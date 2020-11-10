@@ -1,0 +1,118 @@
+<!-- BEGIN: Content-->
+<div class="content-wrapper">
+  <div class="content-header row">
+    <div class="content-header-left col-12 mb-2 mt-1">
+      <shared-breadcrumb></shared-breadcrumb>
+    </div>
+  </div>
+
+  <div class="content-body">
+    <!-- <shared-authorized-content 
+      [permissions]="['usergroups.view', 'usergroups.update']" 
+      [condition]="'or'"> -->
+      <div class="card">
+        <div class="card-header">
+          <form #form="ngForm" autocomplete="off" (submit)="onSubmit()">
+            <fieldset [disabled]="isLoading">
+              <div class="row">
+                <!-- upload banner -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || banner.dirty) && banner.errors">
+                  <label class="text-bold-600" for="banner">Banner</label>
+                  <shared-fileinput
+                    #banner="ngModel"
+                    [(ngModel)]="bannerFiles"
+                    [multiple]="true"
+                    [fileTypes]="fileTypes"
+                    name="banner" id="banner"
+                    required></shared-fileinput>
+  
+                  <!-- validation errors -->
+                  <div class="help-block" *ngIf="submitted || banner.dirty">
+                    <ul role="alert">
+                      <li *ngIf="banner.errors?.required" class="text-danger" role="alert">Banner is required.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- form actions -->
+              <div class="form-actions d-flex">
+                <button type="submit" class="btn btn-primary pull-right"
+                  [disabled]="isLoading">
+                  <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span> Upload
+                </button>
+              </div>
+            </fieldset>
+          </form>
+          <!-- <shared-authorized-content [permissions]="['usergroups.create']" [type]="'hide'">
+            <a class="btn btn-primary float-right" 
+              [routerLink]="['/admin/usergroups/create']">Create User Group
+            </a>
+          </shared-authorized-content> -->
+        </div>
+        <div class="card-content">
+          <div class="card-body">
+            <ag-grid-angular #agGrid style="width: 100%;" domLayout='autoHeight' class="ag-theme-balham"
+              (gridReady)="onGridReady($event)" 
+              [gridOptions]="gridOptions" 
+              [columnDefs]="columnDefs"
+              [defaultColDef]="defaultColDef">
+            </ag-grid-angular>
+          </div>
+        </div>
+      </div>
+    <!-- </shared-authorized-content> -->
+  </div>
+</div>
+
+<ng-template #viewImageModal>
+  <div class="modal-header">
+    <h3 class="modal-title">{{ modalRef.data.name }}</h3>
+    <button type="button" class="close rounded-pill" aria-label="close" (click)="close()"><i class="bx bx-x"></i></button>
+  </div>
+  <div class="modal-body text-center">
+    <img src="{{ modalRef.data.path }}" />
+  </div>
+</ng-template>
+
+<ng-template #imageCell let-row>
+  <ng-container *ngIf="row">
+    <img src="{{ row.path }}" width="100" height="45" />
+  </ng-container>
+</ng-template>
+
+<ng-template #actionsCell let-row>
+  <ng-container *ngIf="row">
+
+    <a class="btn btn-xs btn-icon btn-primary btn-action-icon"
+      (click)="viewImage(row)">
+      <i class="bx bx-image"></i>
+    </a>
+
+    <a *ngIf="row.status === 'active'"
+      class="btn btn-xs btn-icon btn-warning btn-action-icon"
+      (click)="deactivate(row.id)">
+      <i class="bx bx-block"></i>
+    </a>
+
+    <a *ngIf="row.status === 'inactive'"
+      class="btn btn-xs btn-icon btn-success btn-action-icon"
+      (click)="activate(row.id)">
+      <i class="bx bx-check"></i>
+    </a>
+
+    <!-- *ngIf="'delete' | ablePure: 'usergroups' | async" -->
+    <a class="btn btn-xs btn-icon btn-danger btn-action-icon" 
+      (click)="delete(row.id)">
+      <i class="bx bxs-trash"></i>
+    </a>
+
+  </ng-container>
+</ng-template>
+
+<ng-template #statusCell let-row>
+  <ng-container *ngIf="row" [ngSwitch]="row.status">
+    <span *ngSwitchCase="'inactive'" class="badge badge-xs badge-light-danger">{{ row.status | titlecase }}</span>
+    <span *ngSwitchCase="'active'" class="badge badge-xs badge-light-success">{{ row.status | titlecase }}</span>
+  </ng-container>
+</ng-template>

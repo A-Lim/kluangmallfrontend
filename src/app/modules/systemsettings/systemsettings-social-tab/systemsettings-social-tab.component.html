@@ -1,0 +1,52 @@
+<form autocomplete="off" #form="ngForm">
+  <fieldset [disabled]="isLoading || !('update' | ablePure: 'systemsettings' | async)">
+    <!-- facebook  -->
+    <div class="row">
+      <div class="col-md-6 form-group mb-50" [class.error]="(submitted || facebook.dirty) && facebook.errors">
+        <label class="text-bold-600" for="facebook">Facebook</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="bx bxl-facebook"></i></span>
+          </div>
+          <input type="text" class="form-control"
+            #facebook="ngModel"
+            [(ngModel)]="systemSettingVm.facebook"
+            id="facebook" name="facebook" />
+        </div>
+      </div>
+    </div>
+
+    <!-- instagram  -->
+    <div class="row">
+      <div class="col-md-6 form-group mb-50" [class.error]="(submitted || instagram.dirty) && instagram.errors">
+        <label class="text-bold-600" for="instagram">Instagram</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="bx bxl-instagram"></i></span>
+          </div>
+          <input type="text" class="form-control"
+            #instagram="ngModel"
+            [(ngModel)]="systemSettingVm.instagram"
+            id="instagram" name="instagram" />
+        </div>
+      </div>
+    </div>
+
+    <!-- whatsapp  -->
+    <div class="row">
+      <div class="col-md-6 form-group mb-50" [class.error]="(submitted || whatsapp.dirty) && whatsapp.errors">
+        <label class="text-bold-600" for="whatsapp">Whatsapp</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="bx bxl-whatsapp"></i></span>
+          </div>
+          <input type="text" class="form-control"
+            #whatsapp="ngModel"
+            [(ngModel)]="systemSettingVm.whatsapp"
+            id="whatsapp" name="whatsapp" />
+        </div>
+      </div>
+    </div>
+
+  </fieldset>
+</form>

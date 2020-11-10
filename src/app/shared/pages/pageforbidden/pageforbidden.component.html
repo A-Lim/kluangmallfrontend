@@ -1,0 +1,32 @@
+<div class="app-content content">
+  <div class="content-overlay"></div>
+  <div class="content-wrapper">
+    <div class="content-header row">
+    </div>
+    <div class="content-body">
+      <!-- error 404 -->
+      <section class="row flexbox-container">
+        <div class="col-xl-6 col-md-7 col-9">
+          <div class="card bg-transparent shadow-none">
+            <div class="card-content">
+              <div class="card-body text-center">
+                <h1 class="error-title">Action Unauthorized</h1>
+                <p class="pb-3">You are unauthorized to perform this action.</p>
+                <img class="img-fluid img-unauthorized" src="assets/images/pages/rocket.png" alt="403 error">
+
+                <ng-container *ngIf="!isAuthenticated">
+                  <a class="btn btn-primary round glow mt-3" [routerLink]="['/login']">BACK TO LOGIN</a>
+                </ng-container>
+
+                <ng-container *ngIf="isAuthenticated">
+                  <a class="btn btn-primary round glow mt-3" [routerLink]="['/admin/dashboard']">BACK TO DASHBOARD</a>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- error 404 end -->
+    </div>
+  </div>
+</div>

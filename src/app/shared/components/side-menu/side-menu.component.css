@@ -1,0 +1,7 @@
+.navigation > li.nav-item.open > a > i {
+  color: inherit !important;
+}
+
+.main-menu-content {
+  overflow-y: scroll !important;
+}
