@@ -21,7 +21,8 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/.htaccess"
             ],
             "styles": [
               "src/styles.css",
@@ -125,5 +126,5 @@
         }
       }
     }},
-  "defaultProject": "angular-frontend"
+  "defaultProject": "frontend"
 }

@@ -14,7 +14,7 @@ export class SideMenuComponent extends Base implements OnInit, OnDestroy {
   public isHoverOver: boolean = false;
 
   public appLongName: string = environment.longName;
-  public landingModules = ['banners', 'events', 'promotions'];
+  public landingModules = ['landing-management', 'banners', 'events', 'promotions'];
   public isLanding: boolean = false;
 
   constructor(private renderer: Renderer2) { 
