@@ -7,21 +7,70 @@
   </div>
 
   <div class="content-body">
-    <div class="row">
+    <div *ngIf="landing" class="row">
       <!-- banners -->
       <div class="col-12">
         <h5>Banners</h5>
-        <div
-          class="example-list">
-          <div cdkDrag
-            class="card example-box">
+        <div class="text-right">
+          <button class="btn btn-primary">Add Banner</button>
+        </div>
+        
+        <div cdkDropList cdkDropListOrientation="horizontal"
+          class="horizontal-scrollable">
+          <div *ngFor="let banner of landing.banners" 
+            cdkDrag class="card banner-card">
             <div class="card-content">
-              <!-- <img class="card-img-top img-fluid" src="/assets/images/banner/banner-1.jpg" /> -->
+              <img class="card-img-top img-fluid" [src]="banner.path" />
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <!-- events -->
+      <div class="col-12">
+        <h5>Events</h5>
+        <div class="text-right">
+          <button class="btn btn-primary">Add Events</button>
+        </div>
+        
+        <div cdkDropList cdkDropListOrientation="horizontal"
+          class="horizontal-scrollable">
+          <div *ngFor="let event of landing.events" 
+            cdkDrag class="card event-card">
+            <div class="card-content">
+              <img class="card-img-top img-fluid" [src]="event.thumbnail.path" />
               <div class="card-body">
-                <small>banner-1.jpg</small>
+                <div class="card-title mb-0">{{ event.title }}</div>
+                <small class="text-muted">{{ event.fromDate }} - {{ event.toDate }}</small>
+                <div class="card-text mt-2">{{ event.caption }}</div>
               </div>
             </div>
-          </div>  
+          </div>
+        </div>
+        
+      </div>
+
+      <!-- promotions -->
+      <div class="col-12">
+        <h5>Promotions</h5>
+        <div class="text-right">
+          <button class="btn btn-primary">Add Promotions</button>
+        </div>
+        
+        <div cdkDropList cdkDropListOrientation="horizontal"
+          class="horizontal-scrollable">
+          <div *ngFor="let promotion of landing.promotions" 
+            cdkDrag class="card promotion-card">
+            <div class="card-content">
+              <img class="card-img-top img-fluid" [src]="promotion.thumbnail.path" />
+              <div class="card-body">
+                <div class="card-title mb-0">{{ promotion.title }}</div>
+                <small class="text-muted">{{ promotion.fromDate }} - {{ promotion.toDate }}</small>
+                <div class="card-text mt-2">{{ promotion.caption }}</div>
+              </div>
+            </div>
+          </div>
         </div>
         
       </div>

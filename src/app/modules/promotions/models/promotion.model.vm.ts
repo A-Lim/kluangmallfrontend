@@ -6,6 +6,7 @@ export class PromotionVm {
   status: string;
   fromDate: string;
   toDate: string;
+  caption: string;
   content: string;
   thumbnail: FileDetail[];
   uploadThumbnail: File;

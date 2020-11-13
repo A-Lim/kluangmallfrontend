@@ -7,25 +7,22 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Base } from 'app/shared/components/base.component';
 import { ModalSize } from 'app/shared/models/modalsize.enum';
 import { LandingService } from 'app/modules/landing/landing.service';
-import { Landing } from '../models/landing.model';
+import { BaseAgGrid } from 'app/shared/components/baseaggrid.component';
+import { BannerService } from 'app/modules/banners/banners.service';
 
 @Component({
-  selector: 'landing-management',
-  templateUrl: './landing-management.component.html',
-  styleUrls: ['./landing-management.component.css']
+  selector: 'modal-banner-add',
+  templateUrl: './modal-banner-add.component.html',
+  styleUrls: ['./modal-banner-add.component.css']
 })
-export class LandingManagementComponent extends Base implements OnInit {
-  landing: Landing;
+export class BannersAddModalComponent extends BaseAgGrid implements OnInit {
 
-  constructor(public landingSvc: LandingService) { 
+  constructor(public bannerSvc: BannerService) { 
     super();
   }
 
   ngOnInit() {
     super.ngOnInit();
-    this.setTitle('Landing');
-    this.landingSvc.getLanding()
-      .subscribe(response => this.landing = response.data);
   }
 
   

@@ -18,14 +18,14 @@ import { DateTime } from 'luxon';
 export class DatepickerComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   @Input()
-  fromFormat: string = 'dd-MM-yyyy';
+  fromFormat: string = 'dd MMM yyyy';
 
   @Input()
   setDefaultToday: boolean;
 
   myDpOptions: IAngularMyDpOptions = {
     dateRange: false,
-    dateFormat: 'dd-mm-yyyy',
+    dateFormat: 'dd mmm yyyy',
     stylesData: {
       selector: 'dp',
       styles: `

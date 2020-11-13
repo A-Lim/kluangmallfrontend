@@ -7,6 +7,7 @@ export interface Promotion {
   status: string;
   fromDate: string;
   toDate: string;
+  caption: string;
   content: string;
   thumbnail: FileDetail;
   images: FileDetail[];

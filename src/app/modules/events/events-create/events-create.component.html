@@ -134,10 +134,26 @@
                     </ul>
                   </div>
                 </div>
+
+                <!-- caption -->
+                <div class="col-md-12 form-group" [class.error]="(submitted || caption.dirty) && caption.errors">
+                  <label class="text-bold-600">Caption</label>
+                  <textarea class="form-control"
+                    #caption="ngModel"
+                    [(ngModel)]="eventVm.caption"
+                    rows="3"
+                    name="caption" name="caption"></textarea>
+  
+                  <div class="help-block" *ngIf="submitted || caption.dirty">
+                    <ul role="alert">
+                      <!-- <li *ngIf="caption.errors?.required" class="text-danger" role="alert">Caption is required.</li> -->
+                    </ul>
+                  </div>
+                </div>
     
                 <!-- content -->
                 <div class="col-md-12 form-group" [class.error]="(submitted || content.dirty) && content.errors">
-                  <label>Content</label>
+                  <label class="text-bold-600">Content</label>
                   <ckeditor 
                     #content="ngModel"
                     [editor]="Editor" 
