@@ -41,8 +41,7 @@ export class VerifyEmailComponent extends Base implements OnInit, OnDestroy {
       // call api to verify email
       this.http.get<ResponseResult<void>>(url)
         .subscribe(response => {
-          this.swalAlert('Success', response.message, 'success')
-            .subscribe(_ => this.router.navigate(['login']));
+          this.swalAlert('Success', response.message, 'success');
         }, error => {
           this.swalAlert('Error', error.error.message, 'error')
           .subscribe(_ => this.router.navigate(['register']));

@@ -1,0 +1,245 @@
+<div class="content-wrapper">
+  <div class="content-header row">
+    <div class="content-header-left col-12 mb-2 mt-1">
+      <shared-breadcrumb></shared-breadcrumb>
+    </div>
+  </div>
+  
+  <div class="content-body">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <shared-alert></shared-alert>
+          
+          <form autocomplete="off" #form="ngForm" (submit)="onSubmit()">
+            <fieldset [disabled]="isLoading">
+              <div class="row">
+                <!-- name -->
+                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || name.dirty) && name.errors">
+                  <label class="text-bold-600" for="name">Name</label>
+                  <input type="text" class="form-control" 
+                    #name="ngModel" 
+                    [(ngModel)]="merchantVm.name"
+                    id="name" name="name" placeholder="Name"
+                    required />
+                  <div *ngIf="submitted || name.dirty" class="help-block">
+                    <ul role="alert">
+                      <li *ngIf="name.errors?.required" class="text-danger" role="alert">Name is required.</li>
+                    </ul>
+                  </div>
+                </div>
+          
+                <!-- status -->
+                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || status.dirty) && status.errors">
+                  <label class="text-bold-600" for="status">Status</label>
+                  <select class="form-control"
+                    #status="ngModel"
+                    [(ngModel)]="merchantVm.status"
+                    id="status" name="status"
+                    required>
+                    <option value="active" selected>Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                  <div *ngIf="submitted || status.dirty" class="help-block" >
+                    <ul role="alert">
+                      <li *ngIf="status.errors?.required" class="text-danger" role="alert">Status is required.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- logo -->
+                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || logo.dirty) && logo.errors">
+                  <label class="text-bold-600" for="logo">Logo</label>
+                  <shared-fileinput
+                    #logo="ngModel"
+                    [(ngModel)]="merchantVm.uploadLogo"
+                    [multiple]="false"
+                    [fileTypes]="['.png', '.jpg', '.jpeg', '.gif']"
+                    name="logo" id="logo"></shared-fileinput>
+                  <!-- <div *ngIf="submitted || logo.dirty" class="help-block" >
+                    <ul role="alert">
+                      <li *ngIf="logo.errors?.required" class="text-danger" role="alert">Logo is required.</li>
+                    </ul>
+                  </div> -->
+                </div>
+          
+                <!-- category -->
+                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || category.dirty) && category.errors">
+                  <label class="text-bold-600" for="category">Category</label>
+                  <ng-select 
+                    #category="ngModel"
+                    [(ngModel)]="merchantVm.category" 
+                    [items]="merchantCategories$ | async"
+                    [multiple]="false"
+                    [trackByFn]="trackByFn"
+                    [loading]="merchantCategoriesReqLoading"
+                    [typeahead]="merchantCategoriesInput$"
+                    bindLabel="name" bindValue="name"
+                    id="category" name="category"></ng-select>
+                  <div *ngIf="submitted || category.dirty" class="help-block" >
+                    <ul role="alert">
+                      <li *ngIf="category.errors?.required" class="text-danger" role="alert">Category is required.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- location -->
+                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || location.dirty) && location.errors">
+                  <label class="text-bold-600" for="location">Location</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="bx bx-map-pin"></i></span>
+                    </div>
+                    <input type="text" class="form-control" 
+                      #location="ngModel" 
+                      [(ngModel)]="merchantVm.location"
+                      id="location" name="location" placeholder="Location"
+                      required />
+                  </div>
+                  <div *ngIf="submitted || location.dirty" class="help-block" >
+                    <ul role="alert">
+                      <li *ngIf="location.errors?.required" class="text-danger" role="alert">Location is required.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- business registration no -->
+                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || businessRegNo.dirty) && businessRegNo.errors">
+                  <label class="text-bold-600" for="businessRegNo">Business Registration No.</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="bx bx-briefcase"></i></span>
+                    </div>
+                    <input type="text" class="form-control" 
+                      #businessRegNo="ngModel" 
+                      [(ngModel)]="merchantVm.business_reg_no"
+                      id="businessRegNo" name="businessRegNo" placeholder="Business Registration No." />
+                  </div>
+                  <!-- <div *ngIf="submitted || businessRegNo.dirty" class="help-block" >
+                    <ul role="alert">
+                      <li *ngIf="businessRegNo.errors?.required" class="text-danger" role="alert">Business Registration No. is required.</li>
+                    </ul>
+                  </div> -->
+                </div>
+
+                <!-- website -->
+                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || website.dirty) && website.errors">
+                  <label class="text-bold-600" for="website">Website</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="bx bx-globe"></i></span>
+                    </div>
+                    <input type="text" class="form-control" 
+                      #website="ngModel" 
+                      [(ngModel)]="merchantVm.website"
+                      id="website" name="website" placeholder="Website" />
+                  </div>
+                  <!-- <div *ngIf="submitted || businessRegNo.dirty" class="help-block" >
+                    <ul role="alert">
+                      <li *ngIf="businessRegNo.errors?.required" class="text-danger" role="alert">Location is required.</li>
+                    </ul>
+                  </div> -->
+                </div>
+                
+                <!-- email -->
+                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || email.dirty) && email.errors">
+                  <label class="text-bold-600" for="email">Email</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">@</span>
+                    </div>
+                    <input type="text" class="form-control" 
+                      #email="ngModel" 
+                      [(ngModel)]="merchantVm.email"
+                      id="email" name="email" placeholder="Email" />
+                  </div>
+                  <!-- <div *ngIf="submitted || email.dirty" class="help-block" >
+                    <ul role="alert">
+                      <li *ngIf="email.errors?.required" class="text-danger" role="alert">Email is required.</li>
+                    </ul>
+                  </div> -->
+                </div>
+
+                <!-- phone no -->
+                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || phone.dirty) && phone.errors">
+                  <label class="text-bold-600" for="phone">Phone No.</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="bx bx-phone"></i></span>
+                    </div>
+                    <input type="text" class="form-control" 
+                      #phone="ngModel" 
+                      [(ngModel)]="merchantVm.phone"
+                      id="phone" name="phone" placeholder="Phone No." />
+                  </div>
+                  <!-- <div *ngIf="submitted || phone.dirty" class="help-block" >
+                    <ul role="alert">
+                      <li *ngIf="phone.errors?.required" class="text-danger" role="alert">Phone No. is required.</li>
+                    </ul>
+                  </div> -->
+                </div>
+
+                <!-- description -->
+                <div class="col-md-12 form-group mb-50" [class.error]="(submitted || description.dirty) && description.errors">
+                  <label class="text-bold-600">Desription</label>
+                  <ckeditor 
+                    #description="ngModel"
+                    [editor]="Editor" 
+                    [(ngModel)]="merchantVm.description"
+                    name="description" name="description"
+                    required></ckeditor>
+          
+                  <div class="help-block" *ngIf="submitted || description.dirty">
+                    <ul role="alert">
+                      <li *ngIf="description.errors?.required" class="text-danger" role="alert">Description is required.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- terms and conditions -->
+                <div class="col-md-12 form-group mb-50" [class.error]="(submitted || terms.dirty) && terms.errors">
+                  <label class="text-bold-600">Terms and Conditions</label>
+                  <ckeditor 
+                    #terms="ngModel"
+                    [editor]="Editor" 
+                    [(ngModel)]="merchantVm.terms_and_conditions"
+                    name="terms" name="terms"></ckeditor>
+          
+                  <div class="help-block" *ngIf="submitted || terms.dirty">
+                    <ul role="alert">
+                      <li *ngIf="terms.errors?.required" class="text-danger" role="alert">Terms and Conditions is required.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- privacy policy -->
+                <div class="col-md-12 form-group mb-50" [class.error]="(submitted || privacyPolicy.dirty) && privacyPolicy.errors">
+                  <label class="text-bold-600">Privacy Policy</label>
+                  <ckeditor 
+                    #privacyPolicy="ngModel"
+                    [editor]="Editor" 
+                    [(ngModel)]="merchantVm.privacy_policy"
+                    name="privacyPolicy" name="privacyPolicy"></ckeditor>
+          
+                  <div class="help-block" *ngIf="submitted || privacyPolicy.dirty">
+                    <ul role="alert">
+                      <li *ngIf="privacyPolicy.errors?.required" class="text-danger" role="alert">Privacy Policy is required.</li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+          </form>
+
+          <div class="form-actions d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary pull-right" (click)="onSubmit()"
+              [disabled]="isLoading">
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span> Create
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -55,6 +55,8 @@ export class ResetPasswordComponent extends Base implements OnInit, OnDestroy {
     }
 
     this.isLoading = true;
+    this.resetPasswordVm.email = this.email;
+    this.resetPasswordVm.token = this.token;
     this.authService.resetPassword(this.resetPasswordVm)
       .subscribe(response => {
         if (response.message)

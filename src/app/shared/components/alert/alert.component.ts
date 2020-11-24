@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { AlertService } from 'app/shared/services/alert.service';
-import { takeUntil } from 'rxjs/operators';
+import { debounceTime, delay, takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -40,10 +40,17 @@ export class AlertComponent implements OnInit, OnDestroy {
 
           if (this.alertService.hideAfterDelay)
             this.clearSub.next();
+            
         } else {
           this.messages = null;
         }
       });
+
+    // clear after 3 seconds
+    this.clear$.pipe(
+      takeUntil(this.destroy$),
+      debounceTime(3000)
+    ).subscribe(_ => this.messages = null);
   }
 
   ngOnDestroy() {

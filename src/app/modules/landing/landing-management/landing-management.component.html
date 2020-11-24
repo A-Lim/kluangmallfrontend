@@ -7,43 +7,69 @@
   </div>
 
   <div class="content-body">
+    <shared-alert></shared-alert>
     <div *ngIf="landing" class="row">
       <!-- banners -->
       <div class="col-12">
-        <h5>Banners</h5>
-        <div class="text-right">
-          <button class="btn btn-primary">Add Banner</button>
+        <div class="d-flex">
+          <h5>Banners</h5>
+          <button class="btn btn-xs btn-icon btn-action-icon btn-primary ml-1"
+            [disabled]="isLoading || !('update' | ablePure: 'landing' | async)"
+            (click)="addBanners()"
+            title="Add Banners">
+            <i class="bx bx-plus "></i>
+          </button>
         </div>
         
-        <div cdkDropList cdkDropListOrientation="horizontal"
+        <div *ngIf="landing.banners && landing.banners.length > 0; else noContent;"
+          cdkDropList 
+          cdkDropListOrientation="horizontal"
+          [cdkDropListDisabled]="!('update' | ablePure: 'landing' | async)"
           class="horizontal-scrollable">
-          <div *ngFor="let banner of landing.banners" 
+          <div *ngFor="let banner of landing.banners; let i = index" 
             cdkDrag class="card banner-card">
             <div class="card-content">
-              <img class="card-img-top img-fluid" [src]="banner.path" />
+              <button class="btn btn-trash text-danger" (click)="removeBanner(i)">
+                <i class="bx bx-trash"></i>
+              </button>
+              <img class="card-img-top img-fluid" [src]="banner.image?.path" />
+              <div class="card-body">
+                <div class="card-title mb-0">{{ banner.title }}</div>
+              </div>
             </div>
           </div>
         </div>
-        
       </div>
 
       <!-- events -->
       <div class="col-12">
-        <h5>Events</h5>
-        <div class="text-right">
-          <button class="btn btn-primary">Add Events</button>
+        <div class="d-flex">
+          <h5>Events</h5>
+          <button class="btn btn-xs btn-icon btn-action-icon btn-primary ml-1"
+            [disabled]="isLoading || !('update' | ablePure: 'landing' | async)"
+            (click)="addEvents()"
+            title="Add Events">
+            <i class="bx bx-plus "></i>
+          </button>
         </div>
         
-        <div cdkDropList cdkDropListOrientation="horizontal"
+        <div *ngIf="landing.events && landing.events.length > 0; else noContent;"
+          cdkDropList 
+          cdkDropListOrientation="horizontal"
+          (cdkDropListDropped)="dropEvent($event)"
+          [cdkDropListDisabled]="!('update' | ablePure: 'landing' | async)"
           class="horizontal-scrollable">
-          <div *ngFor="let event of landing.events" 
-            cdkDrag class="card event-card">
+
+          <div *ngFor="let event of landing.events; let i = index;" 
+            cdkDrag class="card event-card mt-1">
+            
             <div class="card-content">
-              <img class="card-img-top img-fluid" [src]="event.thumbnail.path" />
+              <button class="btn btn-trash text-danger" (click)="removeEvent(i)">
+                <i class="bx bx-trash"></i>
+              </button>
+              <img class="card-img-top img-fluid" [src]="event.thumbnail?.path" />
               <div class="card-body">
                 <div class="card-title mb-0">{{ event.title }}</div>
-                <small class="text-muted">{{ event.fromDate }} - {{ event.toDate }}</small>
-                <div class="card-text mt-2">{{ event.caption }}</div>
               </div>
             </div>
           </div>
@@ -53,17 +79,31 @@
 
       <!-- promotions -->
       <div class="col-12">
-        <h5>Promotions</h5>
-        <div class="text-right">
-          <button class="btn btn-primary">Add Promotions</button>
+        <div class="d-flex">
+          <h5>Promotions</h5>
+          <button class="btn btn-xs btn-icon btn-action-icon btn-primary ml-1"
+            [disabled]="isLoading || !('update' | ablePure: 'landing' | async)"
+            (click)="addPromotions()"
+            title="Add Promotions">
+            <i class="bx bx-plus "></i>
+          </button>
         </div>
         
-        <div cdkDropList cdkDropListOrientation="horizontal"
+        <div *ngIf="landing.promotions && landing.promotions.length > 0; else noContent;"
+          cdkDropList 
+          cdkDropListOrientation="horizontal"
+          (cdkDropListDropped)="dropPromotion($event)"
+          [cdkDropListDisabled]="!('update' | ablePure: 'landing' | async)"
           class="horizontal-scrollable">
-          <div *ngFor="let promotion of landing.promotions" 
-            cdkDrag class="card promotion-card">
+
+          <div *ngFor="let promotion of landing.promotions; let i = index;" 
+            cdkDrag class="card promotion-card mt-1"> 
             <div class="card-content">
-              <img class="card-img-top img-fluid" [src]="promotion.thumbnail.path" />
+              <button class="btn btn-trash text-danger" (click)="removePromotion(i)">
+                <i class="bx bx-trash"></i>
+              </button>
+              
+              <img class="card-img-top img-fluid" [src]="promotion.thumbnail?.path" />
               <div class="card-body">
                 <div class="card-title mb-0">{{ promotion.title }}</div>
                 <small class="text-muted">{{ promotion.fromDate }} - {{ promotion.toDate }}</small>
@@ -74,6 +114,25 @@
         </div>
         
       </div>
+
+      <div class="col-12 form-actions d-flex justify-content-end">
+        <button type="button" class="btn btn-primary pull-right"
+          [disabled]="isLoading || !('update' | ablePure: 'landing' | async)"
+          (click)="update()">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span> Update
+        </button>
+      </div>
     </div>
   </div>
 </div>
+
+
+<ng-template #noContent>
+  <div class="card mt-1">
+    <div class="card-content">
+      <div class="card-body">
+        <span class="text-muted text-center">No content added.</span>
+      </div>
+    </div>
+  </div>
+</ng-template>

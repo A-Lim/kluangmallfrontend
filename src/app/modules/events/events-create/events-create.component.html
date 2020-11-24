@@ -28,16 +28,19 @@
                     </ul>
                   </div>
                 </div>
-                
-                <!-- category -->
-                <div class="col-md-6 form-group" [class.error]="(submitted || category.dirty) && category.errors">
-                  <label class="text-bold-600" for="category">Category</label>
-                  <input type="text" class="form-control"
-                    #category="ngModel"
-                    [(ngModel)]="eventVm.category"
-                    name="category" id="category" />
+
+                <!-- status -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || status.dirty) && status.errors">
+                  <label class="text-bold-600" for="status">Status</label>
+                  <select class="form-control"
+                    #status="ngModel"
+                    [(ngModel)]="eventVm.status"
+                    name="status" id="status">
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
                 </div>
-  
+                
                 <!-- date -->
                 <div class="col-md-6">
                   <div class="row">
@@ -73,17 +76,21 @@
                     </div>
                   </div>
                 </div>
+
+                <!-- external link -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || externalLink.dirty) && externalLink.errors">
+                  <label class="text-bold-600" for="externalLink">External Link</label>
+                  <input type="text" class="form-control"
+                    #externalLink="ngModel"
+                    [(ngModel)]="eventVm.externalLink"
+                    name="externalLink" id="externalLink" required/>
   
-                <!-- status -->
-                <div class="col-md-6 form-group" [class.error]="(submitted || status.dirty) && status.errors">
-                  <label class="text-bold-600" for="status">Status</label>
-                  <select class="form-control"
-                    #status="ngModel"
-                    [(ngModel)]="eventVm.status"
-                    name="status" id="status">
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                  </select>
+                  <!-- validation errors -->
+                  <div class="help-block" *ngIf="submitted || externalLink.dirty">
+                    <ul role="alert">
+                      <!-- <li *ngIf="externalLink.errors?.required" class="text-danger" role="alert">Title is required.</li> -->
+                    </ul>
+                  </div>
                 </div>
   
                 <!-- thumbnail -->
@@ -119,22 +126,6 @@
                   </div> -->
                 </div>
   
-                <!-- external link -->
-                <div class="col-md-6 form-group" [class.error]="(submitted || externalLink.dirty) && externalLink.errors">
-                  <label class="text-bold-600" for="externalLink">External Link</label>
-                  <input type="text" class="form-control"
-                    #externalLink="ngModel"
-                    [(ngModel)]="eventVm.externalLink"
-                    name="externalLink" id="externalLink" required/>
-  
-                  <!-- validation errors -->
-                  <div class="help-block" *ngIf="submitted || externalLink.dirty">
-                    <ul role="alert">
-                      <!-- <li *ngIf="externalLink.errors?.required" class="text-danger" role="alert">Title is required.</li> -->
-                    </ul>
-                  </div>
-                </div>
-
                 <!-- caption -->
                 <div class="col-md-12 form-group" [class.error]="(submitted || caption.dirty) && caption.errors">
                   <label class="text-bold-600">Caption</label>
@@ -142,7 +133,8 @@
                     #caption="ngModel"
                     [(ngModel)]="eventVm.caption"
                     rows="3"
-                    name="caption" name="caption"></textarea>
+                    name="caption" name="caption"
+                    required></textarea>
   
                   <div class="help-block" *ngIf="submitted || caption.dirty">
                     <ul role="alert">

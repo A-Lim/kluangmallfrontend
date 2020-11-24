@@ -1,14 +1,19 @@
 .card { -webkit-transition: none; transition: none; }
 
-.banner-card {
+ /* {
   flex-basis: 250px;
   height: auto;
   border-radius: 0;
-}
+} */
 
+.banner-card,
 .event-card,
 .promotion-card {
-  flex-basis: 200px;
+  flex-basis: 400px;
+}
+
+.card-content .card-img-top {
+  height: 256px;
 }
 
 .horizontal-scrollable {
@@ -27,7 +32,7 @@
   /* flex-basis: 0; */
   justify-content: space-between;
   
-  margin-right: 15px;
+  margin-right: 20px;
 }
 
 .card-content {
@@ -58,7 +63,23 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-
 .horizontal-scrollable.cdk-drop-list-dragging .card:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.card-content {
+  position: relative;
+}
+
+.card-content:hover .btn-trash {
+  display: block;
+}
+
+.card-content .btn-trash {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  padding: 0;
+  display: none;
+  cursor: point;
 }

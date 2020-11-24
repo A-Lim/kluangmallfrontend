@@ -1,75 +1,56 @@
-<!-- BEGIN: Content-->
-<div class="content-wrapper">
-  <div class="content-header row">
-    <div class="content-header-left col-12 mb-2 mt-1">
-      <shared-breadcrumb></shared-breadcrumb>
-    </div>
-  </div>
-
-  <div class="content-body">
-    <div class="row">
-      <!-- banners -->
-      <div class="col-12">
-        <h5>Banners</h5>
-        <div class="text-right">
-          <button class="btn btn-primary">Add Banner</button>
-        </div>
-        
-        <div cdkDropList cdkDropListOrientation="horizontal"
-          class="horizontal-scrollable">
-          <div cdkDrag
-            class="card banner-card">
-            <div class="card-content">
-              <img class="card-img-top img-fluid" src="/assets/images/banner/banner-1.jpg" />
-              <div class="card-body">
-                <small>banner-1.jpg</small>
-              </div>
-            </div>
+<div class="modal-header">
+  <h3 class="modal-title">Add Banners</h3>
+  <button type="button" class="close rounded-pill" aria-label="close" (click)="close()"><i class="bx bx-x"></i></button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-12 form-group">
+      <label class="text-bold-600">Selected Banners</label>
+      <div class="selected">
+        <ng-container *ngIf="banners.length > 0; else noBannersSelected">
+          <div *ngFor="let banner of banners; let i = index;" class="badge badge-primary d-inline-flex align-items-center">
+            {{ banner.title }}
+            <i class="bx bx-x font-size-small" (click)="remove(i)"></i>
           </div>
+        </ng-container>
 
-          <div cdkDrag
-            class="card banner-card">
-            <div class="card-content">
-              <img class="card-img-top img-fluid" src="/assets/images/banner/banner-1.jpg" />
-              <div class="card-body">
-                <h4 class="card-title mb-0">banner-1.jpg</h4>
-              </div>
-            </div>
-          </div>
-
-          <div cdkDrag
-            class="card banner-card">
-            <div class="card-content">
-              <img class="card-img-top img-fluid" src="/assets/images/banner/banner-1.jpg" />
-              <div class="card-body">
-                <h4 class="card-title mb-0">banner-1.jpg</h4>
-              </div>
-            </div>
-          </div>
-
-          <div cdkDrag
-            class="card banner-card">
-            <div class="card-content">
-              <img class="card-img-top img-fluid" src="/assets/images/banner/banner-1.jpg" />
-              <div class="card-body">
-                <h4 class="card-title mb-0">banner-1.jpg</h4>
-              </div>
-            </div>
-          </div>
-
-          <div cdkDrag
-            class="card banner-card">
-            <div class="card-content">
-              <img class="card-img-top img-fluid" src="/assets/images/banner/banner-1.jpg" />
-              <div class="card-body">
-                <h4 class="card-title mb-0">banner-1.jpg</h4>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        
+        <ng-template #noBannersSelected>
+          <div class="text-muted">No banners selected.</div>
+        </ng-template>
       </div>
     </div>
   </div>
+
+  <ag-grid-angular #agGrid style="width: 100%;" domLayout='autoHeight' class="ag-theme-balham"
+    (gridReady)="onGridReady($event)" 
+    [gridOptions]="gridOptions" 
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef">
+  </ag-grid-angular>
+  
 </div>
+<div class="modal-footer">
+  <button class="btn btn-primary" (click)="addBanners()">Add</button>
+</div>
+
+<ng-template #imageCell let-row>
+  <ng-container *ngIf="row && row.image">
+    <img [src]="row.image.path" style="width:100%" />
+  </ng-container>
+</ng-template>
+
+<ng-template #actionsCell let-row>
+  <ng-container *ngIf="row">
+    <a class="btn btn-xs btn-icon btn-primary btn-action-icon" 
+      (click)="add(row)">
+      <i class="bx bx-plus"></i>
+    </a>
+  </ng-container>
+</ng-template>
+
+<ng-template #statusCell let-row>
+  <ng-container *ngIf="row" [ngSwitch]="row.status">
+    <span *ngSwitchCase="'inactive'" class="badge badge-xs badge-light-danger">{{ row.status | titlecase }}</span>
+    <span *ngSwitchCase="'active'" class="badge badge-xs badge-light-success">{{ row.status | titlecase }}</span>
+  </ng-container>
+</ng-template>

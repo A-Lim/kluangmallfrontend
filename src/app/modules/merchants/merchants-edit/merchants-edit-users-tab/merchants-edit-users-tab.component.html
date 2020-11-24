@@ -1,0 +1,29 @@
+<div class="text-right mb-2">
+  <button class="btn btn-primary" (click)="addMerchantUsers()">Add Users</button>
+</div>
+
+<div class="mb-2">
+  <ag-grid-angular
+    #agGrid style="width: 100%;" domLayout='autoHeight' class="ag-theme-balham"
+    (gridReady)="onGridReady($event)" 
+    [gridOptions]="gridOptions" 
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef">
+  </ag-grid-angular>
+</div>
+        
+<ng-template #actionsCell let-row>
+  <ng-container *ngIf="row">
+    <a class="btn btn-xs btn-icon btn-primary btn-action-icon" 
+      (click)="navigateTo('/admin/users', row.id)">
+      <i class="bx bxs-edit"></i>
+    </a>
+  </ng-container>
+</ng-template>
+
+<ng-template #statusCell let-row>
+  <ng-container *ngIf="row" [ngSwitch]="row.status">
+    <span *ngSwitchCase="'inactive'" class="badge badge-xs badge-light-danger">{{ row.status | titlecase }}</span>
+    <span *ngSwitchCase="'active'" class="badge badge-xs badge-light-success">{{ row.status | titlecase }}</span>
+  </ng-container>
+</ng-template>

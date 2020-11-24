@@ -1,6 +1,12 @@
+import { FileDetail } from 'app/shared/models/filedetail.model';
+
 export interface Banner {
   id: number;
-  name: string;
-  url: string;
+  title: string;
+  is_clickable: boolean;
   status: string;
+  image: FileDetail;
+  type: string;
+  type_id: number;
 }
+

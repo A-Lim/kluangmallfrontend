@@ -40,6 +40,18 @@
   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
+  left: 0.8rem !important;
+  right: 0.8rem !important;
+  width: auto !important;
+}
+
+/* hide blinking cursor indicator when ng-select is single and has value */
+.ng-select-single > .ng-select-container.ng-has-value > .ng-value-container > .ng-input > input {
+  caret-color: transparent;
+}
+
+
 .ng-select-disabled .ng-select-container {
   background-color: #f2f4f4;
   border: none;
@@ -57,10 +69,6 @@
   outline: 0;
   box-shadow: 0 3px 8px 0 rgba(0,0,0,.1);
 }
-
-/* .ng-select.ng-select-opened .ng-select-container {
-  z-index: 10000;
-} */
 
 .ng-select.ng-select-opened.ng-select-bottom .ng-select-container {
   border-bottom-left-radius: 0;
@@ -268,7 +276,7 @@
 /*-------------------------*/
 /* Buttons                 */
 /*-------------------------*/
-.btn-xs i { top: 2px; }
+.btn-xs i { top: 2px !important; }
 .btn-xs.btn-icon { padding: .2rem .4rem; }
 button:focus { outline: none; }
 

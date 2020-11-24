@@ -14,7 +14,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
       breadcrumb: 'promotions',
-      // permissions: ['promotions.view', 'promotions.viewAny', 'promotions.update']
+      permissions: ['promotions.view', 'promotions.viewAny', 'promotions.update']
     },
   },
   { 
@@ -23,7 +23,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
       breadcrumb: 'create promotions',
-      // permissions: ['promotions.create']
+      permissions: ['promotions.create']
     },
   },
   { 
@@ -32,7 +32,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
       breadcrumb: 'edit promotions',
-      // permissions: ['users.view', 'users.viewAny', 'users.update'],
+      permissions: ['users.view', 'users.viewAny', 'users.update'],
     },
   }
 ];

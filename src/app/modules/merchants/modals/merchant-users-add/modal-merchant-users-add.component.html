@@ -1,0 +1,82 @@
+<form autocomplete="off" #form="ngForm" (submit)="onSubmit()">
+  <div class="modal-header">
+    <h3 class="modal-title">Add Merchant Users</h3>
+    <button type="button" class="close rounded-pill" aria-label="close" 
+      [disabled]="isLoading"
+      (click)="close()"><i class="bx bx-x"></i></button>
+  </div>
+  <div class="modal-body">
+    <shared-alert></shared-alert>
+    <fieldset [disabled]="isLoading">
+      <div *ngFor="let mUserVm of merchantUsers; let i = index; trackBy: trackByFn" class="row">
+        <!-- name -->
+        <div class="col-md-4 form-group mb-50" [class.error]="(submitted || name.dirty) && name.errors">
+          <label class="text-bold-600" for="name">Name</label>
+          <input type="text" class="form-control" 
+            #name="ngModel" 
+            [(ngModel)]="mUserVm.name"
+            id="name[{{ i }}]" name="name[{{ i }}]" placeholder="Name"
+            required />
+          <div *ngIf="submitted || name.dirty" class="help-block">
+            <ul role="alert">
+              <li *ngIf="name.errors?.required" class="text-danger" role="alert">Name is required.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- email -->
+        <div class="col-md-4 form-group mb-50" [class.error]="(submitted || email.dirty) && email.errors">
+          <label class="text-bold-600" for="email">Email</label>
+          <input type="text" class="form-control"
+            #email="ngModel"
+            [(ngModel)]="mUserVm.email"
+            id="email[{{ i }}]" name="email[{{ i }}]" placeholder="Email"
+            required />
+          <div *ngIf="submitted || email.dirty" class="help-block" >
+            <ul role="alert">
+              <li *ngIf="email.errors?.required" class="text-danger" role="alert">Email is required.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- phone -->
+        <div class="col-md-3 form-group mb-50" [class.error]="(submitted || phone.dirty) && phone.errors">
+          <label class="text-bold-600" for="phone">Phone</label>
+          <input type="text" class="form-control" 
+            #phone="ngModel" 
+            [(ngModel)]="mUserVm.phone"
+            id="phone[{{ i }}]" name="phone[{{ i }}]" placeholder="Phone"
+            required />
+          <div *ngIf="submitted || phone.dirty" class="help-block" >
+            <ul role="alert">
+              <li *ngIf="phone.errors?.required" class="text-danger" role="alert">Phone is required.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- actions -->
+        <div class="col-md-1 form-group mb-50">
+          <label class="text-bold-600">&nbsp;</label>
+          <button *ngIf="i === 0" class="btn btn-icon rounded-circle btn-primary d-block"
+            type="button"
+            (click)="addUser()">
+            <i class="bx bx-plus"></i>
+          </button>
+
+          <button *ngIf="i > 0" class="btn btn-icon rounded-circle btn-danger d-block"
+            type="button"
+            (click)="removeUser(i)">
+            <i class="bx bx-trash"></i>
+          </button>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary"
+      [disabled]="isLoading">
+      <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+      Add
+    </button>
+  </div>
+</form>

@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <h3 class="modal-title">Manage Categories</h3>
+  <button type="button" class="close rounded-pill" aria-label="close" 
+    [disabled]="isLoading"
+    (click)="close()"><i class="bx bx-x"></i></button>
+</div>
+<div class="modal-body">
+  <shared-alert></shared-alert>
+  <ag-grid-angular #agGrid style="width: 100%;" domLayout='autoHeight' class="ag-theme-balham"
+    (gridReady)="onGridReady($event)" 
+    [gridOptions]="gridOptions" 
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef">
+  </ag-grid-angular>
+</div>
+<div class="modal-footer">
+  <button type="submit" class="btn btn-primary"
+    [disabled]="isLoading">
+    <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+    Add
+  </button>
+</div>
+
+<ng-template #actionsCell let-row>
+  <ng-container *ngIf="row">
+    <a class="btn btn-xs btn-icon btn-danger btn-action-icon" 
+      (click)="delete(row.id)">
+      <i class="bx bxs-trash"></i>
+    </a>
+  </ng-container>
+</ng-template>

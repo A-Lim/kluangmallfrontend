@@ -51,6 +51,11 @@ const routes: Routes = [
         loadChildren: () => import('app/modules/events/events.module').then(m => m.EventsModule), 
       },
       { 
+        path: 'admin/merchants', 
+        data: { breadcrumb: 'merchants', module: 'merchants' },
+        loadChildren: () => import('app/modules/merchants/merchants.module').then(m => m.MerchantsModule), 
+      },
+      { 
         path: 'admin/promotions', 
         data: { breadcrumb: 'promotions', module: 'promotions' },
         loadChildren: () => import('app/modules/promotions/promotions.module').then(m => m.PromotionsModule), 

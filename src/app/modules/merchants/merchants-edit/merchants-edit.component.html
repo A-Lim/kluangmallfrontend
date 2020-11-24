@@ -1,0 +1,52 @@
+<div class="content-wrapper">
+  <div class="content-header row">
+    <div class="content-header-left col-12 mb-2 mt-1">
+      <shared-breadcrumb></shared-breadcrumb>
+    </div>
+  </div>
+  
+  <div class="content-body">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link active"
+          id="users-tab" data-toggle="pill" href="#users" 
+          aria-expanded="false">
+          Users
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"
+          id="general-tab" data-toggle="pill" href="#general"
+          aria-expanded="true">
+          General
+        </a>
+      </li>
+      
+    </ul>
+
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="tab-pane active" id="users" role="tabpanel" aria-labelledby="users-tab" aria-expanded="false">
+              <merchants-edit-users-tab 
+                *ngIf="merchantVm; else loading"
+                [merchantVm]="merchantVm"
+                [isLoading]="isLoading"></merchants-edit-users-tab>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="general" aria-labelledby="general-tab" aria-expanded="true">
+              <merchants-edit-general-tab
+                *ngIf="merchantVm; else loading"
+                [merchantVm]="merchantVm"
+                [isLoading]="isLoading"></merchants-edit-general-tab>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <span class="spinner-border spinner-border-sm"></span> Loading...
+</ng-template>

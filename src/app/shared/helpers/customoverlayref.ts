@@ -4,7 +4,7 @@ import { TemplateRef, Type } from '@angular/core';
 import { ModalSize } from 'app/shared/models/modalsize.enum';
 
 export interface ModalCloseEvent<R> {
-  type: 'backdropClick' | 'close';
+  type: 'backdropClick' | 'close' | 'save';
   data: R;
 }
 
@@ -25,7 +25,11 @@ export class CustomOverlayRef<R = any, T = any> {
     this._close('close', data);
   }
 
-  private _close(type: 'backdropClick' | 'close', data: R) {
+  save(data?: R) {
+    this._close('save', data)
+  }
+
+  private _close(type: 'backdropClick' | 'close' | 'save', data: R) {
     // remove class to hide the delay during dispose
     this.overlay.backdropElement.classList.remove('modal-backdrop');
     this.overlay.dispose();

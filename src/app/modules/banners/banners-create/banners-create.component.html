@@ -1,0 +1,160 @@
+<div class="content-wrapper">
+  <div class="content-header row">
+    <div class="content-header-left col-12 mb-2 mt-1">
+      <shared-breadcrumb></shared-breadcrumb>
+    </div>
+  </div>
+  <div class="content-body">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <shared-alert></shared-alert>
+          <form #form="ngForm" autocomplete="off" (submit)="onSubmit()">
+            <fieldset [disabled]="isLoading">
+
+              <div class="row">
+                <!-- title -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || title.dirty) && title.errors">
+                  <label class="text-bold-600" for="title">Title</label>
+                  <input type="text" class="form-control"
+                    #title="ngModel"
+                    [(ngModel)]="bannerVm.title"
+                    name="title" id="title" required/>
+  
+                  <!-- validation errors -->
+                  <div class="help-block" *ngIf="submitted || title.dirty">
+                    <ul role="alert">
+                      <li *ngIf="title.errors?.required" class="text-danger" role="alert">Title is required.</li>
+                    </ul>
+                  </div>
+                </div>
+          
+                <!-- status -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || status.dirty) && status.errors">
+                  <label class="text-bold-600" for="status">Status</label>
+                  <select class="form-control"
+                    #status="ngModel"
+                    [(ngModel)]="bannerVm.status"
+                    name="status" id="status">
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                </div>
+  
+                <!-- image -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || image.dirty) && image.errors">
+                  <label class="text-bold-600" for="image">Image</label>
+                  <shared-fileinput
+                    #image="ngModel"
+                    [(ngModel)]="bannerVm.uploadImage"
+                    [multiple]="false"
+                    name="image" id="image"></shared-fileinput>
+  
+                  <!-- validation errors -->
+                  <!-- <div class="help-block" *ngIf="submitted && toDate.errors">
+                    <ul role="alert">
+                      <li *ngIf="toDate.errors.required" class="text-danger" role="alert">To Date is required.</li>
+                    </ul>
+                  </div> -->
+                </div>
+  
+                <!-- is clickable -->
+                <div class="col-md-12 form-group" [class.error]="(submitted || isClickable.dirty) && isClickable.errors">
+                  <div class="checkbox">
+                    <input type="checkbox" class="checkbox-input"
+                      #isClickable="ngModel"
+                      [(ngModel)]="bannerVm.is_clickable"
+                      (change)="onIsClickableChange($event)"
+                      name="isClickable" id="isClickable">
+                    <label for="isClickable"><small class="text-bold-600">IS CLICKABLE</small></label>
+                  </div>
+                </div>
+
+                <!-- type -->
+                <div *ngIf="bannerVm.is_clickable"
+                  class="col-md-6 form-group" [class.error]="(submitted || type.dirty) && type.errors">
+                  <label class="text-bold-600">Type</label>
+                  <select class="form-control"
+                    #type="ngModel"
+                    [(ngModel)]="bannerVm.type"
+                    name="type" id="type"
+                    required>
+                    <option value=""></option>
+                    <option value="event">Events</option>
+                    <option value="promotion">Promotions</option>
+                  </select>
+
+                  <!-- validation errors -->
+                  <div class="help-block" *ngIf="(submitted || type.dirty) && type.errors">
+                    <ul role="alert">
+                      <li *ngIf="type.errors.required" class="text-danger" role="alert">Type is required.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div *ngIf="bannerVm.type === 'event'"
+                  class="col-md-6 form-group"
+                  [class.error]="(submitted || event.dirty) && event.errors">
+                  <label class="text-bold-600">Event</label>
+                  <ng-select 
+                    #event="ngModel"
+                    [(ngModel)]="bannerVm.type_id" 
+                    [items]="events$ | async"
+                    [multiple]="false"
+                    [trackByFn]="trackByEventFn"
+                    [loading]="eventsReqLoading"
+                    [typeahead]="eventsInput$"
+                    bindLabel="title" bindValue="id"
+                    id="event" name="event"
+                    required></ng-select>
+
+                  <!-- validation errors -->
+                  <div class="help-block" *ngIf="(submitted || event.dirty) && event.errors">
+                    <ul role="alert">
+                      <li *ngIf="event.errors.required" class="text-danger" role="alert">Event is required.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div *ngIf="bannerVm.type === 'promotion'"
+                  class="col-md-6 form-group"
+                  [class.error]="(submitted || promotion.dirty) && promotion.errors">
+                  <label class="text-bold-600">Promotion</label>
+                  <ng-select 
+                    #promotion="ngModel"
+                    [(ngModel)]="bannerVm.type_id" 
+                    [items]="promotions$ | async"
+                    [multiple]="false"
+                    [trackByFn]="trackByPromotionFn"
+                    [loading]="promotionsReqLoading"
+                    [typeahead]="promotionsInput$"
+                    bindLabel="title" bindValue="id"
+                    id="promotion" name="promotion"
+                    required></ng-select>
+
+                  <!-- validation errors -->
+                  <div class="help-block" *ngIf="(submitted || promotion.dirty) && promotion.errors">
+                    <ul role="alert">
+                      <li *ngIf="promotion.errors.required" class="text-danger" role="alert">Promotion is required.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- form actions -->
+              <div class="form-actions d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary pull-right"
+                  [disabled]="isLoading">
+                  <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span> Create
+                </button>
+              </div>
+
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

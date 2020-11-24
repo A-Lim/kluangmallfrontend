@@ -3,7 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from 'app/core/guards/auth.guard';
 import { PermissionGuard } from 'app/core/guards/permission.guard';
+import { BannersCreateComponent } from 'app/modules/banners/banners-create/banners-create.component';
 import { BannersListComponent } from 'app/modules/banners/banners-list/banners-list.component';
+import { BannersEditComponent } from 'app/modules/banners/banners-edit/banners-edit.component';
 
 const routes: Routes = [
   { 
@@ -12,9 +14,27 @@ const routes: Routes = [
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
       breadcrumb: 'banners',
-      // permissions: ['banners.viewAny', 'banners.update']
+      // permissions: ['banners.view', 'banners.viewAny', 'banners.update']
     },
   },
+  { 
+    path: 'create', 
+    component: BannersCreateComponent,
+    canActivate: [AuthGuard, PermissionGuard],
+    data: { 
+      breadcrumb: 'create banners',
+      // permissions: ['banners.create']
+    },
+  },
+  { 
+    path: ':id', 
+    component: BannersEditComponent, 
+    canActivate: [AuthGuard, PermissionGuard],
+    data: { 
+      breadcrumb: 'edit banners',
+      // permissions: ['users.view', 'users.viewAny', 'users.update'],
+    },
+  }
 ];
 
 @NgModule({

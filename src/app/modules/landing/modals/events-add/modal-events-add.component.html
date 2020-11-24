@@ -1,0 +1,53 @@
+<div class="modal-header">
+  <h3 class="modal-title">Add Events</h3>
+  <button type="button" class="close rounded-pill" aria-label="close" (click)="close()"><i class="bx bx-x"></i></button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-12 form-group">
+      <label class="text-bold-600">Selected Events</label>
+      <div class="selected">
+        <ng-container *ngIf="events.length > 0; else noEventsSelected">
+          <div *ngFor="let event of events; let i = index;" class="badge badge-primary d-inline-flex align-items-center">
+            {{ event.title }}
+            <i class="bx bx-x font-size-small" (click)="remove(i)"></i>
+          </div>
+        </ng-container>
+
+        <ng-template #noEventsSelected>
+          <div class="text-muted">No events selected.</div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <ag-grid-angular #agGrid style="width: 100%;" domLayout='autoHeight' class="ag-theme-balham"
+    (gridReady)="onGridReady($event)" 
+    [gridOptions]="gridOptions" 
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef">
+  </ag-grid-angular>
+  
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" (click)="addEvents()">Add</button>
+</div>
+
+
+<ng-template #actionsCell let-row>
+  <ng-container *ngIf="row">
+
+    <a class="btn btn-xs btn-icon btn-primary btn-action-icon" 
+      (click)="add(row)">
+      <i class="bx bx-plus"></i>
+    </a>
+
+  </ng-container>
+</ng-template>
+
+<ng-template #statusCell let-row>
+  <ng-container *ngIf="row" [ngSwitch]="row.status">
+    <span *ngSwitchCase="'inactive'" class="badge badge-xs badge-light-danger">{{ row.status | titlecase }}</span>
+    <span *ngSwitchCase="'active'" class="badge badge-xs badge-light-success">{{ row.status | titlecase }}</span>
+  </ng-container>
+</ng-template>

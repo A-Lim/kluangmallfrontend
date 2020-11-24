@@ -52,6 +52,7 @@ export class EventsEditComponent extends Base implements OnInit, OnDestroy {
           status: response.data.status,
           fromDate: response.data.fromDate,
           toDate: response.data.toDate,
+          caption: response.data.caption,
           content: response.data.content,
           thumbnail: response.data.thumbnail != null ? [response.data.thumbnail] : [],
           uploadThumbnail: null,
