@@ -6,6 +6,7 @@ import { SystemSettingsComponent } from 'app/modules/systemsettings/systemsettin
 import { SystemSettingsGeneralTabComponent } from 'app/modules/systemsettings/systemsettings-general-tab/systemsettings-general-tab.component';
 import { SystemSettingsAuthTabComponent } from 'app/modules/systemsettings/systemsettings-auth-tab/systemsettings-auth-tab.component';
 import { SystemSettingsSocialTabComponent } from 'app/modules/systemsettings/systemsettings-social-tab/systemsettings-social-tab.component';
+import { SystemSettingsMobileTabComponent } from 'app/modules/systemsettings/systemsettings-mobile-tab/systemsettings-mobile-tab.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { SystemSettingsSocialTabComponent } from 'app/modules/systemsettings/sys
     SystemSettingsGeneralTabComponent,
     SystemSettingsAuthTabComponent,
     SystemSettingsSocialTabComponent,
+    SystemSettingsMobileTabComponent
   ],
   imports: [
     SystemSettingsRoutingModule,

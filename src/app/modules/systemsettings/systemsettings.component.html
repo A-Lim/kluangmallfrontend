@@ -15,11 +15,7 @@
             <shared-alert></shared-alert>
             <ng-container *ngIf="systemSettingVm; else loading">
               <ul class="nav nav-pills">
-                <!-- <li class="nav-item">
-                  <a class="nav-link active" [class.bg-danger]="submitted && !generalTabValid"
-                    id="general-tab" data-toggle="pill" href="#general"
-                    aria-expanded="true">General</a>
-                </li> -->
+
                 <li class="nav-item">
                   <a class="nav-link active" [class.bg-danger]="submitted && !authTabValid"
                     id="auth-tab" data-toggle="pill" href="#authentication"
@@ -31,12 +27,15 @@
                     id="social-tab" data-toggle="pill" href="#social"
                     aria-expanded="true">Social</a>
                 </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" [class.bg-danger]="submitted && !mobileTabValid"
+                    id="mobile-tab" data-toggle="pill" href="#mobile"
+                    aria-expanded="true">Mobile</a>
+                </li>
               </ul>
   
               <div class="tab-content">
-                <!-- <div role="tabpanel" class="tab-pane active" id="general" aria-labelledby="general-tab" aria-expanded="true">
-                  <systemsettings-general-tab [systemSettingVm]="systemSettingVm"></systemsettings-general-tab>
-                </div> -->
                 <div class="tab-pane active" id="authentication" role="tabpanel" aria-labelledby="settings-tab" aria-expanded="false">
                   <systemsettings-auth-tab 
                     [systemSettingVm]="systemSettingVm"
@@ -51,6 +50,14 @@
                     [submitted]="submitted"
                     [isLoading]="isLoading"
                     (formValid)="onFormStatusChange(SystemSettingTab.Social, $event)"></systemsettings-social-tab>
+                </div>
+
+                <div class="tab-pane" id="mobile" role="tabpanel" aria-labelledby="mobile-tab" aria-expanded="false">
+                  <systemsettings-mobile-tab 
+                    [systemSettingVm]="systemSettingVm"
+                    [submitted]="submitted"
+                    [isLoading]="isLoading"
+                    (formValid)="onFormStatusChange(SystemSettingTab.Mobile, $event)"></systemsettings-mobile-tab>
                 </div>
               </div>
   

@@ -27,7 +27,7 @@ export class MerchantsListComponent extends BaseAgGrid implements OnInit {
       this.getIndexColDef(),
       this.getTemplateColDef('Logo', 'logo', 120, false, this.imageCell),
       this.getColDef('Name', 'name', true, true),
-      this.getColDef('Category', 'category'),
+      this.getColDef('Category', 'category', true, true),
       this.getColDef('Business Reg No.', 'business_reg_no', true, true),
       this.getStatusColDef('Status', 'status', 100, false, this.statusCell),
       this.getActionColDef('Action', '', 110, this.actionsCell),

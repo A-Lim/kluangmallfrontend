@@ -1,0 +1,48 @@
+<form autocomplete="off" #form="ngForm">
+  <fieldset [disabled]="isLoading || !('update' | ablePure: 'systemsettings' | async)">
+    <!-- android version -->
+    <div class="row">
+      <div class="col-md-6 form-group mb-50" [class.error]="(submitted || androidversion.dirty) && androidversion.errors">
+        <label class="text-bold-600" for="androidversion">Android Version</label>
+        <input type="text" class="form-control"
+          #androidversion="ngModel"
+          [(ngModel)]="systemSettingVm.android_version"
+          id="androidversion" name="androidversion" />
+      </div>
+    </div>
+
+    <!-- android link -->
+    <div class="row">
+      <div class="col-md-6 form-group mb-50" [class.error]="(submitted || androidLink.dirty) && androidLink.errors">
+        <label class="text-bold-600" for="androidLink">Android Link</label>
+        <input type="text" class="form-control"
+          #androidLink="ngModel"
+          [(ngModel)]="systemSettingVm.android_link"
+          id="androidLink" name="androidLink" />
+      </div>
+    </div>
+
+    <!-- ios version -->
+    <div class="row">
+      <div class="col-md-6 form-group mb-50" [class.error]="(submitted || iosversion.dirty) && iosversion.errors">
+        <label class="text-bold-600" for="iosversion">IOS Version</label>
+        <input type="text" class="form-control"
+          #iosversion="ngModel"
+          [(ngModel)]="systemSettingVm.ios_version"
+          id="iosversion" name="iosversion" />
+      </div>
+    </div>
+
+    <!-- ios link -->
+    <div class="row">
+      <div class="col-md-6 form-group mb-50" [class.error]="(submitted || iosLink.dirty) && iosLink.errors">
+        <label class="text-bold-600" for="iosLink">IOS Link</label>
+        <input type="text" class="form-control"
+          #iosLink="ngModel"
+          [(ngModel)]="systemSettingVm.ios_link"
+          id="iosLink" name="iosLink" />
+      </div>
+    </div>
+    
+  </fieldset>
+</form>

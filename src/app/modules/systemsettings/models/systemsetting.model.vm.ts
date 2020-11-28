@@ -6,4 +6,9 @@ export class SystemSettingVm {
   facebook: string;
   instagram: string;
   whatsapp: string;
+
+  ios_version: string;
+  ios_link: string;
+  android_version: string;
+  android_link: string;
 }

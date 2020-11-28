@@ -1,4 +1,5 @@
 <form autocomplete="off" #form="ngForm">
+  <shared-alert></shared-alert>
   <fieldset [disabled]="isLoading || !('update' | ablePure: 'usergroups' | async)">
     <div class="row">
       <!-- name -->
@@ -83,6 +84,13 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="form-actions d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary pull-right"
+        [disabled]="isLoading || !('update' | ablePure: 'usergroups' | async)">
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span> Edit
+      </button>
     </div>
   </fieldset>
 </form>

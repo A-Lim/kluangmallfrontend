@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'environments/environment';
+import { User } from 'app/modules/users/models/user.model';
 import { UserGroup } from 'app/modules/usergroups/models/usergroup.model';
+import { UserGroupVm } from 'app/modules/usergroups/models/usergroup.model.vm';
 import { PaginationResponse } from 'app/shared/models/responses/pagination.response';
 import { ResponseResult } from 'app/shared/models/responses/responseresult.model';
 import { PermissionModule } from 'app/modules/usergroups/models/permissionmodule.model';
-import { UserGroupVm } from './models/usergroup.model.vm';
 
 @Injectable({ providedIn: 'root' })
 export class UserGroupService {
@@ -28,6 +29,15 @@ export class UserGroupService {
     return this.http.get<ResponseResult<PaginationResponse<UserGroup>>>(this.userGroupUrl, { params: qParams });
   }
 
+  getUsers(id: number, qParams: any) {
+    return this.http.get<ResponseResult<PaginationResponse<User>>>(`${this.userGroupUrl}/${id}/users`, { params: qParams });
+  }
+
+  // list users that are not inside usergroup
+  getNotUsers(id: number, qParams: any) {
+    return this.http.get<ResponseResult<PaginationResponse<User>>>(`${this.userGroupUrl}/${id}/notusers`, { params: qParams });
+  }
+
   getUserGroup(id: number) {
     return this.http.get<ResponseResult<UserGroup>>(`${this.userGroupUrl}/${id}`);
   }
@@ -42,5 +52,14 @@ export class UserGroupService {
 
   deleteUserGroup(id: number) {
     return this.http.delete<ResponseResult<null>>(`${this.userGroupUrl}/${id}`);
+  }
+
+  addUsers(id: number, userIds: number[]) {
+    const data = { userIds: userIds };
+    return this.http.post<ResponseResult<null>>(`${this.userGroupUrl}/${id}/users`, data);
+  }
+
+  removeUser(id: number, userId: number) {
+    return this.http.delete<ResponseResult<null>>(`${this.userGroupUrl}/${id}/users/${userId}`);
   }
 }
