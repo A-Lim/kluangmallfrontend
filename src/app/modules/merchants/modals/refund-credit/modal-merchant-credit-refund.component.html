@@ -1,0 +1,55 @@
+<form autocomplete="off" #form="ngForm" (submit)="onSubmit()">
+  <div class="modal-header">
+    <h3 class="modal-title">Credit Refund</h3>
+    <button type="button" class="close rounded-pill" aria-label="close"
+      (click)="close()"><i class="bx bx-x"></i></button>
+  </div>
+
+  <div class="modal-body">
+    <fieldset [disabled]="isLoading">
+      <div class="row">
+        <!-- amount -->
+        <div class="col-6 form-group" [class.error]="(submitted || amount.dirty) && amount.errors">
+          <label class="text-bold-600">Amount (RM)</label>
+          <input type="number" class="form-control"
+            #amount="ngModel"
+            [(ngModel)]="transaction.amount"
+            id="amount" name="amount" disabled />
+        </div>
+
+        <!-- credit -->
+        <div class="col-6 form-group">
+          <label class="text-bold-600">Credit</label>
+          <input type="text" class="form-control"
+            [value]="transaction.credit"
+            id="credit" name="credit" disabled />
+        </div>
+
+        <!-- remarks -->
+        <div class="col-12 form-group">
+          <label class="text-bold-600">Remark</label>
+          <textarea class="form-control" rows="3"
+            #remark="ngModel"
+            [(ngModel)]="transaction.remark"
+            id="remark" name="remark" disabled></textarea>
+        </div>
+
+        <!-- remarks -->
+        <div class="col-12 form-group">
+          <label class="text-bold-600">Refund Remark</label>
+          <textarea class="form-control" rows="3"
+            #remark="ngModel"
+            [(ngModel)]="transactionVm.remark"
+            id="refundRemark" name="refundRemark"></textarea>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-warning"
+      [disabled]="isLoading">
+      <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+      Refund
+    </button>
+  </div>
+</form>

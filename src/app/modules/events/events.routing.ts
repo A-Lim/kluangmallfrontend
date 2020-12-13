@@ -14,7 +14,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
       breadcrumb: 'events',
-      // permissions: ['events.view', 'events.viewAny', 'events.update']
+      permissions: ['events.view', 'events.viewAny', 'events.update']
     },
   },
   { 
@@ -23,7 +23,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
       breadcrumb: 'create events',
-      // permissions: ['events.create']
+      permissions: ['events.create']
     },
   },
   { 
@@ -32,7 +32,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
       breadcrumb: 'edit events',
-      // permissions: ['users.view', 'users.viewAny', 'users.update'],
+      permissions: ['events.view', 'events.viewAny', 'events.update'],
     },
   }
 ];

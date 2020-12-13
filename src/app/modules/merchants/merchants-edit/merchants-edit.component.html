@@ -9,36 +9,52 @@
     <ul class="nav nav-pills">
       <li class="nav-item">
         <a class="nav-link active"
-          id="users-tab" data-toggle="pill" href="#users" 
-          aria-expanded="false">
-          Users
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link"
           id="general-tab" data-toggle="pill" href="#general"
           aria-expanded="true">
           General
         </a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link"
+          id="users-tab" data-toggle="pill" href="#users" 
+          (click)="onTabClick(MerchantEditTab.Users)"
+          aria-expanded="false">
+          Users
+        </a>
+      </li>
       
+      <li class="nav-item">
+        <a class="nav-link"
+          id="account-tab" data-toggle="pill" href="#account"
+          (click)="onTabClick(MerchantEditTab.Account)"
+          aria-expanded="true">
+          Account
+        </a>
+      </li>
     </ul>
 
     <div class="card">
       <div class="card-content">
         <div class="card-body">
-          <div class="tab-content">
-            <div class="tab-pane active" id="users" role="tabpanel" aria-labelledby="users-tab" aria-expanded="false">
-              <merchants-edit-users-tab 
-                *ngIf="merchantVm; else loading"
-                [merchantVm]="merchantVm"
-                [isLoading]="isLoading"></merchants-edit-users-tab>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="general" aria-labelledby="general-tab" aria-expanded="true">
+          <div *ngIf="merchantVm; else loading"
+            class="tab-content">
+            <div class="tab-pane active" id="general" role="tabpanel" aria-labelledby="general-tab" aria-expanded="true">
               <merchants-edit-general-tab
-                *ngIf="merchantVm; else loading"
                 [merchantVm]="merchantVm"
                 [isLoading]="isLoading"></merchants-edit-general-tab>
+            </div>
+            <div class="tab-pane" id="users" role="tabpanel" aria-labelledby="users-tab" aria-expanded="false">
+              <merchants-edit-users-tab 
+                *ngIf="isUsersTabLoaded"
+                [merchant]="merchant"
+                [isLoading]="isLoading"></merchants-edit-users-tab>
+            </div>
+            <div class="tab-pane" id="account" role="tabpanel" aria-labelledby="account-tab" aria-expanded="false">
+              <merchants-edit-account-tab
+                *ngIf="isAccountTabLoaded"
+                [merchant]="merchant"
+                [isLoading]="isLoading"></merchants-edit-account-tab>
             </div>
           </div>
         </div>

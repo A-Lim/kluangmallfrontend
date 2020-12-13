@@ -41,6 +41,16 @@ const routes: Routes = [
         loadChildren: () => import('app/modules/usergroups/usergroups.module').then(m => m.UserGroupsModule), 
       },
       { 
+        path: 'admin/feedbacks', 
+        data: { breadcrumb: 'feedbacks', module: 'feedbacks' },
+        loadChildren: () => import('app/modules/feedbacks/feedbacks.module').then(m => m.FeedbacksModule), 
+      },
+      { 
+        path: 'admin/apilogs', 
+        data: { breadcrumb: 'api logs', module: 'api logs' },
+        loadChildren: () => import('app/modules/apilogs/apilogs.module').then(m => m.ApiLogsModule), 
+      },
+      { 
         path: 'admin/banners', 
         data: { breadcrumb: 'banners', module: 'banners' },
         loadChildren: () => import('app/modules/banners/banners.module').then(m => m.BannersModule), 

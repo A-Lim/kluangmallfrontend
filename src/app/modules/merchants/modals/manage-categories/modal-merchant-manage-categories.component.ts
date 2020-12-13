@@ -1,6 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
-import { AgGridAngular } from 'ag-grid-angular';
 import { BaseAgGrid } from 'app/shared/components/baseaggrid.component';
 import { CustomOverlayRef } from 'app/shared/helpers/customoverlayref';
 import { MerchantService } from 'app/modules/merchants/merchants.service';
@@ -12,7 +11,6 @@ import { filter, switchMap } from 'rxjs/operators';
   styleUrls: ['./modal-merchant-manage-categories.component.css']
 })
 export class MerchantManageCategoriesModalComponent extends BaseAgGrid implements OnInit {
-  @ViewChild('agGrid') agGrid: AgGridAngular;
   @ViewChild('actionsCell', { static: true }) actionsCell: TemplateRef<any>;
 
   constructor(public merchantSvc: MerchantService,
@@ -45,6 +43,6 @@ export class MerchantManageCategoriesModalComponent extends BaseAgGrid implement
         filter(isConfirmed => isConfirmed),
         switchMap(_ => this.merchantSvc.deleteMerchantCategory(id)),
         switchMap(response => this.swalAlert('Success', response.message, 'success'))
-      ).subscribe(_ => this.agGrid.gridOptions.api.refreshInfiniteCache());
+      ).subscribe(_ => this.refreshTable());
   }
 }

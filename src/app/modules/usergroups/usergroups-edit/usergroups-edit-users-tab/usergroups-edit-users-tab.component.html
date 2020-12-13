@@ -2,7 +2,7 @@
   <fieldset [disabled]="isLoading || !('update' | ablePure: 'usergroups' | async)">
     <div class="row">
       <!-- users -->
-      <div class="col-md-10 form-group mb-50" [class.error]="(submitted || users.dirty) && users.errors">
+      <div class="col-md-10 form-group" [class.error]="(submitted || users.dirty) && users.errors">
         <label class="text-bold-600" for="userIds">Users</label>
         
         <ng-select 
@@ -42,7 +42,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-2 form-group mb-50 col-add-users">
+      <div class="col-md-2 form-group col-add-users">
         <button type="submit" class="btn btn-primary">Add Users</button>
       </div>
     </div>

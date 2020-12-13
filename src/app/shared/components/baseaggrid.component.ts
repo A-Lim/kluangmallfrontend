@@ -1,16 +1,17 @@
-import { OnInit, OnDestroy, Directive, TemplateRef } from '@angular/core';
+import { OnInit, OnDestroy, Directive, TemplateRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { GridOptions, IDatasource, ColDef, IGetRowsParams } from 'ag-grid-community';
+import { AgGridAngular } from 'ag-grid-angular';
+import { GridOptions, IDatasource, ColDef, IGetRowsParams, GridApi } from 'ag-grid-community';
 
-import { ServiceLocator } from 'app/shared/services/servicelocator';
 import { Base } from 'app/shared/components/base.component';
 import { TemplateRendererComponent } from './template-renderer.component';
 import UrlQueryBuilder from 'app/shared/helpers/urlquerybuilder';
 
-
 @Directive()
 export abstract class BaseAgGrid extends Base implements OnInit, OnDestroy {
+  @ViewChild('agGrid') agGrid: AgGridAngular;
+  
   // default grid options
   public gridOptions: GridOptions = {
     defaultColDef: {
@@ -50,8 +51,13 @@ export abstract class BaseAgGrid extends Base implements OnInit, OnDestroy {
   }
 
   onGridReady(params) {
-    params.api.sizeColumnsToFit();
-    params.api.setDatasource(this.dataSource);
+    const api = params.api as GridApi;
+    api.sizeColumnsToFit();
+    api.setDatasource(this.dataSource);
+  }
+
+  refreshTable() {
+    this.agGrid.api.setDatasource(this.dataSource);
   }
 
   getIndexColDef(headerName: string = '#', width: number = 30): ColDef {
@@ -117,7 +123,7 @@ export abstract class BaseAgGrid extends Base implements OnInit, OnDestroy {
     return colDef;
   }
 
-  getDateColDef(headerName: string, field: string) {
+  getDateColDef(headerName: string, field: string, ) {
     let colDef = <ColDef> {
       headerName: headerName,
       field: field,

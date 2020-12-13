@@ -4,10 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { PaginationResponse } from 'app/shared/models/responses/pagination.response';
 import { ResponseResult } from 'app/shared/models/responses/responseresult.model';
+import { User } from 'app/modules/users/models/user.model';
 import { Merchant } from 'app/modules/merchants/models/merchant.model';
 import { MerchantVm } from 'app/modules/merchants/models/merchant.model.vm';
-import { User } from '../users/models/user.model';
-import { MerchantUserVm } from './models/merchant-user.model.vm';
+import { MerchantUserVm } from 'app/modules/merchants/models/merchant-user.model.vm';
+import { MerchantTransactionVm } from './models/merchant-transaction.model.vm';
+import { MerchantTransactionResponse } from './models/merchant-transaction-response.model';
 
 @Injectable({ providedIn: 'root' })
 export class MerchantService {
@@ -28,8 +30,20 @@ export class MerchantService {
     return this.http.get<ResponseResult<PaginationResponse<User>>>(`${this.merchantUrl}/categories`, { params: qParams });
   }
 
+  getMerchantAccountTransactions(id: number, qParams: any) {
+    return this.http.get<ResponseResult<PaginationResponse<User>>>(`${this.merchantUrl}/${id}/transactions`, { params: qParams });
+  }
+
   getMerchant(id: number) {
     return this.http.get<ResponseResult<Merchant>>(`${this.merchantUrl}/${id}`);
+  }
+
+  topUp(id: number, transaction: MerchantTransactionVm) {
+    return this.http.post<ResponseResult<MerchantTransactionResponse>>(`${this.merchantUrl}/${id}/topup`, transaction);
+  }
+
+  refund(transactionId: number, transaction: MerchantTransactionVm) {
+    return this.http.post<ResponseResult<MerchantTransactionResponse>>(`${this.merchantUrl}/refund/${transactionId}`, transaction);
   }
 
   createMerchant(merchantVm: MerchantVm) {

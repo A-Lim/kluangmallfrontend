@@ -10,7 +10,7 @@
     <fieldset [disabled]="isLoading">
       <div *ngFor="let mUserVm of merchantUsers; let i = index; trackBy: trackByFn" class="row">
         <!-- name -->
-        <div class="col-md-4 form-group mb-50" [class.error]="(submitted || name.dirty) && name.errors">
+        <div class="col-md-4 form-group" [class.error]="(submitted || name.dirty) && name.errors">
           <label class="text-bold-600" for="name">Name</label>
           <input type="text" class="form-control" 
             #name="ngModel" 
@@ -25,7 +25,7 @@
         </div>
 
         <!-- email -->
-        <div class="col-md-4 form-group mb-50" [class.error]="(submitted || email.dirty) && email.errors">
+        <div class="col-md-4 form-group" [class.error]="(submitted || email.dirty) && email.errors">
           <label class="text-bold-600" for="email">Email</label>
           <input type="text" class="form-control"
             #email="ngModel"
@@ -40,7 +40,7 @@
         </div>
 
         <!-- phone -->
-        <div class="col-md-3 form-group mb-50" [class.error]="(submitted || phone.dirty) && phone.errors">
+        <div class="col-md-3 form-group" [class.error]="(submitted || phone.dirty) && phone.errors">
           <label class="text-bold-600" for="phone">Phone</label>
           <input type="text" class="form-control" 
             #phone="ngModel" 
@@ -55,7 +55,7 @@
         </div>
 
         <!-- actions -->
-        <div class="col-md-1 form-group mb-50">
+        <div class="col-md-1 form-group">
           <label class="text-bold-600">&nbsp;</label>
           <button *ngIf="i === 0" class="btn btn-icon rounded-circle btn-primary d-block"
             type="button"

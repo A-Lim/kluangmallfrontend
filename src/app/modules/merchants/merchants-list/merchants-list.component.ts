@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { AgGridAngular } from 'ag-grid-angular';
 
 import { MerchantService } from 'app/modules/merchants/merchants.service';
 import { BaseAgGrid } from 'app/shared/components/baseaggrid.component';
@@ -11,8 +10,6 @@ import { MerchantManageCategoriesModalComponent } from 'app/modules/merchants/mo
   styleUrls: ['./merchants-list.component.css']
 })
 export class MerchantsListComponent extends BaseAgGrid implements OnInit {
-  @ViewChild('agGrid') agGrid: AgGridAngular;
-  @ViewChild('imageCell', { static: true }) imageCell: TemplateRef<any>;
   @ViewChild('actionsCell', { static: true }) actionsCell: TemplateRef<any>;
   @ViewChild('statusCell', { static: true }) statusCell: TemplateRef<any>;
 
@@ -25,10 +22,10 @@ export class MerchantsListComponent extends BaseAgGrid implements OnInit {
     this.setTitle('Merchants');
     this.columnDefs = [
       this.getIndexColDef(),
-      this.getTemplateColDef('Logo', 'logo', 120, false, this.imageCell),
       this.getColDef('Name', 'name', true, true),
       this.getColDef('Category', 'category', true, true),
       this.getColDef('Business Reg No.', 'business_reg_no', true, true),
+      this.getNumberColDef('Credit', 'account.credit', false, false),
       this.getStatusColDef('Status', 'status', 100, false, this.statusCell),
       this.getActionColDef('Action', '', 110, this.actionsCell),
     ];

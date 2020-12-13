@@ -1,4 +1,11 @@
 export class SystemSettingVm {
+  email: string;
+  phone: string;
+  address: string;
+  about_us: string;
+  privacy_policy: string;
+  terms_and_conditions: string;
+
   allow_public_registration: boolean;
   verification_type: string;
   default_usergroups: number[];

@@ -1,0 +1,38 @@
+<!-- BEGIN: Content-->
+<div class="content-wrapper">
+  <div class="content-header row">
+    <div class="content-header-left col-12 mb-2 mt-1">
+      <shared-breadcrumb></shared-breadcrumb>
+    </div>
+  </div>
+
+  <div class="content-body">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <ag-grid-angular #agGrid style="width: 100%;" domLayout='autoHeight' class="ag-theme-balham"
+            (gridReady)="onGridReady($event)" 
+            [gridOptions]="gridOptions" 
+            [columnDefs]="columnDefs"
+            [defaultColDef]="defaultColDef">
+          </ag-grid-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #actionsCell let-row>
+  <ng-container *ngIf="row">
+    <a class="btn btn-xs btn-icon btn-primary btn-action-icon" 
+      (click)="showDetails(row)">
+      <i class="bx bxs-detail"></i>
+    </a>
+    <!-- *ngIf="'delete' | ablePure: 'banners' | async" -->
+    <a 
+      class="btn btn-xs btn-icon btn-danger btn-action-icon" 
+      (click)="delete(row.id)">
+      <i class="bx bxs-trash"></i>
+    </a>
+  </ng-container>
+</ng-template>

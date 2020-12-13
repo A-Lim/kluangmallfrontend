@@ -1,12 +1,5 @@
 import { Component, OnInit, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
-import { filter, switchMap } from 'rxjs/operators';
-import { AgGridAngular } from 'ag-grid-angular';
-import { NgForm } from '@angular/forms';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
-import { Base } from 'app/shared/components/base.component';
-import { ModalSize } from 'app/shared/models/modalsize.enum';
-import { LandingService } from 'app/modules/landing/landing.service';
 import { BaseAgGrid } from 'app/shared/components/baseaggrid.component';
 import { BannerService } from 'app/modules/banners/banners.service';
 import { Banner } from 'app/modules/banners/models/banner.model';
@@ -18,7 +11,6 @@ import { CustomOverlayRef } from 'app/shared/helpers/customoverlayref';
   styleUrls: ['./modal-banner-add.component.css']
 })
 export class BannersAddModalComponent extends BaseAgGrid implements OnInit {
-  @ViewChild('agGrid') agGrid: AgGridAngular;
   @ViewChild('imageCell', { static: true }) imageCell: TemplateRef<any>;
   @ViewChild('actionsCell', { static: true }) actionsCell: TemplateRef<any>;
   @ViewChild('statusCell', { static: true }) statusCell: TemplateRef<any>;

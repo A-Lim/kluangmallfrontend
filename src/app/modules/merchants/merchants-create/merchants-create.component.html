@@ -15,7 +15,7 @@
             <fieldset [disabled]="isLoading">
               <div class="row">
                 <!-- name -->
-                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || name.dirty) && name.errors">
+                <div class="col-md-6 form-group" [class.error]="(submitted || name.dirty) && name.errors">
                   <label class="text-bold-600" for="name">Name</label>
                   <input type="text" class="form-control" 
                     #name="ngModel" 
@@ -30,7 +30,7 @@
                 </div>
           
                 <!-- status -->
-                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || status.dirty) && status.errors">
+                <div class="col-md-6 form-group" [class.error]="(submitted || status.dirty) && status.errors">
                   <label class="text-bold-600" for="status">Status</label>
                   <select class="form-control"
                     #status="ngModel"
@@ -48,7 +48,7 @@
                 </div>
 
                 <!-- logo -->
-                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || logo.dirty) && logo.errors">
+                <div class="col-md-6 form-group" [class.error]="(submitted || logo.dirty) && logo.errors">
                   <label class="text-bold-600" for="logo">Logo</label>
                   <shared-fileinput
                     #logo="ngModel"
@@ -64,7 +64,7 @@
                 </div>
           
                 <!-- category -->
-                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || category.dirty) && category.errors">
+                <div class="col-md-6 form-group" [class.error]="(submitted || category.dirty) && category.errors">
                   <label class="text-bold-600" for="category">Category</label>
                   <ng-select 
                     #category="ngModel"
@@ -84,8 +84,44 @@
                 </div>
 
                 <!-- location -->
-                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || location.dirty) && location.errors">
-                  <label class="text-bold-600" for="location">Location</label>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6 form-group" [class.error]="(submitted || floor.dirty) && floor.errors">
+                      <label class="text-bold-600" for="location">Floor</label>
+                      <select class="form-control" 
+                        #floor="ngModel"
+                        [(ngModel)]="merchantVm.floor"
+                        id="floor" name="floor" required>
+                        <option></option>
+                        <option value="LG">LG</option>
+                        <option value="GF">GF</option>
+                        <option value="1F">1F</option>
+                        <option value="2F">2F</option>
+                        <option value="3F">3F</option>
+                        <option value="4F">4F</option>
+                      </select>
+                      <div *ngIf="submitted || floor.dirty" class="help-block" >
+                        <ul role="alert">
+                          <li *ngIf="floor.errors?.required" class="text-danger" role="alert">Floor is required.</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6 form-group" [class.error]="(submitted || unit.dirty) && unit.errors">
+                      <label class="text-bold-600" for="unit">Unit</label>
+                      <input type="text" class="form-control"
+                        #unit="ngModel"
+                        [(ngModel)]="merchantVm.unit"
+                        id="unit" name="unit"
+                        required />
+                      <div *ngIf="submitted || unit.dirty" class="help-block" >
+                        <ul role="alert">
+                          <li *ngIf="unit.errors?.required" class="text-danger" role="alert">Unit is required.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <label class="text-bold-600" for="location">Location</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="bx bx-map-pin"></i></span>
@@ -100,30 +136,25 @@
                     <ul role="alert">
                       <li *ngIf="location.errors?.required" class="text-danger" role="alert">Location is required.</li>
                     </ul>
-                  </div>
-                </div>
-
-                <!-- business registration no -->
-                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || businessRegNo.dirty) && businessRegNo.errors">
-                  <label class="text-bold-600" for="businessRegNo">Business Registration No.</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="bx bx-briefcase"></i></span>
-                    </div>
-                    <input type="text" class="form-control" 
-                      #businessRegNo="ngModel" 
-                      [(ngModel)]="merchantVm.business_reg_no"
-                      id="businessRegNo" name="businessRegNo" placeholder="Business Registration No." />
-                  </div>
-                  <!-- <div *ngIf="submitted || businessRegNo.dirty" class="help-block" >
-                    <ul role="alert">
-                      <li *ngIf="businessRegNo.errors?.required" class="text-danger" role="alert">Business Registration No. is required.</li>
-                    </ul>
                   </div> -->
                 </div>
 
+                <!-- business registration no -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || businessRegNo.dirty) && businessRegNo.errors">
+                  <label class="text-bold-600" for="businessRegNo">Business Registration No.</label>
+                  <input type="text" class="form-control" 
+                    #businessRegNo="ngModel" 
+                    [(ngModel)]="merchantVm.business_reg_no"
+                    id="businessRegNo" name="businessRegNo" placeholder="Business Registration No." />
+                  <div *ngIf="submitted || businessRegNo.dirty" class="help-block" >
+                    <ul role="alert">
+                      <li *ngIf="businessRegNo.errors?.required" class="text-danger" role="alert">Business Registration No. is required.</li>
+                    </ul>
+                  </div>
+                </div>
+
                 <!-- website -->
-                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || website.dirty) && website.errors">
+                <div class="col-md-6 form-group" [class.error]="(submitted || website.dirty) && website.errors">
                   <label class="text-bold-600" for="website">Website</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -142,7 +173,7 @@
                 </div>
                 
                 <!-- email -->
-                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || email.dirty) && email.errors">
+                <div class="col-md-6 form-group" [class.error]="(submitted || email.dirty) && email.errors">
                   <label class="text-bold-600" for="email">Email</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -161,7 +192,7 @@
                 </div>
 
                 <!-- phone no -->
-                <div class="col-md-6 form-group mb-50" [class.error]="(submitted || phone.dirty) && phone.errors">
+                <div class="col-md-6 form-group" [class.error]="(submitted || phone.dirty) && phone.errors">
                   <label class="text-bold-600" for="phone">Phone No.</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -180,7 +211,7 @@
                 </div>
 
                 <!-- description -->
-                <div class="col-md-12 form-group mb-50" [class.error]="(submitted || description.dirty) && description.errors">
+                <div class="col-md-12 form-group" [class.error]="(submitted || description.dirty) && description.errors">
                   <label class="text-bold-600">Desription</label>
                   <ckeditor 
                     #description="ngModel"
@@ -197,7 +228,7 @@
                 </div>
 
                 <!-- terms and conditions -->
-                <div class="col-md-12 form-group mb-50" [class.error]="(submitted || terms.dirty) && terms.errors">
+                <div class="col-md-12 form-group" [class.error]="(submitted || terms.dirty) && terms.errors">
                   <label class="text-bold-600">Terms and Conditions</label>
                   <ckeditor 
                     #terms="ngModel"
@@ -213,7 +244,7 @@
                 </div>
 
                 <!-- privacy policy -->
-                <div class="col-md-12 form-group mb-50" [class.error]="(submitted || privacyPolicy.dirty) && privacyPolicy.errors">
+                <div class="col-md-12 form-group" [class.error]="(submitted || privacyPolicy.dirty) && privacyPolicy.errors">
                   <label class="text-bold-600">Privacy Policy</label>
                   <ckeditor 
                     #privacyPolicy="ngModel"

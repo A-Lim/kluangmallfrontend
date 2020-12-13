@@ -48,17 +48,17 @@
       </shared-authorized-content>
 
       <!-- merchant -->
-      <!-- <shared-authorized-content 
-        [permissions]="['usergroups.view', 'usergroups.viewAny']" 
+      <shared-authorized-content 
+        [permissions]="['merchants.view', 'merchants.viewAny']" 
         [condition]="'or'" 
-        [type]="'hide'"> -->
+        [type]="'hide'">
         <li class="nav-item" routerLinkActive="active">
           <a href="#" [routerLink]="['/admin/merchants']">
             <i class="bx bx-store"></i>
             <span class="menu-title">Merchants</span>
           </a>
         </li>
-      <!-- </shared-authorized-content> -->
+      </shared-authorized-content>
 
       <!-- usergroups -->
       <shared-authorized-content 
@@ -75,8 +75,7 @@
 
       <!-- systemsettings -->
       <shared-authorized-content 
-        [permissions]="['systemsettings.viewAny']" 
-        [condition]="'or'" 
+        [permissions]="['systemsettings.viewAny']"
         [type]="'hide'">
         <li class="nav-item" routerLinkActive="active">
           <a href="#" [routerLink]="['/admin/systemsettings']">
@@ -86,49 +85,88 @@
         </li>
       </shared-authorized-content> 
 
-      <!-- landing -->
-      <!-- <shared-authorized-content 
-        [permissions]="['systemsettings.viewAny']" 
+      <!-- landing management -->
+      <shared-authorized-content 
+        [permissions]="['landing.viewAny', 'banners.viewAny', 'events.viewAny', 'promotions.viewAny']" 
         [condition]="'or'" 
-        [type]="'hide'"> -->
+        [type]="'hide'">
         <li class="nav-item has-sub" [class.open]="isLanding">
           <a href="#" (click)="onLandingClicked($event)">
             <i class="bx bx-home"></i>
             <span class="menu-title">Landing</span>
           </a>
           <ul class="menu-content">
-            <li routerLinkActive="active">
-              <a href="#" [routerLink]="['/admin/landing-management']">
-                <i class="bx bx-grid-alt"></i>
-                <span class="menu-title">Manage Landing</span>
-              </a>
-            </li>
-            <li routerLinkActive="active">
-              <a href="#" [routerLink]="['/admin/banners']">
-                <i class="bx bx-image"></i>
-                <span class="menu-title">Banners</span>
-              </a>
-            </li>
-            <li routerLinkActive="active">
-              <a href="#" [routerLink]="['/admin/events']">
-                <i class="bx bx-calendar-event"></i>
-                <span class="menu-title">Events</span>
-              </a>
-            </li>
-            <li routerLinkActive="active">
-              <a href="#" [routerLink]="['/admin/promotions']">
-                <i class="bx bxs-discount"></i>
-                <span class="menu-title">Promotions</span>
-              </a>
-            </li>
-          </ul>
-          <!-- <a href="#" [routerLink]="['/admin/systemsettings']">
-            <i class="bx bx-cog"></i>
-            <span class="menu-title" data-i18n="SystemSettings">System Settings</span>
-          </a> -->
-        </li>
-      <!-- </shared-authorized-content>  -->
+            <!-- <shared-authorized-content 
+              [permissions]="['landing.viewAny']"
+              [type]="'hide'"> -->
+              <!-- landing -->
+              <li routerLinkActive="active">
+                <a href="#" [routerLink]="['/admin/landing-management']">
+                  <i class="bx bx-grid-alt"></i>
+                  <span class="menu-title">Manage Landing</span>
+                </a>
+              </li>
+            <!-- </shared-authorized-content> -->
 
+            <!-- <shared-authorized-content 
+              [permissions]="['banners.viewAny']"
+              [type]="'hide'"> -->
+              <li routerLinkActive="active">
+                <a href="#" [routerLink]="['/admin/banners']">
+                  <i class="bx bx-image"></i>
+                  <span class="menu-title">Banners</span>
+                </a>
+              </li>
+            <!-- </shared-authorized-content> -->
+
+            <!-- <shared-authorized-content 
+              [permissions]="['events.viewAny']"
+              [type]="'hide'"> -->
+              <li routerLinkActive="active">
+                <a href="#" [routerLink]="['/admin/events']">
+                  <i class="bx bx-calendar-event"></i>
+                  <span class="menu-title">Events</span>
+                </a>
+              </li>
+            <!-- </shared-authorized-content> -->
+
+            <!-- <shared-authorized-content 
+              [permissions]="['promotions.viewAny']"
+              [type]="'hide'"> -->
+              <li routerLinkActive="active">
+                <a href="#" [routerLink]="['/admin/promotions']">
+                  <i class="bx bxs-discount"></i>
+                  <span class="menu-title">Promotions</span>
+                </a>
+              </li>
+            <!-- </shared-authorized-content> -->
+          </ul>
+        </li>
+      </shared-authorized-content> 
+
+      <!-- feedbacks -->
+      <shared-authorized-content 
+        [permissions]="['feedbacks.viewAny']"
+        [type]="'hide'">
+        <li class="nav-item" routerLinkActive="active">
+          <a href="#" [routerLink]="['/admin/feedbacks']">
+            <i class="bx bxs-comment-detail"></i>
+            <span class="menu-title">Feedbacks</span>
+          </a>
+        </li>
+      </shared-authorized-content>
+
+      <!-- apilogs -->
+      <!-- <shared-authorized-content 
+        [permissions]="['apilogs.viewAny']"
+        [type]="'hide'"> -->
+        <li class="nav-item" routerLinkActive="active">
+          <a href="#" [routerLink]="['/admin/apilogs']">
+            <i class="bx bx bx-history"></i>
+            <span class="menu-title">Api Logs</span>
+          </a>
+        </li>
+      <!-- </shared-authorized-content> -->
     </ul>
   </div>
 </div>

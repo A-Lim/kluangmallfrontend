@@ -10,7 +10,6 @@ import { UserVm } from 'app/modules/users/models/user.model.vm';
 import { UserGroup } from 'app/modules/usergroups/models/usergroup.model';
 import { UserService } from 'app/modules/users/users.service';
 import { UserGroupService } from 'app/modules/usergroups/usergroups.service';
-import { Ability } from '@casl/ability';
 
 @Component({
   selector: 'users-edit-general-tab',

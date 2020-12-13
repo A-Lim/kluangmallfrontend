@@ -2,7 +2,7 @@
   <fieldset [disabled]="isLoading || !('update' | ablePure: 'systemsettings' | async)">
     <!-- facebook  -->
     <div class="row">
-      <div class="col-md-6 form-group mb-50" [class.error]="(submitted || facebook.dirty) && facebook.errors">
+      <div class="col-md-6 form-group" [class.error]="(submitted || facebook.dirty) && facebook.errors">
         <label class="text-bold-600" for="facebook">Facebook</label>
         <div class="input-group">
           <div class="input-group-prepend">
@@ -18,7 +18,7 @@
 
     <!-- instagram  -->
     <div class="row">
-      <div class="col-md-6 form-group mb-50" [class.error]="(submitted || instagram.dirty) && instagram.errors">
+      <div class="col-md-6 form-group" [class.error]="(submitted || instagram.dirty) && instagram.errors">
         <label class="text-bold-600" for="instagram">Instagram</label>
         <div class="input-group">
           <div class="input-group-prepend">
@@ -34,7 +34,7 @@
 
     <!-- whatsapp  -->
     <div class="row">
-      <div class="col-md-6 form-group mb-50" [class.error]="(submitted || whatsapp.dirty) && whatsapp.errors">
+      <div class="col-md-6 form-group" [class.error]="(submitted || whatsapp.dirty) && whatsapp.errors">
         <label class="text-bold-600" for="whatsapp">Whatsapp</label>
         <div class="input-group">
           <div class="input-group-prepend">

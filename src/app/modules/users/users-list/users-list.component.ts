@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild, TemplateRef, OnDestroy } from '@angular/core';
-import { AgGridAngular } from 'ag-grid-angular';
-import { pipe } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 
 import { BaseAgGrid } from 'app/shared/components/baseaggrid.component';
@@ -8,14 +6,12 @@ import { UserService } from 'app/modules/users/users.service';
 import { AuthService } from 'app/core/services/auth.service';
 import { User } from 'app/modules/users/models/user.model';
 
-
 @Component({
   selector: 'users-list',
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.css']
 })
 export class UsersListComponent extends BaseAgGrid implements OnInit, OnDestroy {
-  @ViewChild('agGrid') agGrid: AgGridAngular;
   @ViewChild('actionsCell', { static: true }) actionsCell: TemplateRef<any>;
   @ViewChild('statusCell', { static: true }) statusCell: TemplateRef<any>;
 
@@ -35,6 +31,7 @@ export class UsersListComponent extends BaseAgGrid implements OnInit, OnDestroy 
 
     this.columnDefs = [
       this.getIndexColDef(),
+      this.getColDef('Member No.', 'member_no', true, true),
       this.getColDef('Name', 'name', true, true),
       this.getColDef('Email', 'email', true, true),
       this.getStatusColDef('Status', 'status', 100, false, this.statusCell),

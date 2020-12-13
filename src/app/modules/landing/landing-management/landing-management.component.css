@@ -1,11 +1,5 @@
 .card { -webkit-transition: none; transition: none; }
 
- /* {
-  flex-basis: 250px;
-  height: auto;
-  border-radius: 0;
-} */
-
 .banner-card,
 .event-card,
 .promotion-card {
@@ -41,6 +35,10 @@
 
 .card-title {
   text-transform: none;
+}
+
+.card-text {
+  white-space: pre-wrap;
 }
 
 .card-img-top {

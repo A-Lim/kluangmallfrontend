@@ -30,7 +30,7 @@ import { DefaultLayoutComponent } from 'app/shared/components/layouts/default.la
 // pipes
 import { IsRouteActivePipe } from 'app/shared/pipes/isrouteactive.pipe';
 
-// Validators
+// validators
 import { IsIntegerValidator } from 'app/shared//validators/isinteger.validator';
 import { MatchValueValidator } from 'app/shared//validators/matchvalue.validator';
 import { RequiredIfEitherNotEmptyValidator } from 'app/shared/validators/requiredifnotempty.validator';
@@ -43,6 +43,8 @@ import { PageForbiddenComponent } from './pages/pageforbidden/pageforbidden.comp
 
 import { ForbiddenComponent } from 'app/shared/components/forbidden/forbidden.component';
 import { AuthorizedContentComponent } from 'app/shared/components/authorized-content/authorized-content/authorized-content.component';
+
+// directives
 
 @NgModule({
   declarations: [
@@ -77,6 +79,8 @@ import { AuthorizedContentComponent } from 'app/shared/components/authorized-con
 
     AuthorizedContentComponent,
     DatepickerComponent,
+
+    // Directives
   ],
   imports: [
     CommonModule,
@@ -128,6 +132,8 @@ import { AuthorizedContentComponent } from 'app/shared/components/authorized-con
     MatchValueValidator,
     RequiredIfEitherNotEmptyValidator,
     DateRequiredValidator,
+
+    // Directives
   ],
   providers: [
     { provide: Ability, useValue: new Ability() },

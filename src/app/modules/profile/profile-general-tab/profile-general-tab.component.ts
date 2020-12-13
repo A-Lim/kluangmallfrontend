@@ -52,7 +52,12 @@ export class ProfileGeneralTabComponent extends Base implements OnInit, OnDestro
     this.authSvc.getProfile()
       .subscribe(response => {
         this.user = response.data;
-        this.profileVm = <ProfileVm> { name: response.data.name };
+        this.profileVm = <ProfileVm> { 
+          name: response.data.name,
+          gender: response.data.gender,
+          phone: response.data.phone,
+          date_of_birth: response.data.date_of_birth,
+        };
         this.isLoading = false;
       }, _ => { this.isLoading = false; });
   }

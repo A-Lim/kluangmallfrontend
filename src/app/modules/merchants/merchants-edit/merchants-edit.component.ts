@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { Base } from 'app/shared/components/base.component';
 import { MerchantService } from 'app/modules/merchants/merchants.service';
+import { Merchant } from 'app/modules/merchants/models/merchant.model';
 import { MerchantVm } from 'app/modules/merchants/models/merchant.model.vm';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'merchants-edit',
@@ -14,8 +14,13 @@ import { ActivatedRoute } from '@angular/router';
 export class MerchantsEditComponent extends Base implements OnInit, OnDestroy {
   
   id: number;
+  merchant: Merchant;
   merchantVm: MerchantVm;
   userTabHasBeenActive: boolean = false;
+
+  // tab tracking
+  isUsersTabLoaded: boolean = false;
+  isAccountTabLoaded: boolean = false;
 
   constructor(private merchantSvc: MerchantService,
     private route: ActivatedRoute) {
@@ -38,12 +43,14 @@ export class MerchantsEditComponent extends Base implements OnInit, OnDestroy {
 
     this.merchantSvc.getMerchant(this.id)
       .subscribe(response => {
+        this.merchant = response.data;
         this.merchantVm = <MerchantVm> {
           id: response.data.id,
           name: response.data.name,
           status: response.data.status,
           category: response.data.category,
-          location: response.data.location,
+          floor: response.data.floor,
+          unit: response.data.unit,
           description: response.data.description,
           uploadLogo: [],
           logo: response.data.logo != null ? [response.data.logo] : [],
@@ -58,4 +65,28 @@ export class MerchantsEditComponent extends Base implements OnInit, OnDestroy {
         this.isLoading = false;
       }, _ => { this.isLoading = false; });
   }
+
+  onTabClick(tab: MerchantEditTab) {
+    switch (tab) {
+      case MerchantEditTab.Users:
+        this.isUsersTabLoaded = true;
+        break;
+      
+      case MerchantEditTab.Account:
+        this.isAccountTabLoaded = true;
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  get MerchantEditTab() {
+    return MerchantEditTab;
+  }
+}
+
+enum MerchantEditTab {
+  Users,
+  Account
 }

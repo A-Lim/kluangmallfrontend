@@ -14,7 +14,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
       breadcrumb: 'banners',
-      // permissions: ['banners.view', 'banners.viewAny', 'banners.update']
+      permissions: ['banners.view', 'banners.viewAny', 'banners.update']
     },
   },
   { 
@@ -23,7 +23,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
       breadcrumb: 'create banners',
-      // permissions: ['banners.create']
+      permissions: ['banners.create']
     },
   },
   { 
@@ -32,7 +32,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
       breadcrumb: 'edit banners',
-      // permissions: ['users.view', 'users.viewAny', 'users.update'],
+      permissions: ['banners.view', 'banners.viewAny', 'banners.update'],
     },
   }
 ];

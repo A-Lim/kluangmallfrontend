@@ -2,7 +2,7 @@
   <fieldset [disabled]="isLoading || !('update' | ablePure: 'systemsettings' | async)">
     <!-- verification type -->
     <div class="row">
-      <div class="col-md-6 form-group mb-50" [class.error]="(submitted || verificationType.dirty) && verificationType.errors">
+      <div class="col-md-6 form-group" [class.error]="(submitted || verificationType.dirty) && verificationType.errors">
         <label class="text-bold-600" for="verificationType">Verification Type</label>
         <select class="form-control"
           #verificationType="ngModel"
@@ -23,7 +23,7 @@
 
     <!-- default usergroup -->
     <div class="row">
-      <div class="col-md-6 form-group mb-50" [class.error]="(submitted || usergroups.dirty) && usergroups.errors">
+      <div class="col-md-6 form-group" [class.error]="(submitted || usergroups.dirty) && usergroups.errors">
         <label class="text-bold-600" for="usergroups">User Groups</label>
         <ng-select 
           #usergroups="ngModel"
@@ -46,7 +46,7 @@
 
     <!-- allow public registration -->
     <div class="row">
-      <div class="col-md-6 form-group mb-50" [class.error]="(submitted || publicRegistration.dirty) && publicRegistration.errors">
+      <div class="col-md-6 form-group" [class.error]="(submitted || publicRegistration.dirty) && publicRegistration.errors">
         <div class="custom-control custom-switch mb-1">
           <input type="checkbox" class="custom-control-input"
             #publicRegistration="ngModel"

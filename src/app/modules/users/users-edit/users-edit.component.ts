@@ -33,6 +33,9 @@ export class UsersEditComponent extends Base implements OnInit {
         this.user = result.data;
         this.userVm = {
           name: result.data.name,
+          gender: result.data.gender,
+          date_of_birth: result.data.date_of_birth,
+          phone: result.data.phone,
           status: result.data.status,
           usergroups: result.data.usergroups.map(x => x.id)
         };

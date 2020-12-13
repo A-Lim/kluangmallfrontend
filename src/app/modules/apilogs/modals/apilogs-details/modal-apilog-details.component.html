@@ -1,0 +1,92 @@
+<div class="modal-header">
+  <h3 class="modal-title">Api Log Details</h3>
+  <button type="button" class="close rounded-pill" aria-label="close"
+    (click)="close()"><i class="bx bx-x"></i></button>
+</div>
+
+<div class="modal-body">
+  <div class="row">
+    <!-- user_id -->
+    <div class="col-6 form-group">
+      <label class="text-bold-600">User Id</label>
+      <input type="text" class="form-control"
+        [value]="apiLog.user_id"
+        id="user_id" name="user_id" disabled />
+    </div>
+
+    <!-- method -->
+    <div class="col-6 form-group">
+      <label class="text-bold-600">Method</label>
+      <input type="text" class="form-control"
+        [value]="apiLog.method"
+        id="method" name="method" disabled />
+    </div>
+
+    <!-- status -->
+    <div class="col-6 form-group">
+      <label class="text-bold-600">Status</label>
+      <input type="text" class="form-control"
+        [value]="apiLog.status"
+        id="status" name="status" disabled />
+    </div>
+
+    <!-- created_at -->
+    <div class="col-6 form-group">
+      <label class="text-bold-600">Created At</label>
+      <input type="text" class="form-control"
+        [value]="apiLog.created_at"
+        id="created_at" name="created_at" disabled />
+    </div>
+
+    <!-- url -->
+    <div class="col-12 form-group">
+      <label class="text-bold-600">Url</label>
+      <input type="text" class="form-control"
+        [value]="apiLog.url"
+        id="url" name="url" disabled />
+    </div>
+
+    <!-- ip -->
+    <div class="col-6 form-group">
+      <label class="text-bold-600">IP</label>
+      <input type="text" class="form-control"
+        [value]="apiLog.ip"
+        id="ip" name="ip" disabled />
+    </div>
+
+    <!-- user agent -->
+    <div class="col-6 form-group">
+      <label class="text-bold-600">User Agent</label>
+      <input type="text" class="form-control"
+        [value]="apiLog.user_agent"
+        id="user_agent" name="user_agent" disabled />
+    </div>
+
+    <!-- header -->
+    <div class="col-12 form-group">
+      <label class="text-bold-600">Header</label>
+      <textarea class="form-control"
+        rows="5"
+        [value]="apiLog.header"
+        id="header" name="header" disabled></textarea>
+    </div>
+
+    <!-- request data -->
+    <div class="col-12 form-group">
+      <label class="text-bold-600">Request Data</label>
+      <textarea class="form-control"
+        rows="5"
+        [value]="apiLog.request_data"
+        id="request_data" name="request_data" disabled></textarea>
+    </div>
+
+    <!-- response data -->
+    <div class="col-12 form-group">
+      <label class="text-bold-600">Response Data</label>
+      <textarea class="form-control"
+        rows="5"
+        [value]="apiLog.response_data"
+        id="response_data" name="response_data" disabled></textarea>
+    </div>
+  </div>
+</div>

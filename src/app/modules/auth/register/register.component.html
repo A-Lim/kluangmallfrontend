@@ -29,7 +29,7 @@
   
                           <fieldset [disabled]="isLoading">
                             <!-- name -->
-                            <div class="form-group mb-50" [class.error]="(submitted || name.dirty) && name.errors">
+                            <div class="form-group" [class.error]="(submitted || name.dirty) && name.errors">
                               <label class="text-bold-600" for="name">Name</label>
                               <input type="text" class="form-control" 
                                 #name="ngModel"
@@ -44,7 +44,7 @@
                             </div>
   
                             <!-- email -->
-                            <div class="form-group mb-50" [class.error]="(submitted || email.dirty) && email.errors">
+                            <div class="form-group" [class.error]="(submitted || email.dirty) && email.errors">
                               <label class="text-bold-600" for="email">Email address</label>
                               <input type="email" class="form-control" 
                                 #email="ngModel" 
@@ -61,7 +61,7 @@
                             </div>
   
                             <!-- password -->
-                            <div class="form-group mb-50" [class.error]="(submitted || password.dirty) && password.errors">
+                            <div class="form-group" [class.error]="(submitted || password.dirty) && password.errors">
                               <label class="text-bold-600" for="password">Password</label>
                               <input type="password" class="form-control" 
                                 #password="ngModel"

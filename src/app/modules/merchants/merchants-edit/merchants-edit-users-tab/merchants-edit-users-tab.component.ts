@@ -4,11 +4,9 @@ import { filter } from 'rxjs/operators';
 
 import { BaseAgGrid } from 'app/shared/components/baseaggrid.component';
 import { MerchantService } from 'app/modules/merchants/merchants.service';
-import { MerchantVm } from 'app/modules/merchants/models/merchant.model.vm';
-import { MerchantUserVm } from 'app/modules/merchants/models/merchant-user.model.vm';
+import { Merchant } from 'app/modules/merchants/models/merchant.model';
 import { MerchantUsersAddModalComponent } from 'app/modules/merchants/modals/merchant-users-add/modal-merchant-users-add.component';
 import { ModalSize } from 'app/shared/models/modalsize.enum';
-import { AgGridAngular } from 'ag-grid-angular';
 
 @Component({
   selector: 'merchants-edit-users-tab',
@@ -16,12 +14,11 @@ import { AgGridAngular } from 'ag-grid-angular';
   styleUrls: ['./merchants-edit-users-tab.component.css']
 })
 export class MerchantsEditUsersTabComponent extends BaseAgGrid implements OnInit, OnDestroy {
-  @ViewChild('agGrid') agGrid: AgGridAngular;
   @ViewChild('actionsCell', { static: true }) actionsCell: TemplateRef<any>;
   @ViewChild('statusCell', { static: true }) statusCell: TemplateRef<any>;
   
   @Input()
-  merchantVm: MerchantVm;
+  merchant: Merchant;
 
   @Input()
   isLoading: boolean;
@@ -45,7 +42,7 @@ export class MerchantsEditUsersTabComponent extends BaseAgGrid implements OnInit
     ];
 
     this.dataSourceCallBack = (params: any) => {
-      return this.merchantSvc.getMerchantUsers(this.merchantVm.id, params);
+      return this.merchantSvc.getMerchantUsers(this.merchant.id, params);
     }
 
     this.setDataSource();
@@ -56,9 +53,9 @@ export class MerchantsEditUsersTabComponent extends BaseAgGrid implements OnInit
   }
 
   addMerchantUsers() {
-    this.modalSvc.open(MerchantUsersAddModalComponent, this.merchantVm, ModalSize.ExtraLarge)
+    this.modalSvc.open(MerchantUsersAddModalComponent, this.merchant, ModalSize.ExtraLarge)
       .afterClosed$
       .pipe(filter(x => x.type == 'save'))
-      .subscribe(_ => this.agGrid.gridOptions.api.refreshInfiniteCache());
+      .subscribe(_ => this.refreshTable());
   }
 }

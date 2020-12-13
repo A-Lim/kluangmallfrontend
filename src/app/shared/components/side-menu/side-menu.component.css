@@ -5,3 +5,33 @@
 .main-menu-content {
   overflow-y: scroll !important;
 }
+
+.nav-item.has-sub {
+  border-radius: .267rem;
+  border: 1px solid #DFE3E7;
+  background-color: #FAFBFB;
+  transition: none;
+}
+
+.nav-item.has-sub > a {
+  margin: 0 11px;
+  padding: 9px 0;
+  transition: transform .25s ease 0s,-webkit-transform .25s ease 0s;
+}
+
+.nav-item.has-sub > .menu-content {
+  display: none;
+}
+
+.nav-item.has-sub.open > .menu-content {
+  display: block;
+}
+
+.nav-item.has-sub > .menu-content > li:first-child > a {
+  border-top: 1px solid #DFE3E7;
+}
+
+.nav-item.has-sub > .menu-content > li > a {
+  padding: 10px 9px !important;
+  margin: 0 11px;
+}

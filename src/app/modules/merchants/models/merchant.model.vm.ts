@@ -5,7 +5,8 @@ export class MerchantVm {
   name: string;
   status: string;
   category: string;
-  location: string;
+  floor: string;
+  unit: string;
   description: string;
   uploadLogo: File[];
   logo: FileDetail[];

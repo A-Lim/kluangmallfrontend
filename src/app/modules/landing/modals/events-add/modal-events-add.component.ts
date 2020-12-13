@@ -1,5 +1,4 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { AgGridAngular } from 'ag-grid-angular';
 
 import { BaseAgGrid } from 'app/shared/components/baseaggrid.component';
 import { CustomOverlayRef } from 'app/shared/helpers/customoverlayref';
@@ -12,7 +11,6 @@ import { Event } from 'app/modules/events/models/event.model';
   styleUrls: ['./modal-events-add.component.css']
 })
 export class EventsAddModalComponent extends BaseAgGrid implements OnInit {
-  @ViewChild('agGrid') agGrid: AgGridAngular;
   @ViewChild('actionsCell', { static: true }) actionsCell: TemplateRef<any>;
   @ViewChild('statusCell', { static: true }) statusCell: TemplateRef<any>;
 

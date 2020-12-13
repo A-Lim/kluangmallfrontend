@@ -48,39 +48,88 @@
               [matchValue]="['newPassword', 'confirmPassword']">
 
               <fieldset [disabled]="isLoading">
-                <!-- name -->
-                <div class="form-group mb-50" [class.error]="(submitted || name.dirty) && name.errors">
-                  <label class="text-bold-600" for="name">Name</label>
-                  <input type="text" class="form-control" 
-                    #name="ngModel"
-                    [(ngModel)]="profileVm.name"
-                    id="name" name="name" placeholder="Name"
-                    required>
+                <div class="row">
+                  <!-- name -->
+                  <div class="col-6 form-group" [class.error]="(submitted || name.dirty) && name.errors">
+                    <label class="text-bold-600" for="name">Name</label>
+                    <input type="text" class="form-control" 
+                      #name="ngModel"
+                      [(ngModel)]="profileVm.name"
+                      id="name" name="name" placeholder="Name"
+                      required>
+  
+                    <div *ngIf="submitted || name.dirty" class="help-block">
+                      <ul role="alert">
+                        <li *ngIf="name.errors?.required" class="text-danger" role="alert">Name is required.</li>
+                      </ul>
+                    </div>
+                  </div>
 
-                  <div *ngIf="submitted || name.dirty" class="help-block">
-                    <ul role="alert">
-                      <li *ngIf="name.errors?.required" class="text-danger" role="alert">Name is required.</li>
-                    </ul>
+                  <!-- gender -->
+                  <div class="col-6 form-group" [class.error]="(submitted || gender.dirty) && gender.errors">
+                    <label class="text-bold-600" for="name">Gender</label>
+                    <select type="text" class="form-control" 
+                      #gender="ngModel"
+                      [(ngModel)]="profileVm.gender"
+                      id="gender" name="gender">
+                      <option disabled></option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                    <div *ngIf="submitted || gender.dirty" class="help-block" >
+                      <ul role="alert">
+                        <li *ngIf="gender.errors?.required" class="text-danger" role="alert">Gender is required.</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
 
-                <!-- email -->
-                <div class="form-group mb-50" [class.error]="(submitted || email.dirty) && email.errors">
-                  <label class="text-bold-600" for="email">Email address</label>
-                  <!-- no two way binding for email cause email should not be updated -->
-                  <input type="email" class="form-control" 
-                    #email="ngModel"
-                    [ngModel]="user.email"
-                    id="email" name="email" placeholder="Email address" disabled>
-                    
-                  <div *ngIf="submitted || email.dirty" class="help-block">
-                    <ul role="alert">
-                    </ul>
+                <div class="row">
+                  <!-- member no -->
+                  <div class="form-group col-6">
+                    <label class="text-bold-600" for="email">Member No</label>
+                    <input type="email" class="form-control" 
+                      [value]="user.member_no"
+                      [disabled]="true"
+                      id="member_no" name="member_no" disabled>
+                  </div>
+
+                  <!-- date of birth -->
+                  <div class="form-group col-6" [class.error]="(submitted || dob.dirty) && dob.errors">
+                    <label class="text-bold-600" for="date_of_birth">Date of Birth</label>
+                    <shared-datepicker
+                      #dob="ngModel"
+                      [(ngModel)]="profileVm.date_of_birth"
+                      name="date_of_birth" id="date_of_birth"></shared-datepicker>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <!-- email -->
+                  <div class="col-6 form-group">
+                    <label class="text-bold-600" for="email">Email address</label>
+                    <input type="email" class="form-control" 
+                      [value]="user.email"
+                      [disabled]="true"
+                      id="email" name="email" placeholder="Email address">
+                  </div>
+
+                  <!-- phone -->
+                  <div class="col-6 form-group" [class.error]="(submitted || phone.dirty) && phone.errors">
+                    <label class="text-bold-600" for="phone">Phone</label>
+                    <input type="phone" class="form-control" 
+                      #phone="ngModel"
+                      [(ngModel)]="profileVm.phone"
+                      id="phone" name="phone" placeholder="Phone">
+                    <div *ngIf="submitted || phone.dirty" class="help-block" >
+                      <ul role="alert">
+                      </ul>
+                    </div>
                   </div>
                 </div>
 
                 <!-- oldpassword -->
-                <div class="form-group mb-50" [class.error]="(submitted || oldPassword.dirty) && oldPassword.errors">
+                <div class="form-group" [class.error]="(submitted || oldPassword.dirty) && oldPassword.errors">
                   <label class="text-bold-600" for="oldPassword">Old Password</label>
                   <input type="password" class="form-control" 
                     #oldPassword="ngModel"
@@ -97,7 +146,7 @@
                 </div>
 
                 <!-- newpassword -->
-                <div class="form-group mb-50" [class.error]="(submitted || newPassword.dirty) && newPassword.errors">
+                <div class="form-group" [class.error]="(submitted || newPassword.dirty) && newPassword.errors">
                   <label class="text-bold-600" for="password">New Password</label>
                   <input type="password" class="form-control" 
                     #newPassword="ngModel"

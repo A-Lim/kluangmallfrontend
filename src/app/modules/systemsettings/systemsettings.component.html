@@ -15,9 +15,14 @@
             <shared-alert></shared-alert>
             <ng-container *ngIf="systemSettingVm; else loading">
               <ul class="nav nav-pills">
+                <li class="nav-item">
+                  <a class="nav-link active" [class.bg-danger]="submitted && !generalTabValid"
+                    id="general-tab" data-toggle="pill" href="#general"
+                    aria-expanded="true">General</a>
+                </li>
 
                 <li class="nav-item">
-                  <a class="nav-link active" [class.bg-danger]="submitted && !authTabValid"
+                  <a class="nav-link" [class.bg-danger]="submitted && !authTabValid"
                     id="auth-tab" data-toggle="pill" href="#authentication"
                     aria-expanded="true">Authentication</a>
                 </li>
@@ -36,7 +41,15 @@
               </ul>
   
               <div class="tab-content">
-                <div class="tab-pane active" id="authentication" role="tabpanel" aria-labelledby="settings-tab" aria-expanded="false">
+                <div class="tab-pane active" id="general" role="tabpanel" aria-labelledby="general-tab" aria-expanded="false">
+                  <systemsettings-general-tab 
+                    [systemSettingVm]="systemSettingVm"
+                    [submitted]="submitted"
+                    [isLoading]="isLoading"
+                    (formValid)="onFormStatusChange(SystemSettingTab.Auth, $event)"></systemsettings-general-tab>
+                </div>
+
+                <div class="tab-pane" id="authentication" role="tabpanel" aria-labelledby="settings-tab" aria-expanded="false">
                   <systemsettings-auth-tab 
                     [systemSettingVm]="systemSettingVm"
                     [submitted]="submitted"

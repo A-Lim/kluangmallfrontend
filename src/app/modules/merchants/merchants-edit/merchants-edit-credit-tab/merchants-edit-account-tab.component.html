@@ -1,0 +1,52 @@
+<shared-alert></shared-alert>
+<div class="row mb-3">
+  <div class="col-5">
+    <div class="row">
+      <div class="col-3">
+        <label class="text-bold-600">Credit</label>
+      </div>
+      <div class="col-9">
+        <div class="input-group">
+          <input type="text" class="form-control" 
+            [style.text-align]="'right'"
+            [value]="merchant.account?.credit" readonly/>
+          <div class="input-group-append">
+            <button class="btn btn-primary" title="Top Up Credit"
+              (click)="topUp()">
+              <i class="bx bx-plus-circle"></i>
+            </button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <label class="text-bold-600 mb-1">Transactions</label>
+    <ag-grid-angular
+      #agGrid style="width: 100%;" domLayout='autoHeight' class="ag-theme-balham"
+      (gridReady)="onGridReady($event)" 
+      [gridOptions]="gridOptions" 
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef">
+    </ag-grid-angular>
+  </div>
+</div>
+
+<ng-template #actionsCell let-row>
+  <ng-container *ngIf="row">
+    <button class="btn btn-xs btn-icon btn-primary btn-action-icon" title="Details"
+      (click)="showTransactionDetails(row)">
+      <i class="bx bxs-detail"></i>
+    </button>
+
+    <a *ngIf="row.type != 'refund' && !row.refunded" 
+      class="btn btn-xs btn-icon btn-warning btn-action-icon" 
+      (click)="refund(row)">
+      <i class="bx bx-undo"></i>
+    </a>
+  </ng-container>
+</ng-template>

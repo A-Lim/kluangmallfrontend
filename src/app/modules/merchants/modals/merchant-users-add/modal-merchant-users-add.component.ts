@@ -7,6 +7,7 @@ import { MerchantUserVm } from 'app/modules/merchants/models/merchant-user.model
 import { MerchantService } from 'app/modules/merchants/merchants.service';
 import { switchMap } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
+import { Merchant } from '../../models/merchant.model';
 
 @Component({
   selector: 'modal-merchant-users-add',
@@ -17,17 +18,17 @@ export class MerchantUsersAddModalComponent extends Base implements OnInit {
   @ViewChild('form')
   form: NgForm;
   
-  merchantVm: MerchantVm;
+  merchant: Merchant;
   merchantUsers: MerchantUserVm[];
 
   constructor(public merchantSvc: MerchantService,
-    private ref: CustomOverlayRef<MerchantUserVm[], MerchantVm>) { 
+    private ref: CustomOverlayRef<MerchantUserVm[], Merchant>) { 
     super();
   }
 
   ngOnInit() {
     super.ngOnInit();
-    this.merchantVm = this.ref.data;
+    this.merchant = this.ref.data;
     this.merchantUsers = [new MerchantUserVm()];
   }
 
@@ -54,7 +55,7 @@ export class MerchantUsersAddModalComponent extends Base implements OnInit {
       return;
 
     this.isLoading = true;
-    this.merchantSvc.addUsers(this.merchantVm.id, this.merchantUsers)
+    this.merchantSvc.addUsers(this.merchant.id, this.merchantUsers)
       .pipe(
         switchMap(response => this.swalAlert('Success', response.message, 'success'))
       )

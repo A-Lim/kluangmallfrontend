@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { AgGridAngular } from 'ag-grid-angular';
 
 import { UserGroupService } from 'app/modules/usergroups/usergroups.service';
 import { BaseAgGrid } from 'app/shared/components/baseaggrid.component';
@@ -11,7 +10,6 @@ import { filter, switchMap } from 'rxjs/operators';
   styleUrls: ['./usergroups-list.component.css']
 })
 export class UserGroupsListComponent extends BaseAgGrid implements OnInit {
-  @ViewChild('agGrid') agGrid: AgGridAngular;
   @ViewChild('actionsCell', { static: true }) actionsCell: TemplateRef<any>;
   @ViewChild('statusCell', { static: true }) statusCell: TemplateRef<any>;
 
@@ -44,6 +42,6 @@ export class UserGroupsListComponent extends BaseAgGrid implements OnInit {
         filter(isConfirmed => isConfirmed),
         switchMap(_ => this.userGroupSvc.deleteUserGroup(id)),
         switchMap(response => this.swalAlert('Success', response.message, 'success'))
-      ).subscribe(_ => this.agGrid.gridOptions.api.refreshInfiniteCache());
+      ).subscribe(_ => this.refreshTable());
   }
 }

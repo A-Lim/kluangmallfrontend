@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { AgGridAngular } from 'ag-grid-angular';
 
 import { BannerService } from 'app/modules/banners/banners.service';
 import { BaseAgGrid } from 'app/shared/components/baseaggrid.component';
@@ -11,7 +10,6 @@ import { filter, switchMap } from 'rxjs/operators';
   styleUrls: ['./banners-list.component.css']
 })
 export class BannersListComponent extends BaseAgGrid implements OnInit {
-  @ViewChild('agGrid') agGrid: AgGridAngular;
   @ViewChild('imageCell', { static: true }) imageCell: TemplateRef<any>;
   @ViewChild('actionsCell', { static: true }) actionsCell: TemplateRef<any>;
   @ViewChild('statusCell', { static: true }) statusCell: TemplateRef<any>;
@@ -45,6 +43,6 @@ export class BannersListComponent extends BaseAgGrid implements OnInit {
         filter(isConfirmed => isConfirmed),
         switchMap(_ => this.bannerSvc.deleteBanner(id)),
         switchMap(response => this.swalAlert('Success', response.message, 'success'))
-      ).subscribe(_ => this.agGrid.gridOptions.api.refreshInfiniteCache());
+      ).subscribe(_ => this.refreshTable());
   }
 }

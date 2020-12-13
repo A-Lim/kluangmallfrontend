@@ -8,8 +8,6 @@ import { BaseAgGrid } from 'app/shared/components/baseaggrid.component';
 import { User } from 'app/modules/users/models/user.model';
 import { UserGroupService } from 'app/modules/usergroups/usergroups.service';
 import { UserGroupVm } from 'app/modules/usergroups/models/usergroup.model.vm';
-import { FORMSTATUS } from 'app/shared/constants/formstatus.constants';
-import { AgGridAngular } from 'ag-grid-angular';
 
 @Component({
   selector: 'usergroups-edit-users-tab',
@@ -17,7 +15,6 @@ import { AgGridAngular } from 'ag-grid-angular';
   styleUrls: ['./usergroups-edit-users-tab.component.css']
 })
 export class UserGroupsEditUsersTabComponent extends BaseAgGrid implements OnInit, OnDestroy {
-  @ViewChild('agGrid') agGrid: AgGridAngular;
   @ViewChild('actionsCell', { static: true }) actionsCell: TemplateRef<any>;
   @ViewChild('statusCell', { static: true }) statusCell: TemplateRef<any>;
   
@@ -95,7 +92,7 @@ export class UserGroupsEditUsersTabComponent extends BaseAgGrid implements OnIni
         this.submitted = false;
         
         this.loadSelectUsers();
-        this.agGrid.gridOptions.api.refreshInfiniteCache();
+        this.refreshTable();
       }, _ => this.isLoading = false);
   }
 
@@ -105,7 +102,7 @@ export class UserGroupsEditUsersTabComponent extends BaseAgGrid implements OnIni
       .pipe(switchMap(response => this.swalAlert('Success', response.message, 'success')))
       .subscribe(_ => {
         this.isLoading = false;
-        this.agGrid.gridOptions.api.refreshInfiniteCache();
+        this.refreshTable();
       }, _ => this.isLoading = false);
   }
 
