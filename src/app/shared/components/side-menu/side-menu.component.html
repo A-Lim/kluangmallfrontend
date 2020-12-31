@@ -85,6 +85,24 @@
         </li>
       </shared-authorized-content> 
 
+      <!-- announcements -->
+      <!-- <shared-authorized-content 
+        [permissions]="['announcements.viewAny']"
+        [type]="'hide'"> -->
+        <li class="nav-item" routerLinkActive="active">
+          <a href="#" [routerLink]="['/admin/announcements']">
+            <i class="bx bx-broadcast"></i>
+            <span class="menu-title">Announcements</span> 
+            <ng-container *ngIf="pendingCount$ | async as pendingCount">
+              <span *ngIf="pendingCount > 0"
+                class="badge badge-pill badge-round badge-light-danger">
+                {{ pendingCount }}
+              </span>
+            </ng-container>
+          </a>
+        </li>
+      <!-- </shared-authorized-content>  -->
+
       <!-- landing management -->
       <shared-authorized-content 
         [permissions]="['landing.viewAny', 'banners.viewAny', 'events.viewAny', 'promotions.viewAny']" 

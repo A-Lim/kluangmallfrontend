@@ -46,6 +46,7 @@ export class MerchantCreditRefundModalComponent extends Base implements OnInit {
     this.isLoading = true;
     this.swalConfirm('Confirm', 'Are you sure you want to refund this transaction?', 'warning', 'Refund')
       .pipe(
+        tap(isConfirmed => { if (!isConfirmed) this.isLoading = false; }),
         filter(isConfirmed => isConfirmed),
         switchMap(_ => this.merchantSvc.refund(this.transaction.id, this.transactionVm)),
         tap(response => this.balance = response.data.credit_balance),

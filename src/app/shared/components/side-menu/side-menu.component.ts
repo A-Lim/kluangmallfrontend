@@ -1,8 +1,11 @@
 import { Component, OnInit, Renderer2, OnDestroy } from '@angular/core';
-import { Base } from 'app/shared/components/base.component';
-import { environment } from 'environments/environment';
-import { filter } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { NavigationEnd } from '@angular/router';
+
+import { environment } from 'environments/environment';
+import { Base } from 'app/shared/components/base.component';
+import { AnnouncementService } from 'app/modules/announcements/announcements.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'shared-side-menu',
@@ -17,7 +20,10 @@ export class SideMenuComponent extends Base implements OnInit, OnDestroy {
   public landingModules = ['landing-management', 'banners', 'events', 'promotions'];
   public isLanding: boolean = false;
 
-  constructor(private renderer: Renderer2) { 
+  public pendingCount$: Observable<number>;
+
+  constructor(private renderer: Renderer2,
+    private announcementSvc: AnnouncementService) { 
     super();
   }
 
@@ -34,6 +40,13 @@ export class SideMenuComponent extends Base implements OnInit, OnDestroy {
       false;
 
     this.checkIsLanding();
+
+    // get pending announcements
+    this.announcementSvc
+      .getPendingCount()
+      .subscribe();
+
+    this.pendingCount$ = this.announcementSvc.pendingCount$;
   }
 
   ngOnDestroy() {

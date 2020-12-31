@@ -14,8 +14,13 @@ export class SystemSettingVm {
   instagram: string;
   whatsapp: string;
 
-  ios_version: string;
-  ios_link: string;
-  android_version: string;
-  android_link: string;
+  user_ios_version: string;
+  user_ios_link: string;
+  user_android_version: string;
+  user_android_link: string;
+
+  merchant_ios_version: string;
+  merchant_ios_link: string;
+  merchant_android_version: string;
+  merchant_android_link: string;
 }

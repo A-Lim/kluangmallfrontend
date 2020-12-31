@@ -1,46 +1,74 @@
 <form autocomplete="off" #form="ngForm">
   <fieldset [disabled]="isLoading || !('update' | ablePure: 'systemsettings' | async)">
-    <!-- android version -->
     <div class="row">
-      <div class="col-md-6 form-group" [class.error]="(submitted || androidversion.dirty) && androidversion.errors">
-        <label class="text-bold-600" for="androidversion">Android Version</label>
-        <input type="text" class="form-control"
-          #androidversion="ngModel"
-          [(ngModel)]="systemSettingVm.android_version"
-          id="androidversion" name="androidversion" />
+      <!-- user -->
+      <div class="col-6">
+        <div class="col-md-12 form-group" [class.error]="(submitted || user_android_version.dirty) && user_android_version.errors">
+          <label class="text-bold-600" for="user_android_version">User App Android Version</label>
+          <input type="text" class="form-control"
+            #user_android_version="ngModel"
+            [(ngModel)]="systemSettingVm.user_android_version"
+            id="user_android_version" name="user_android_version" />
+        </div>
+  
+        <div class="col-md-12 form-group" [class.error]="(submitted || user_android_link.dirty) && user_android_link.errors">
+          <label class="text-bold-600" for="user_android_link">User App Android Link</label>
+          <input type="text" class="form-control"
+            #user_android_link="ngModel"
+            [(ngModel)]="systemSettingVm.user_android_link"
+            id="user_android_link" name="user_android_link" />
+        </div>
+  
+        <div class="col-md-12 form-group" [class.error]="(submitted || user_ios_version.dirty) && user_ios_version.errors">
+          <label class="text-bold-600" for="user_ios_version">User App IOS Version</label>
+          <input type="text" class="form-control"
+            #user_ios_version="ngModel"
+            [(ngModel)]="systemSettingVm.user_ios_version"
+            id="user_ios_version" name="user_ios_version" />
+        </div>
+  
+        <div class="col-md-12 form-group" [class.error]="(submitted || user_ios_link.dirty) && user_ios_link.errors">
+          <label class="text-bold-600" for="user_ios_link">User App IOS Link</label>
+          <input type="text" class="form-control"
+            #user_ios_link="ngModel"
+            [(ngModel)]="systemSettingVm.user_ios_link"
+            id="user_ios_link" name="user_ios_link" />
+        </div>
       </div>
-    </div>
 
-    <!-- android link -->
-    <div class="row">
-      <div class="col-md-6 form-group" [class.error]="(submitted || androidLink.dirty) && androidLink.errors">
-        <label class="text-bold-600" for="androidLink">Android Link</label>
-        <input type="text" class="form-control"
-          #androidLink="ngModel"
-          [(ngModel)]="systemSettingVm.android_link"
-          id="androidLink" name="androidLink" />
-      </div>
-    </div>
-
-    <!-- ios version -->
-    <div class="row">
-      <div class="col-md-6 form-group" [class.error]="(submitted || iosversion.dirty) && iosversion.errors">
-        <label class="text-bold-600" for="iosversion">IOS Version</label>
-        <input type="text" class="form-control"
-          #iosversion="ngModel"
-          [(ngModel)]="systemSettingVm.ios_version"
-          id="iosversion" name="iosversion" />
-      </div>
-    </div>
-
-    <!-- ios link -->
-    <div class="row">
-      <div class="col-md-6 form-group" [class.error]="(submitted || iosLink.dirty) && iosLink.errors">
-        <label class="text-bold-600" for="iosLink">IOS Link</label>
-        <input type="text" class="form-control"
-          #iosLink="ngModel"
-          [(ngModel)]="systemSettingVm.ios_link"
-          id="iosLink" name="iosLink" />
+      <!-- merchant -->
+      <div class="col-6">
+        <div class="col-md-12 form-group" [class.error]="(submitted || merchant_android_version.dirty) && merchant_android_version.errors">
+          <label class="text-bold-600" for="merchant_android_version">Merchant App Android Version</label>
+          <input type="text" class="form-control"
+            #merchant_android_version="ngModel"
+            [(ngModel)]="systemSettingVm.merchant_android_version"
+            id="merchant_android_version" name="merchant_android_version" />
+        </div>
+  
+        <div class="col-md-12 form-group" [class.error]="(submitted || merchant_android_link.dirty) && merchant_android_link.errors">
+          <label class="text-bold-600" for="merchant_android_link">Merchant App Android Link</label>
+          <input type="text" class="form-control"
+            #merchant_android_link="ngModel"
+            [(ngModel)]="systemSettingVm.merchant_android_link"
+            id="merchant_android_link" name="merchant_android_link" />
+        </div>
+  
+        <div class="col-md-12 form-group" [class.error]="(submitted || merchant_ios_version.dirty) && merchant_ios_version.errors">
+          <label class="text-bold-600" for="merchant_ios_version">Merchant App IOS Version</label>
+          <input type="text" class="form-control"
+            #merchant_ios_version="ngModel"
+            [(ngModel)]="systemSettingVm.merchant_ios_version"
+            id="merchant_ios_version" name="merchant_ios_version" />
+        </div>
+  
+        <div class="col-md-12 form-group" [class.error]="(submitted || merchant_ios_link.dirty) && merchant_ios_link.errors">
+          <label class="text-bold-600" for="merchant_ios_link">Merchant App IOS Link</label>
+          <input type="text" class="form-control"
+            #merchant_ios_link="ngModel"
+            [(ngModel)]="systemSettingVm.merchant_ios_link"
+            id="merchant_ios_link" name="merchant_ios_link" />
+        </div>
       </div>
     </div>
     

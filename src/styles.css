@@ -215,7 +215,11 @@
 }
 
 .ck-editor__editable_inline {
-  min-height: 300px;
+  min-height: 250px;
+}
+
+.ck-read-only {
+  background-color: #F2F4F4 !important;
 }
 
 /*-------------------------*/

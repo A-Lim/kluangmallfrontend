@@ -1,0 +1,137 @@
+<div class="content-wrapper">
+  <div class="content-header row">
+    <div class="content-header-left col-12 mb-2 mt-1">
+      <shared-breadcrumb></shared-breadcrumb>
+    </div>
+  </div>
+  <div class="content-body">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <shared-alert></shared-alert>
+          <form #form="ngForm" autocomplete="off" (submit)="onSubmit()">
+            <fieldset [disabled]="isLoading">
+
+              <div class="row">
+                <!-- title -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || title.dirty) && title.errors">
+                  <label class="text-bold-600" for="title">Title</label>
+                  <input type="text" class="form-control"
+                    #title="ngModel"
+                    [(ngModel)]="announcementVm.title"
+                    name="title" id="title" required/>
+  
+                  <!-- validation errors -->
+                  <div class="help-block" *ngIf="submitted || title.dirty">
+                    <ul role="alert">
+                      <li *ngIf="title.errors?.required" class="text-danger" role="alert">Title is required.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- status -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || status.dirty) && status.errors">
+                  <label class="text-bold-600" for="status">Status</label>
+                  <select class="form-control"
+                    #status="ngModel"
+                    [(ngModel)]="announcementVm.status"
+                    name="status" id="status">
+                    <option value="pending">Pending</option>
+                    <option value="published">Published</option>
+                    <option value="rejected">Rejected</option>
+                  </select>
+                </div>
+
+                <!-- audience -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || audience.dirty) && audience.errors">
+                  <label class="text-bold-600" for="audience">Audience</label>
+                  <select class="form-control"
+                    #audience="ngModel"
+                    [(ngModel)]="announcementVm.audience"
+                    name="audience" id="audience">
+                    <option value="all">All</option>
+                    <option value="merchant">Merchants</option>
+                    <option value="user">Users</option>
+                  </select>
+                </div>
+
+                <!-- description -->
+                <div class="col-md-12 form-group" [class.error]="(submitted || description.dirty) && description.errors">
+                  <label class="text-bold-600" for="description">Description</label>
+                  <textarea class="form-control"
+                    #description="ngModel"
+                    [(ngModel)]="announcementVm.description"
+                    name="description" id="description" rows="3" required></textarea>
+  
+                  <!-- validation errors -->
+                  <div class="help-block" *ngIf="submitted || description.dirty">
+                    <ul role="alert">
+                      <li *ngIf="description.errors?.required" class="text-danger" role="alert">Description is required.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- has content -->
+                <div class="col-md-12 form-group" [class.error]="(submitted || hasContent.dirty) && hasContent.errors">
+                  <div class="checkbox">
+                    <input type="checkbox" class="checkbox-input"
+                      #hasContent="ngModel"
+                      [(ngModel)]="announcementVm.has_content"
+                      (ngModelChange)="onHasContentChange($event)"
+                      name="hasContent" id="hasContent">
+                    <label for="hasContent"><small class="text-bold-600">Has Content</small></label>
+                  </div>
+                </div>
+
+                <ng-container *ngIf="announcementVm.has_content">
+                  <!-- image -->
+                  <div class="col-md-6 form-group" [class.error]="(submitted || image.dirty) && image.errors">
+                    <label class="text-bold-600" for="image">Image</label>
+                    <shared-fileinput
+                      #image="ngModel"
+                      [(ngModel)]="announcementVm.uploadImage"
+                      [multiple]="false"
+                      name="image" id="image"></shared-fileinput>
+    
+                    <!-- validation errors -->
+                    <!-- <div class="help-block" *ngIf="submitted && toDate.errors">
+                      <ul role="alert">
+                        <li *ngIf="toDate.errors.required" class="text-danger" role="alert">To Date is required.</li>
+                      </ul>
+                    </div> -->
+                  </div>
+
+                  <!-- content -->
+                  <div class="col-md-12 form-group" [class.error]="(submitted || content.dirty) && content.errors">
+                    <label class="text-bold-600" for="content">Content</label>
+                    <ckeditor 
+                      #content="ngModel"
+                      [editor]="Editor" 
+                      [(ngModel)]="announcementVm.content"
+                      id="content" name="content"></ckeditor>
+    
+                    <!-- validation errors -->
+                    <div class="help-block" *ngIf="submitted || content.dirty">
+                      <ul role="alert">
+                        <li *ngIf="content.errors?.required" class="text-danger" role="alert">Content is required.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+  
+              <!-- form actions -->
+              <div class="form-actions d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary pull-right"
+                  [disabled]="isLoading">
+                  <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span> Create
+                </button>
+              </div>
+
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

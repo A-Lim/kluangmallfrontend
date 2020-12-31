@@ -1,0 +1,106 @@
+<div class="modal-header">
+  <h3 class="modal-title">Announcement Details</h3>
+  <button type="button" class="close rounded-pill" aria-label="close"
+    (click)="close()"><i class="bx bx-x"></i></button>
+</div>
+
+<div class="modal-body">
+  <shared-alert></shared-alert>
+  <div class="row">
+    <!-- image -->
+    <div *ngIf="announcement.image" class="col-12 form-group">
+      <img class="img-fluid" [src]="announcement.image.path" />
+    </div>
+
+    <!-- title -->
+    <div class="col-12 form-group">
+      <label class="text-bold-600">Title</label>
+      <input type="text" class="form-control"
+        [value]="announcement.title"
+        id="title" name="title" disabled />
+    </div>
+
+    <!-- requested by -->
+    <div class="col-6 form-group">
+      <label class="text-bold-600">Request By Merchant</label>
+      <input type="text'" class="form-control"
+        [value]="announcement.merchant_name"
+        id="merchant_name" name="merchant_name" disabled />
+    </div>
+
+    <!-- audience -->
+    <div class="col-6 form-group">
+      <label class="text-bold-600">Audience</label>
+      <select class="form-control"
+        [value]="announcement.audience" disabled>
+        <option value="all">All</option>
+        <option value="merchant">Merchants</option>
+        <option value="user">Users</option>
+      </select>
+    </div>
+
+    <!-- status -->
+    <div class="col-6 form-group">
+      <label class="text-bold-600">Status</label>
+      <select class="form-control"
+        [value]="announcement.status"
+        id="status" name="email" disabled>
+        <option value="pending">Pending</option>
+        <option value="rejected">Rejected</option>
+        <option value="published">Published</option>
+      </select>
+    </div>
+
+    <!-- description -->
+    <div class="col-12 form-group">
+      <label class="text-bold-600">Description</label>
+      <textarea class="form-control"
+        [value]="announcement.description"
+        rows="3"
+        id="description" name="description" disabled></textarea>
+    </div>
+
+    <!-- has content -->
+    <div class="col-md-12 form-group">
+      <div class="checkbox">
+        <input type="checkbox" class="checkbox-input"
+          [ngModel]="announcement.has_content"
+          name="hasContent" id="hasContent" disabled>
+        <label for="hasContent"><small class="text-bold-600">Has Content</small></label>
+      </div>
+    </div>
+
+    <!-- content -->
+    <div *ngIf="announcement.has_content" class="col-12 form-group">
+      <label class="text-bold-600">Content</label>
+      <ckeditor 
+        [editor]="Editor" 
+        [ngModel]="announcement.content"
+        id="content" name="content" disabled></ckeditor>
+    </div>
+
+    <!-- remark -->
+    <div class="col-12 form-group">
+      <label class="text-bold-600">Remark</label>
+      <textarea class="form-control"
+        [disabled]="announcement.status == 'published' || announcement.status == 'rejected'"
+        [(ngModel)]="announcement.remark"
+        rows="3"
+        id="remark" name="remark"></textarea>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-success" 
+    (click)="approve()"
+    [disabled]="isLoading || announcement.status !== 'published'">
+    <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span> Approve
+  </button>
+  <button class="btn btn-danger" 
+    (click)="reject()"
+    [disabled]="isLoading || announcement.status !== 'published'">
+    <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span> Reject
+  </button>
+</div>
