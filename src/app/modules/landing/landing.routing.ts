@@ -12,7 +12,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
       breadcrumb: 'landing',
-      permissions: ['landing.viewAny', 'landing.update']
+      permissions: ['user.landing.viewAny', 'user.landing.update']
     },
   },
 ];

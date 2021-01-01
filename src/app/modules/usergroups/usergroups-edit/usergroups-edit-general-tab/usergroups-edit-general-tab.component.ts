@@ -77,7 +77,7 @@ export class UserGroupsEditGeneralTabComponent extends Base implements OnInit, O
       const checkboxes = module.permissions.map(function (permission) {
         // if is_admin all permissions checked
         let isChecked = this.userGroupVm.is_admin ? true :
-          this.userGroupVm.permissions.includes(permission.code);
+          this.userGroupVm.permissions.includes(permission.id);
 
         return <CheckBox> {
           name: permission.name,
