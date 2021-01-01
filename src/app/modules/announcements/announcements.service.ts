@@ -41,12 +41,42 @@ export class AnnouncementService {
     );
   }
 
+  getAnnouncement(id: number) {
+    return this.http.get<ResponseResult<Announcement>>(`${this.announcementUrl}/${id}`);
+  }
+
   getAnnouncements(qParams: any) {
-    return this.http.get<ResponseResult<PaginationResponse<Announcement>>>(this.announcementUrl, { params: qParams });
+    // combine two streams into 1
+    // return first result
+    return zip(
+      this.http.get<ResponseResult<PaginationResponse<Announcement>>>(this.announcementUrl, { params: qParams }),
+      this.getPendingCount()
+    ).pipe(
+      map(responses => responses[0]),
+      // unsubscribe after first emit
+      first()
+    );
   }
 
   deleteAnnouncement(id: number) {
     return this.http.delete<ResponseResult<null>>(`${this.announcementUrl}/${id}`);
+  }
+
+  editAnnouncement(id: number, announcementVm: AnnouncementVm) {
+    const formData = new FormData();
+    formData.append('_method', 'PATCH');
+    Utils.appendFormData(formData, announcementVm, '');
+    
+    // combine two streams into 1
+    // return first result
+    return zip(
+      this.http.post<ResponseResult<AnnouncementVm>>(`${this.announcementUrl}/${id}`, formData),
+      this.getPendingCount()
+    ).pipe(
+      map(responses => responses[0]),
+      // unsubscribe after first emit
+      first()
+    );
   }
 
   approve(id: number, remark: string = null) {

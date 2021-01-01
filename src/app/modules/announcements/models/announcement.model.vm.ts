@@ -8,7 +8,7 @@ export class AnnouncementVm {
   
   has_content: boolean = false;
   content: string = '';
-  image: FileDetail;
-  uploadImage: File[];
+  image: FileDetail[];
+  uploadImage: File;
   remark: string;
 }

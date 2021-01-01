@@ -5,6 +5,7 @@ import { AuthGuard } from 'app/core/guards/auth.guard';
 import { PermissionGuard } from 'app/core/guards/permission.guard';
 import { AnnouncementsListComponent } from 'app/modules/announcements/announcements-list/announcements-list.component';
 import { AnnouncementsCreateComponent } from 'app/modules/announcements/announcements-create/announcements-create.component';
+import { AnnouncementsEditComponent } from 'app/modules/announcements/announcements-edit/announcements-edit.component';
 
 const routes: Routes = [
   { 
@@ -21,8 +22,17 @@ const routes: Routes = [
     component: AnnouncementsCreateComponent, 
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
-      breadcrumb: 'announcements',
+      breadcrumb: 'create announcements',
       // permissions: ['announcements.create']
+    },
+  },
+  { 
+    path: ':id', 
+    component: AnnouncementsEditComponent, 
+    canActivate: [AuthGuard, PermissionGuard],
+    data: { 
+      breadcrumb: 'edit announcements',
+      // permissions: ['events.view', 'events.viewAny', 'events.update'],
     },
   }
 ];

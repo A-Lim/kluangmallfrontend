@@ -10,7 +10,7 @@
         <div class="card-body">
           <shared-alert></shared-alert>
           <form #form="ngForm" autocomplete="off" (submit)="onSubmit()">
-            <fieldset [disabled]="isLoading">
+            <fieldset [disabled]="isLoading || disabled">
 
               <div class="row">
                 <!-- title -->
@@ -91,6 +91,7 @@
                       #image="ngModel"
                       [(ngModel)]="announcementVm.uploadImage"
                       [multiple]="false"
+                      [files]="announcementVm.image"
                       name="image" id="image"></shared-fileinput>
     
                     <!-- validation errors -->
@@ -108,6 +109,7 @@
                       #content="ngModel"
                       [editor]="Editor" 
                       [(ngModel)]="announcementVm.content"
+                      [disabled]="disabled"
                       id="content" name="content"></ckeditor>
     
                     <!-- validation errors -->
@@ -124,7 +126,7 @@
               <div class="form-actions d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary pull-right"
                   [disabled]="isLoading">
-                  <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span> Create
+                  <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span> Edit
                 </button>
               </div>
 

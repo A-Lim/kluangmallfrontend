@@ -95,12 +95,12 @@
 <div class="modal-footer">
   <button class="btn btn-success" 
     (click)="approve()"
-    [disabled]="isLoading || announcement.status !== 'published'">
+    [disabled]="isLoading || announcement.status == 'published'">
     <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span> Approve
   </button>
   <button class="btn btn-danger" 
     (click)="reject()"
-    [disabled]="isLoading || announcement.status !== 'published'">
+    [disabled]="isLoading || announcement.status == 'published'">
     <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span> Reject
   </button>
 </div>
