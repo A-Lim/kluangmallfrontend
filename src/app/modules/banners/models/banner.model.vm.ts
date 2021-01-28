@@ -3,6 +3,7 @@ import { FileDetail } from 'app/shared/models/filedetail.model';
 export class BannerVm {
   title: string;
   status: string;
+  app: string;
   is_clickable: boolean;
   image: FileDetail[];
   uploadImage: File[];

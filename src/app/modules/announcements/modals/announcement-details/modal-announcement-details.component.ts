@@ -48,8 +48,11 @@ export class AnnouncementDetailsModalComponent extends Base implements OnInit {
   }
 
   reject() {
-    if (this.announcement.remark == null || this.announcement.remark == '')
+    if (this.announcement.remark == null || this.announcement.remark == '') {
       this.swalAlert('Error', 'Please provide a remark for reject action.', 'error');
+      return;
+    }
+      
 
     this.isLoading = true;
     this.isRejectReqLoading = true;

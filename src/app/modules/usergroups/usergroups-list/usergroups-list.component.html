@@ -7,29 +7,25 @@
   </div>
 
   <div class="content-body">
-    <shared-authorized-content 
-      [permissions]="['usergroups.view', 'usergroups.update']" 
-      [condition]="'or'">
-      <div class="card">
-        <div class="card-header">
-          <shared-authorized-content [permissions]="['usergroups.create']" [type]="'hide'">
-            <a class="btn btn-primary float-right" 
-              [routerLink]="['/admin/usergroups/create']">Create User Group
-            </a>
-          </shared-authorized-content>
-        </div>
-        <div class="card-content">
-          <div class="card-body">
-            <ag-grid-angular #agGrid style="width: 100%;" domLayout='autoHeight' class="ag-theme-balham"
-              (gridReady)="onGridReady($event)" 
-              [gridOptions]="gridOptions" 
-              [columnDefs]="columnDefs"
-              [defaultColDef]="defaultColDef">
-            </ag-grid-angular>
-          </div>
+    <div class="card">
+      <div class="card-header text-right">
+        <shared-authorized-content [permissions]="['usergroups.create']" [type]="'hide'">
+          <a class="btn btn-primary" 
+            [routerLink]="['/admin/usergroups/create']">Create User Group
+          </a>
+        </shared-authorized-content>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <ag-grid-angular #agGrid style="width: 100%;" domLayout='autoHeight' class="ag-theme-balham"
+            (gridReady)="onGridReady($event)" 
+            [gridOptions]="gridOptions" 
+            [columnDefs]="columnDefs"
+            [defaultColDef]="defaultColDef">
+          </ag-grid-angular>
         </div>
       </div>
-    </shared-authorized-content>
+    </div>
   </div>
 </div>
 

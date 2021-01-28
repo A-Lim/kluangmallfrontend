@@ -15,16 +15,18 @@ export class BannersAddModalComponent extends BaseAgGrid implements OnInit {
   @ViewChild('actionsCell', { static: true }) actionsCell: TemplateRef<any>;
   @ViewChild('statusCell', { static: true }) statusCell: TemplateRef<any>;
 
+  app: string;
   banners: Banner[];
 
   constructor(public bannerSvc: BannerService,
-    private ref: CustomOverlayRef<Banner[], Banner[]>) { 
+    private ref: CustomOverlayRef<Banner[], any>) { 
     super();
   }
 
   ngOnInit() {
     super.ngOnInit();
-    this.banners = this.ref.data;
+    this.app = this.ref.data.app;
+    this.banners = this.ref.data.banners;
     this.gridOptions.rowHeight = 70;
     this.columnDefs = [
       this.getIndexColDef(),
@@ -35,6 +37,7 @@ export class BannersAddModalComponent extends BaseAgGrid implements OnInit {
     ];
 
     this.dataSourceCallBack = (params: any) => {
+      params['app'] = 'equals:' + this.app;
       params['status'] = 'equals:active';
       return this.bannerSvc.getBanners(params);
     }

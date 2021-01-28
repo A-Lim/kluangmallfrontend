@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">Most visited merchants</div>
+  </div>
+  <div class="card-body">
+    <!-- loading -->
+    <ng-container *ngIf="isLoading">
+      <span class="spinner-border spinner-border-sm"></span> Loading...
+    </ng-container>
+    <!-- loaded -->
+    <ng-container *ngIf="!isLoading">
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th class="font-small-2">Merchant</th>
+            <th class="font-small-2">No of Visits</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let merchant of merchantVisitStats">
+            <td class="font-small-2">
+              <a [routerLink]="['/admin/merchants', merchant.id]">
+                <img class="merchant-logo" [src]="merchant.logo.path" alt="logo" />
+                {{ merchant.name }}
+              </a>
+            </td>
+            <td class="font-small-2">{{ merchant.visits | number }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+  </div>
+</div>

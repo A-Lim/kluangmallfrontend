@@ -12,7 +12,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
       breadcrumb: 'feedbacks',
-      // permissions: ['events.view', 'events.viewAny', 'events.update']
+      permissions: ['feedbacks.view', 'feedbacks.viewAny']
     },
   }
 ];

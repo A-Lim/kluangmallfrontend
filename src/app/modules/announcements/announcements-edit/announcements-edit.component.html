@@ -10,7 +10,7 @@
         <div class="card-body">
           <shared-alert></shared-alert>
           <form #form="ngForm" autocomplete="off" (submit)="onSubmit()">
-            <fieldset [disabled]="isLoading || disabled">
+            <fieldset [disabled]="isLoading || disabled || !('update' | ablePure: 'announcements' | async)">
 
               <div class="row">
                 <!-- title -->
@@ -37,8 +37,9 @@
                     [(ngModel)]="announcementVm.status"
                     name="status" id="status">
                     <option value="pending">Pending</option>
-                    <option value="published">Published</option>
+                    <option value="approved">Approved</option>
                     <option value="rejected">Rejected</option>
+                    <option *ngIf="announcementVm.status == 'published'" value="published">Published</option>
                   </select>
                 </div>
 

@@ -37,7 +37,7 @@
                     [(ngModel)]="announcementVm.status"
                     name="status" id="status">
                     <option value="pending">Pending</option>
-                    <option value="published">Published</option>
+                    <option value="approved">Approved</option>
                     <option value="rejected">Rejected</option>
                   </select>
                 </div>
@@ -54,7 +54,38 @@
                     <option value="user">Users</option>
                   </select>
                 </div>
+              </div>
 
+              <div class="row">
+                <!-- publish now -->
+                <div class="col-md-6 form-group">
+                  <div class="checkbox">
+                    <input type="checkbox" class="checkbox-input"
+                      #publish_now="ngModel"
+                      [(ngModel)]="announcementVm.publish_now"
+                      (ngModelChange)="onPublishNowChange($event)"
+                      name="publish_now" id="publish_now">
+                    <label for="publish_now"><small class="text-bold-600">Publish Now</small></label>
+                  </div>
+
+                  <!-- publish date -->
+                  <div class="mt-1">
+                    <shared-datepicker *ngIf="!announcementVm.publish_now"
+                      #publishDate="ngModel"
+                      [(ngModel)]="announcementVm.publish_at"
+                      name="publishDate" id="publishDate"
+                      required></shared-datepicker>
+                  </div>
+                </div>
+
+                
+                <!-- <div  class="col-md-6 form-group">
+                  <label for="publishDate"><small class="text-bold-600">Publish Date</small></label>
+                  
+                </div> -->
+              </div>
+
+              <div class="row">
                 <!-- description -->
                 <div class="col-md-12 form-group" [class.error]="(submitted || description.dirty) && description.errors">
                   <label class="text-bold-600" for="description">Description</label>

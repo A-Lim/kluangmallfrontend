@@ -13,8 +13,8 @@ export class LandingService {
   constructor(private http: HttpClient) {
   }
 
-  getLanding() {
-    return this.http.get<ResponseResult<Landing>>(`${this.landingUrl}`);
+  getLanding(app: string) {
+    return this.http.get<ResponseResult<Landing>>(`${this.landingUrl}/${app}`);
   }
 
   updateLanding(landingVm: LandingVm) {

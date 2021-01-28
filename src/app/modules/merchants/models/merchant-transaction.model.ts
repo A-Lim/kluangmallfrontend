@@ -2,7 +2,6 @@ export interface MerchantTransaction {
   id: number;
   merchant_id: number;
   credit: number;
-  amount: number;
   type: number;
   remark: string;
   refunded: boolean;

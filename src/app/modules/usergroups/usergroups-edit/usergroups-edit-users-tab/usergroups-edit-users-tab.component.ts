@@ -93,7 +93,10 @@ export class UserGroupsEditUsersTabComponent extends BaseAgGrid implements OnIni
         
         this.loadSelectUsers();
         this.refreshTable();
-      }, _ => this.isLoading = false);
+      }, errorResponse => {
+        this.swalAlert('Error', errorResponse.error.message, 'error');
+        this.isLoading = false;
+      });
   }
 
   removeUser(id: number) {
@@ -103,7 +106,10 @@ export class UserGroupsEditUsersTabComponent extends BaseAgGrid implements OnIni
       .subscribe(_ => {
         this.isLoading = false;
         this.refreshTable();
-      }, _ => this.isLoading = false);
+      }, errorResponse => {
+        this.swalAlert('Error', errorResponse.error.message, 'error');
+        this.isLoading = false;
+      });
   }
 
   trackByFn(user: User) {

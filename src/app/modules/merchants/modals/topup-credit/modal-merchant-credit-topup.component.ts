@@ -56,6 +56,9 @@ export class MerchantCreditTopUpModalComponent extends Base implements OnInit {
       .subscribe(_ => {
         this.isLoading = false;
         this.ref.save(this.balance);
-      }, _ => this.isLoading = false);
+      }, errorResponse => {
+        this.swalAlert('Error', errorResponse.error.message, 'error');
+        this.isLoading = false;
+      });
   }
 }

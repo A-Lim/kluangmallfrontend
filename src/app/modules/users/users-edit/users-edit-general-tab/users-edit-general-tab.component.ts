@@ -62,7 +62,10 @@ export class UsersEditGeneralTabComponent extends Base implements OnInit {
         .subscribe(response => {
           this.user.avatar = response.data;
           this.isLoading = false;
-        }, _ => this.isLoading = false)
+        }, errorResponse => {
+          this.swalAlert('Error', errorResponse.error.message, 'error');
+          this.isLoading = false;
+        });
     }
   }
 

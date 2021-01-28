@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, Input } from '@angular/core';
 import { concat, Observable, of, Subject } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+import { ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { Base } from 'app/shared/components/base.component';
 import { NgForm } from '@angular/forms';
@@ -34,14 +35,16 @@ export class BannersCreateComponent extends Base implements OnInit, OnDestroy {
 
   constructor(private bannerSvc: BannerService,
     private eventSvc: EventService,
-    private promotionSvc: PromotionService) {
+    private promotionSvc: PromotionService,
+    private route: ActivatedRoute) {
     super();
   }
 
   ngOnInit() {
     super.ngOnInit();
-    this.setTitle('Create Banner');
+    this.setTitle('Create Banner ');
     this.bannerVm = new BannerVm();
+    this.bannerVm.app = this.route.snapshot.data.app;
 
     this.loadEvents();
     this.loadPromotions();
@@ -71,7 +74,7 @@ export class BannersCreateComponent extends Base implements OnInit, OnDestroy {
       .pipe(switchMap(response => this.swalAlert('Success', response.message, 'success')))
       .subscribe(_ => {
         this.isLoading = false;
-        this.router.navigate(['admin/banners']);
+        this.router.navigate(['admin/banners', { queryParams: { tab: this.bannerVm.app } }]);
       }, _ => { this.isLoading = false; });
   }
 

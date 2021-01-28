@@ -38,6 +38,12 @@
                     id="mobile-tab" data-toggle="pill" href="#mobile"
                     aria-expanded="true">Mobile</a>
                 </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" [class.bg-danger]="submitted && !creditTabValid"
+                    id="mobile-tab" data-toggle="pill" href="#credit"
+                    aria-expanded="true">Credit</a>
+                </li>
               </ul>
   
               <div class="tab-content">
@@ -71,6 +77,14 @@
                     [submitted]="submitted"
                     [isLoading]="isLoading"
                     (formValid)="onFormStatusChange(SystemSettingTab.Mobile, $event)"></systemsettings-mobile-tab>
+                </div>
+
+                <div class="tab-pane" id="credit" role="tabpanel" aria-labelledby="credit-tab" aria-expanded="false">
+                  <systemsettings-credit-tab 
+                    [systemSettingVm]="systemSettingVm"
+                    [submitted]="submitted"
+                    [isLoading]="isLoading"
+                    (formValid)="onFormStatusChange(SystemSettingTab.Credit, $event)"></systemsettings-credit-tab>
                 </div>
               </div>
   

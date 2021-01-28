@@ -1,4 +1,4 @@
 export class MerchantTransactionVm {
-  amount: number;
+  credit: number;
   remark: string;
 }

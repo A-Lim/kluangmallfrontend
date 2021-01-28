@@ -1,48 +1,64 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { BannerService } from 'app/modules/banners/banners.service';
-import { BaseAgGrid } from 'app/shared/components/baseaggrid.component';
-import { filter, switchMap } from 'rxjs/operators';
+import { Base } from 'app/shared/components/base.component';
 
 @Component({
   selector: 'banners-list',
   templateUrl: './banners-list.component.html',
   styleUrls: ['./banners-list.component.css']
 })
-export class BannersListComponent extends BaseAgGrid implements OnInit {
-  @ViewChild('imageCell', { static: true }) imageCell: TemplateRef<any>;
-  @ViewChild('actionsCell', { static: true }) actionsCell: TemplateRef<any>;
-  @ViewChild('statusCell', { static: true }) statusCell: TemplateRef<any>;
+export class BannersListComponent extends Base implements OnInit {
 
-  constructor(public bannerSvc: BannerService) { 
+  activeTab: string = 'user';
+
+  // tab tracking
+  isUsersTabLoaded: boolean = false;
+  isMerchantsTabLoaded: boolean = false;
+
+  constructor(private activatedRoute: ActivatedRoute) { 
     super();
   }
 
   ngOnInit() {
     super.ngOnInit();
     this.setTitle('Banners');
-    this.gridOptions.rowHeight = 70;
-    this.columnDefs = [
-      this.getIndexColDef(),
-      this.getTemplateColDef('Image', 'image', 120, false, this.imageCell),
-      this.getColDef('Title', 'title', true, true),
-      this.getStatusColDef('Status', 'status', 100, false, this.statusCell),
-      this.getActionColDef('Action', '', 110, this.actionsCell),
-    ];
 
-    this.dataSourceCallBack = (params: any) => {
-      return this.bannerSvc.getBanners(params);
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.activeTab = params['tab'] ?? 'user';
+      switch(this.activeTab) {
+        case 'user':
+          this.isUsersTabLoaded = true;
+          break;
+        
+        case 'merchant':
+          this.isMerchantsTabLoaded = true;
+          break;
+      }
+    });
+  }
+
+  onTabClick(tab: BannerListTab) {
+    switch (tab) {
+      case BannerListTab.Users:
+        this.isUsersTabLoaded = true;
+        break;
+      
+      case BannerListTab.Merchants:
+        this.isMerchantsTabLoaded = true;
+        break;
+
+      default:
+        break;
     }
-
-    this.setDataSource();
   }
 
-  delete(id: number) {
-    this.swalConfirm('Confirm', 'Are you sure you want to delete this banner?', 'warning', 'Delete')
-      .pipe(
-        filter(isConfirmed => isConfirmed),
-        switchMap(_ => this.bannerSvc.deleteBanner(id)),
-        switchMap(response => this.swalAlert('Success', response.message, 'success'))
-      ).subscribe(_ => this.refreshTable());
+  get BannerListTab() {
+    return BannerListTab;
   }
+}
+
+enum BannerListTab {
+  Users,
+  Merchants
 }

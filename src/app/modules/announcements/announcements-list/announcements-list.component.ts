@@ -57,7 +57,10 @@ export class AnnouncementsListComponent extends BaseAgGrid implements OnInit {
       ).subscribe(_ => {
         this.isLoading = false;
         this.refreshTable();
-      }, _ => this.isLoading = false);
+      }, errorResponse => {
+        this.swalAlert('Error', errorResponse.error.message, 'error');
+        this.isLoading = false;
+      });
   }
 
   reject(announcement: Announcement) {
@@ -70,7 +73,10 @@ export class AnnouncementsListComponent extends BaseAgGrid implements OnInit {
       ).subscribe(_ => {
         this.isLoading = false;
         this.refreshTable();
-      }, _ => this.isLoading = false);
+      }, errorResponse => {
+        this.swalAlert('Error', errorResponse.error.message, 'error');
+        this.isLoading = false;
+      });
   }
 
   // delete(id: number) {

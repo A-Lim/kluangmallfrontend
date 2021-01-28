@@ -41,6 +41,11 @@ export class AnnouncementsCreateComponent extends Base implements OnInit, OnDest
     }
   }
 
+  onPublishNowChange(publishNow: boolean) {
+    if (publishNow)
+      this.announcementVm.publish_at = null;
+  }
+
   onSubmit() {
     this.submitted = true;
   

@@ -45,9 +45,9 @@ export class MerchantsEditAccountTabComponent extends BaseAgGrid implements OnIn
 
     this.columnDefs = [
       this.getIndexColDef(),
+      this.getColDef('Title', 'title', true, true),
       this.getColDef('Type', 'type', true, true),
       this.getNumberColDef('Credit', 'credit', true, true),
-      this.getNumberColDef('Amount (RM)', 'amount', true, true),
       <ColDef> {
         headerName: 'Date',
         field: 'created_at',

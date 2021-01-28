@@ -18,10 +18,21 @@ const routes: Routes = [
     },
   },
   { 
-    path: 'create', 
+    path: 'create/users', 
     component: BannersCreateComponent,
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
+      app: 'user',
+      breadcrumb: 'create banners',
+      permissions: ['banners.create']
+    },
+  },
+  { 
+    path: 'create/merchants', 
+    component: BannersCreateComponent,
+    canActivate: [AuthGuard, PermissionGuard],
+    data: { 
+      app: 'merchant',
       breadcrumb: 'create banners',
       permissions: ['banners.create']
     },

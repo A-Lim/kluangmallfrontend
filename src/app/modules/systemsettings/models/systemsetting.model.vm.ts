@@ -23,4 +23,6 @@ export class SystemSettingVm {
   merchant_ios_link: string;
   merchant_android_version: string;
   merchant_android_link: string;
+
+  credit_announcement: number;
 }

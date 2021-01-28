@@ -10,7 +10,7 @@
         <div class="card-body">
           <shared-alert></shared-alert>
           <form #form="ngForm" autocomplete="off" (submit)="onSubmit()">
-            <fieldset [disabled]="isLoading">
+            <fieldset [disabled]="isLoading || !('update' | ablePure: 'banners' | async)">
 
               <div class="row">
                 <!-- title -->

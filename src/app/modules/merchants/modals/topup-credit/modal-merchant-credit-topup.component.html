@@ -8,28 +8,20 @@
   <div class="modal-body">
     <fieldset [disabled]="isLoading">
       <div class="row">
-        <!-- amount -->
-        <div class="col-6 form-group" [class.error]="(submitted || amount.dirty) && amount.errors">
-          <label class="text-bold-600">Amount (RM)</label>
+        <!-- credit -->
+        <div class="col-6 form-group" [class.error]="(submitted || credit.dirty) && credit.errors">
+          <label class="text-bold-600">Credit</label>
           <input type="number" class="form-control"
-            #amount="ngModel"
-            [(ngModel)]="transactionVm.amount"
+            #credit="ngModel"
+            [(ngModel)]="transactionVm.credit"
             (ngModelChange)="onAmountChange($event)"
-            id="amount" name="amount" required />
+            id="credit" name="credit" required />
 
-          <div *ngIf="submitted || amount.dirty" class="help-block">
+          <div *ngIf="submitted || credit.dirty" class="help-block">
             <ul role="alert">
-              <li *ngIf="amount.errors?.required" class="text-danger" role="alert">Amount is required.</li>
+              <li *ngIf="credit.errors?.required" class="text-danger" role="alert">Credit is required.</li>
             </ul>
           </div>
-        </div>
-
-        <!-- credit -->
-        <div class="col-6 form-group">
-          <label class="text-bold-600">Credit</label>
-          <input type="text" class="form-control"
-            [value]="credit"
-            id="credit" name="credit" disabled />
         </div>
 
         <!-- remarks -->

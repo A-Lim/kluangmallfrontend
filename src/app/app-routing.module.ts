@@ -76,9 +76,14 @@ const routes: Routes = [
         loadChildren: () => import('app/modules/announcements/announcements.module').then(m => m.AnnouncementsModule), 
       },
       { 
-        path: 'admin/landing-management', 
-        data: { breadcrumb: 'landing management', module: 'landing' },
+        path: 'admin', 
+        data: { breadcrumb: 'landing', module: 'landing' },
         loadChildren: () => import('app/modules/landing/landing.module').then(m => m.LandingModule), 
+      },
+      { 
+        path: 'admin/vouchers', 
+        data: { breadcrumb: 'vouchers', module: 'vouchers' },
+        loadChildren: () => import('app/modules/vouchers/vouchers.module').then(m => m.VouchersModule), 
       },
     ]
   },

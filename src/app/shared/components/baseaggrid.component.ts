@@ -60,7 +60,7 @@ export abstract class BaseAgGrid extends Base implements OnInit, OnDestroy {
     this.agGrid.api.setDatasource(this.dataSource);
   }
 
-  getIndexColDef(headerName: string = '#', width: number = 30): ColDef {
+  getIndexColDef(headerName: string = '#', width: number = 35): ColDef {
     return <ColDef> {
       headerName: headerName,
       lockPosition: true,
@@ -128,6 +128,7 @@ export abstract class BaseAgGrid extends Base implements OnInit, OnDestroy {
       headerName: headerName,
       field: field,
       filter: 'agDateColumnFilter',
+      sortable: true,
       suppressMenu: true,
       floatingFilterComponentParams: { suppressFilterButton: true },
       filterParams: {

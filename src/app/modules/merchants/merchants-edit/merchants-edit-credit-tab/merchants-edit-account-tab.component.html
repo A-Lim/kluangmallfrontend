@@ -12,7 +12,8 @@
             [value]="merchant.account?.credit" readonly/>
           <div class="input-group-append">
             <button class="btn btn-primary" title="Top Up Credit"
-              (click)="topUp()">
+              (click)="topUp()"
+              [disabled]="!('update' | ablePure: 'merchant' | async)">
               <i class="bx bx-plus-circle"></i>
             </button>
           </div>
@@ -43,7 +44,7 @@
       <i class="bx bxs-detail"></i>
     </button>
 
-    <a *ngIf="row.type != 'refund' && !row.refunded" 
+    <a *ngIf="row.type == 'topup' && !row.refunded || !('update' | ablePure: 'merchant' | async)"
       class="btn btn-xs btn-icon btn-warning btn-action-icon" 
       (click)="refund(row)">
       <i class="bx bx-undo"></i>

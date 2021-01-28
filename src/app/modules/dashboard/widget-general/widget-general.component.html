@@ -1,0 +1,62 @@
+<div class="row">
+  <!-- total users -->
+  <div class="col-sm-3 col-6">
+    <div class="card text-center">
+      <div class="card-body py-1">
+        <a [routerLink]="['/admin/users']">
+          <div class="badge-circle badge-circle-lg badge-circle-light-success mx-auto mb-50">
+            <i class="bx bx-user font-medium-5"></i>
+          </div>
+          <div class="text-muted line-ellipsis">Total Users</div>
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+          <h3 *ngIf="!isLoading" class="mb-0">{{ generalStat.users_count }}</h3>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- total merchants -->
+  <div class="col-sm-3 col-6">
+    <div class="card text-center">
+      <div class="card-body py-1">
+        <a [routerLink]="['/admin/merchants']">
+          <div class="badge-circle badge-circle-lg badge-circle-light-danger mx-auto mb-50">
+            <i class="bx bx-store font-medium-5"></i>
+          </div>
+          <div class="text-muted line-ellipsis">Total Merchants</div>
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+          <h3 *ngIf="!isLoading" class="mb-0">{{ generalStat.merchants_count }}</h3>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- ongoing events -->
+  <div class="col-sm-3 col-6">
+    <div class="card text-center">
+      <div class="card-body py-1">
+        <a [routerLink]="['/admin/events']">
+          <div class="badge-circle badge-circle-lg badge-circle-light-info mx-auto mb-50">
+            <i class="bx bx-calendar-event font-medium-5"></i>
+          </div>
+          <div class="text-muted line-ellipsis">On Going Events</div>
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+          <h3 *ngIf="!isLoading" class="mb-0">{{ generalStat.events_count }}</h3>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- ongoing promotions -->
+  <div class="col-sm-3 col-6">
+    <div class="card text-center">
+      <div class="card-body py-1">
+        <a [routerLink]="['/admin/promotions']">
+          <div class="badge-circle badge-circle-lg badge-circle-light-warning mx-auto mb-50">
+            <i class="bx bxs-discount font-medium-5"></i>
+          </div>
+          <div class="text-muted line-ellipsis">On Going Promotions</div>
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+          <h3 *ngIf="!isLoading" class="mb-0">{{ generalStat.promotions_count }}</h3>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,253 @@
+<div class="content-wrapper">
+  <div class="content-header row">
+    <div class="content-header-left col-12 mb-2 mt-1">
+      <shared-breadcrumb></shared-breadcrumb>
+    </div>
+  </div>
+  
+  <div class="content-body">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-body">
+          <shared-alert></shared-alert>
+          <form autocomplete="off" #form="ngForm">
+            <fieldset [disabled]="isLoading || !('update' | ablePure: 'vouchers' | async)">
+              <div class="row">
+                <!-- name -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || name.dirty) && name.errors">
+                  <label class="text-bold-600" for="name">Name</label>
+                  <input type="text" class="form-control" 
+                    #name="ngModel" 
+                    [(ngModel)]="voucherVm.name"
+                    id="name" name="name" placeholder="Name"
+                    required>
+                  <div *ngIf="submitted || name.dirty" class="help-block">
+                    <ul role="alert">
+                      <li *ngIf="name.errors?.required" class="text-danger" role="alert">Name is required.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- status -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || status.dirty) && status.errors">
+                  <label class="text-bold-600" for="status">Status</label>
+                  <select class="form-control"
+                    #status="ngModel" 
+                    [(ngModel)]="voucherVm.status"
+                    id="status" name="status" required>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                  <div *ngIf="submitted || status.dirty" class="help-block">
+                    <ul role="alert">
+                      <li *ngIf="status.errors?.required" class="text-danger" role="alert">Status is required.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- merchants -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || merchantId.dirty) && merchantId.errors">
+                  <label class="text-bold-600" for="merchantId">Merchant</label>
+                  <ng-select 
+                    #merchantId="ngModel"
+                    [(ngModel)]="voucherVm.merchant_id" 
+                    [items]="merchants$ | async"
+                    [multiple]="false"
+                    [trackByFn]="trackByMerchantFn"
+                    [loading]="merchantsReqLoading"
+                    [typeahead]="merchantsInput$"
+                    bindLabel="name" bindValue="id"
+                    id="merchantId" name="merchantId"
+                    required></ng-select>
+                  <div *ngIf="submitted || merchantId.dirty" class="help-block">
+                    <ul role="alert">
+                      <li *ngIf="merchantId.errors?.required" class="text-danger" role="alert">Merchant is required.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- period -->
+                <div class="col-md-6">
+                  <!-- from date -->
+                  <div class="row">
+                    <div class="col-6 form-group" [class.error]="(submitted || fromDate.dirty) && fromDate.errors">
+                      <label class="text-bold-600" for="fromDate">From Date</label>
+                      <shared-datepicker
+                        #fromDate="ngModel"
+                        [(ngModel)]="voucherVm.fromDate"
+                        name="fromDate" id="fromDate"
+                        required></shared-datepicker>
+  
+                      <!-- validation errors -->
+                      <div class="help-block" *ngIf="submitted || fromDate.dirty">
+                        <ul role="alert">
+                          <li *ngIf="fromDate.errors?.required" class="text-danger" role="alert">From Date is required.</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <!-- to date -->
+                    <div class="col-6 form-group" [class.error]="(submitted || toDate.dirty) && toDate.errors">
+                      <label class="text-bold-600" for="toDate">To Date</label>
+                      <shared-datepicker
+                        #toDate="ngModel"
+                        [(ngModel)]="voucherVm.toDate"
+                        name="toDate" id="toDate"
+                        required></shared-datepicker>
+  
+                      <!-- validation errors -->
+                      <div class="help-block" *ngIf="submitted || toDate.dirty">
+                        <ul role="alert">
+                          <li *ngIf="toDate.errors?.required" class="text-danger" role="alert">To Date is required.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- qr -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || qr.dirty) && qr.errors">
+                  <label class="text-bold-600" for="qr">QR</label>
+                  <shared-fileinput
+                    #qr="ngModel"
+                    [(ngModel)]="voucherVm.uploadQr"
+                    [multiple]="false"
+                    [files]="voucherVm.qr"
+                    name="image" id="image"></shared-fileinput>
+                </div>
+                
+
+                <!-- points -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || points.dirty) && points.errors">
+                  <label class="text-bold-600" for="points">Points</label>
+                  <input type="number" class="form-control" 
+                    #points="ngModel" 
+                    [(ngModel)]="voucherVm.points"
+                    id="points" name="points" placeholder="Points"
+                    required>
+                  <div *ngIf="submitted || points.dirty" class="help-block">
+                    <ul role="alert">
+                      <li *ngIf="points.errors?.required" class="text-danger" role="alert">Points is required.</li>
+                    </ul>
+                  </div>
+                  <small class="help-text">Points required to redeeem voucher.</small>
+                </div>
+
+                <!-- redemption limits -->
+                <div class="col-md-12 form-group">
+                  <div class="checkbox">
+                    <input type="checkbox" class="checkbox-input"
+                      #hasRedemptionLimit="ngModel"
+                      [(ngModel)]="voucherVm.has_redemption_limit"
+                      (ngModelChange)="hasLimitOnChange($event)"
+                      id="hasRedemptionLimit" name="hasRedemptionLimit">
+                    <label for="hasRedemptionLimit"><small class="text-bold-600">REDEMPTION LIMITS</small></label>
+                  </div>
+
+                  <table *ngIf="voucherVm.has_redemption_limit" class="table mt-1">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th class="col-type">Type</th>
+                        <th class="col-value">Value</th>
+                        <th class="col-action"></th>
+                      </tr>
+                    </thead>
+                    <tbody [ngModelGroup]="limits" isLimitUnique #limits="ngModelGroup">
+                      <tr *ngFor="let limit of voucherVm.limits; let i = index; trackBy: trackByFn">
+                        <!-- limit -->
+                        <td class="form-group" [class.error]="(submitted || limitType.dirty) && limitType.errors">
+                          <select class="form-control" 
+                            #limitType="ngModel"
+                            [(ngModel)]="voucherVm.limits[i].type"
+                            id="limitType_{{ i }}" name="limitType_{{ i }}"
+                            required>
+                            <option value="" disabled></option>
+                            <option value="person">Person</option>
+                            <option value="daily">Daily</option>
+                            <option value="perday">Per Day</option>
+                            <option value="total">Total</option>
+                          </select>
+                          <!-- validation -->
+                          <div *ngIf="submitted || limitType.dirty" class="help-block">
+                            <ul role="alert">
+                              <li *ngIf="limitType.errors?.required" class="text-danger" role="alert">Limit is required.</li>
+                              <li *ngIf="limitType.errors?.isLimitUnique" class="text-danger" role="alert">Limit must be unique.</li>
+                            </ul>
+                          </div>
+                          <!-- description -->
+                          <small class="help-text">
+                            <ng-container *ngIf="limit.type === 'person'">Limit by the amount of times a person is able to redeem this voucher.</ng-container>
+                            <ng-container *ngIf="limit.type === 'daily'">Limit by the amount of this voucher redeeemed in a day.</ng-container>
+                            <ng-container *ngIf="limit.type === 'perday'">Limit by the amount of this voucher redeeemed in a day by the same user.</ng-container>
+                            <ng-container *ngIf="limit.type === 'total'">Limit by the total amount of times this voucher is redeemable.</ng-container>
+                          </small>
+                        </td>
+                        <td class="form-group" [class.error]="(submitted || limitValue.dirty) && limitValue.errors">
+                          <input type="number" class="form-control" 
+                            #limitValue="ngModel"
+                            [(ngModel)]="voucherVm.limits[i].value"
+                            id="limitValue_{{ i }}" name="limitValue_{{ i }}"
+                            required />
+                        </td>
+                        <td>
+                          <button class="btn btn-xs btn-danger btn-icon btn-icon-action" 
+                            (click)="removeLimit(i)">
+                            <i class="bx bx-x"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr *ngIf="voucherVm.limits.length !== 4">
+                        <td colspan="3">
+                          <button class="btn btn-primary" (click)="addLimit()">Add Redemption Limit</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- description -->
+                <div class="col-md-12 form-group" [class.error]="(submitted || description.dirty) && description.errors">
+                  <label class="text-bold-600" for="description">Description</label>
+                  <ckeditor #description="ngModel"
+                    [editor]="Editor" 
+                    [(ngModel)]="voucherVm.description"
+                    name="description" name="description"
+                    required></ckeditor>
+                  <div *ngIf="submitted || description.dirty" class="help-block">
+                    <ul role="alert">
+                      <li *ngIf="description.errors?.required" class="text-danger" role="alert">Description is required.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- terms and conditions -->
+                <div class="col-md-12 form-group" [class.error]="(submitted || tnc.dirty) && tnc.errors">
+                  <label class="text-bold-600" for="tnc">Terms and Conditions</label>
+                  <ckeditor #tnc="ngModel"
+                    [editor]="Editor" 
+                    [(ngModel)]="voucherVm.terms_and_conditions"
+                    name="tnc" name="tnc"
+                    required></ckeditor>
+                  <div *ngIf="submitted || tnc.dirty" class="help-block">
+                    <ul role="alert">
+                      <li *ngIf="tnc.errors?.required" class="text-danger" role="alert">Terms and Condition is required.</li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-actions d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary pull-right" (click)="onSubmit()"
+                  [disabled]="isLoading">
+                  <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span> Update
+                </button>
+              </div>
+              
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+td {
+  vertical-align: top;
+}
+
+.col-type {
+  width: 50%;
+}
+
+.col-value {
+  width: 40%;
+}
+
+.col-action {
+  width: 10%;
+}

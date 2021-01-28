@@ -22,7 +22,7 @@ const routes: Routes = [
     component: AnnouncementsCreateComponent, 
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
-      breadcrumb: 'create announcements',
+      breadcrumb: 'create announcement',
       // permissions: ['announcements.create']
     },
   },
@@ -31,7 +31,7 @@ const routes: Routes = [
     component: AnnouncementsEditComponent, 
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
-      breadcrumb: 'edit announcements',
+      breadcrumb: 'edit announcement',
       // permissions: ['events.view', 'events.viewAny', 'events.update'],
     },
   }

@@ -28,8 +28,7 @@
       (click)="showDetails(row)">
       <i class="bx bxs-detail"></i>
     </a>
-    <!-- *ngIf="'delete' | ablePure: 'banners' | async" -->
-    <a 
+    <a *ngIf="'delete' | ablePure: 'feedbacks' | async"
       class="btn btn-xs btn-icon btn-danger btn-action-icon" 
       (click)="delete(row.id)">
       <i class="bx bxs-trash"></i>

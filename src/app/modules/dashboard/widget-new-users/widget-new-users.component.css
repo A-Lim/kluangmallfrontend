@@ -1,0 +1,5 @@
+.btn-outline-secondary:not(:disabled):not(.disabled).active, 
+.btn-outline-secondary:not(:disabled):not(.disabled):active, 
+.show > .btn-outline-secondary.dropdown-toggle {
+  color: #fff !important;
+}

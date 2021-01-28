@@ -247,11 +247,11 @@
 /* Form Validation         */
 /*-------------------------*/
 
-.form-group.error label {
+.error label {
   color: #FF5B5C;
 }
 
-.form-group.error > .select2-container > .selection > .select2-selection { 
+.error > .select2-container > .selection > .select2-selection { 
   border-color: #FF5B5C;
 }
 

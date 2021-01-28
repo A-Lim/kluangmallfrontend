@@ -17,10 +17,11 @@ export class SideMenuComponent extends Base implements OnInit, OnDestroy {
   public isHoverOver: boolean = false;
 
   public appLongName: string = environment.longName;
-  public landingModules = ['landing-management', 'banners', 'events', 'promotions'];
+  public landingModules = ['landing-user', 'landing-merchant', 'banners', 'events', 'promotions'];
   public isLanding: boolean = false;
 
-  public pendingCount$: Observable<number>;
+  public pendingCount: number = 0;
+  // public pendingCount$: Observable<number>;
 
   constructor(private renderer: Renderer2,
     private announcementSvc: AnnouncementService) { 
@@ -44,9 +45,7 @@ export class SideMenuComponent extends Base implements OnInit, OnDestroy {
     // get pending announcements
     this.announcementSvc
       .getPendingCount()
-      .subscribe();
-
-    this.pendingCount$ = this.announcementSvc.pendingCount$;
+      .subscribe(response => this.pendingCount = response.data);
   }
 
   ngOnDestroy() {

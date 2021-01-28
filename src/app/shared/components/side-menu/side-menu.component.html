@@ -27,12 +27,12 @@
     <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation"
       data-icon-style="lines">
       <!-- dashboard -->
-      <!-- <li class="nav-item">
+      <li class="nav-item">
         <a [routerLink]="['/admin/dashboard']">
           <i class="bx bx-dashboard"></i>
           <span class="menu-title" data-i18n="Dashboard">Dashboard</span>
         </a>
-      </li> -->
+      </li>
 
       <!-- users -->
       <shared-authorized-content 
@@ -86,22 +86,32 @@
       </shared-authorized-content> 
 
       <!-- announcements -->
-      <!-- <shared-authorized-content 
+      <shared-authorized-content 
         [permissions]="['announcements.viewAny']"
-        [type]="'hide'"> -->
+        [type]="'hide'">
         <li class="nav-item" routerLinkActive="active">
           <a href="#" [routerLink]="['/admin/announcements']">
             <i class="bx bx-broadcast"></i>
             <span class="menu-title">Announcements</span> 
-            <ng-container *ngIf="pendingCount$ | async as pendingCount">
-              <span *ngIf="pendingCount > 0"
-                class="badge badge-pill badge-round badge-light-danger">
-                {{ pendingCount }}
-              </span>
-            </ng-container>
+            <span *ngIf="pendingCount > 0"
+              class="badge badge-pill badge-round badge-light-danger float-right mr-50 ml-auto">
+              {{ pendingCount }}
+            </span>
           </a>
         </li>
-      <!-- </shared-authorized-content>  -->
+      </shared-authorized-content> 
+
+      <!-- vouchers -->
+      <shared-authorized-content 
+        [permissions]="['vouchers.viewAny']"
+        [type]="'hide'">
+        <li class="nav-item" routerLinkActive="active">
+          <a href="#" [routerLink]="['/admin/vouchers']">
+            <i class="bx bxs-discount"></i>
+            <span class="menu-title">Vouchers</span>
+          </a>
+        </li>
+      </shared-authorized-content>
 
       <!-- landing management -->
       <shared-authorized-content 
@@ -115,13 +125,25 @@
           </a>
           <ul class="menu-content">
             <!-- <shared-authorized-content 
-              [permissions]="['landing.viewAny']"
+              [permissions]="['userlanding.viewAny']"
               [type]="'hide'"> -->
               <!-- landing -->
               <li routerLinkActive="active">
-                <a href="#" [routerLink]="['/admin/landing-management']">
+                <a href="#" [routerLink]="['/admin/landing-user']">
                   <i class="bx bx-grid-alt"></i>
-                  <span class="menu-title">Manage Landing</span>
+                  <span class="menu-title">User Landing</span>
+                </a>
+              </li>
+            <!-- </shared-authorized-content> -->
+
+            <!-- <shared-authorized-content 
+              [permissions]="['userlanding.viewAny']"
+              [type]="'hide'"> -->
+              <!-- landing -->
+              <li routerLinkActive="active">
+                <a href="#" [routerLink]="['/admin/landing-merchant']">
+                  <i class="bx bx-grid-alt"></i>
+                  <span class="menu-title">Merchant Landing</span>
                 </a>
               </li>
             <!-- </shared-authorized-content> -->

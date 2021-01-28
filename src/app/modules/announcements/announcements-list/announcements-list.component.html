@@ -33,7 +33,8 @@
   <ng-container *ngIf="row">
     <span class="badge badge-xs" [ngClass]="{
       'badge-light-danger': row.status === 'rejected',
-      'badge-light-success': row.status === 'published',
+      'badge-light-success': row.status === 'approved',
+      'badge-light-info': row.status === 'published',
       'badge-light-warning': row.status === 'pending'
     }">{{ row.status | titlecase }}</span>
   </ng-container>

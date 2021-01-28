@@ -27,6 +27,7 @@ export class UserGroupsCreateComponent extends Base implements OnInit, OnDestroy
   ngOnInit() {
     super.ngOnInit();
     this.userGroupVm = new UserGroupVm();
+    this.setTitle('Create UserGroup');
 
     this.userGroupSvc.getPermissions()
       .pipe(takeUntil(this.destroy$))
@@ -54,7 +55,10 @@ export class UserGroupsCreateComponent extends Base implements OnInit, OnDestroy
       .subscribe(_ => { 
         this.isLoading = false;
         this.router.navigate(['admin/usergroups', userGroup.id]);
-      }, _ => this.isLoading = false);
+      }, errorResponse => {
+        this.swalAlert('Error', errorResponse.error.message, 'error');
+        this.isLoading = false;
+      });
   }
 
   mapPermissionToCheckBoxes(permissionModules: PermissionModule[]) {

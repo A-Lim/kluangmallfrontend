@@ -54,6 +54,9 @@ export class MerchantCreditRefundModalComponent extends Base implements OnInit {
       ).subscribe(_ => {
         this.isLoading = false;
         this.ref.save(this.balance);
-      }, _ => this.isLoading = false);
+      }, error => {
+        this.swalAlert('Error', error.error.message, 'error');
+        this.isLoading = false;
+      });
   }
 }

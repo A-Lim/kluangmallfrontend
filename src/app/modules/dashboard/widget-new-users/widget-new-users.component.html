@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="card-title">New Users</div>
+    <div class="dropdown">
+      <button class="btn btn-sm btn-outline-secondary dropdown-toggle text-white" type="button" id="dropdownMenuButtonSec" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <ng-container [ngSwitch]="filterRange">
+          <ng-container *ngSwitchCase="'week'">This Week</ng-container>
+          <ng-container *ngSwitchCase="'month'">This Month</ng-container>
+          <ng-container *ngSwitchCase="'year'">This Year</ng-container>
+        </ng-container>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonSec">
+        <a class="dropdown-item" href="javascript:void(0)" (click)="onFilterRangeChanged('week')">This Week</a>
+        <a class="dropdown-item" href="javascript:void(0)" (click)="onFilterRangeChanged('month')">This Month</a>
+        <a class="dropdown-item" href="javascript:void(0)" (click)="onFilterRangeChanged('year')">This Year</a>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- loading -->
+    <ng-container *ngIf="isLoading">
+      <span class="spinner-border spinner-border-sm"></span> Loading...
+    </ng-container>
+    <!-- loaded -->
+    <ng-container *ngIf="!isLoading">
+      <canvas baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [legend]="barChartLegend"
+        [chartType]="barChartType">
+      </canvas>
+    </ng-container>
+  </div>
+</div>

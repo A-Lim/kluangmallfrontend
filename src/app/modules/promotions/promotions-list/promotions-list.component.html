@@ -7,29 +7,25 @@
   </div>
 
   <div class="content-body">
-    <!-- <shared-authorized-content 
-      [permissions]="['promotions.view', 'promotions.update']" 
-      [condition]="'or'"> -->
-      <div class="card">
-        <div class="card-header">
-          <!-- <shared-authorized-content [permissions]="['promotions.create']" [type]="'hide'"> -->
-            <a class="btn btn-primary float-right" 
-              [routerLink]="['/admin/promotions/create']">Create Promotion
-            </a>
-          <!-- </shared-authorized-content> -->
-        </div>
-        <div class="card-content">
-          <div class="card-body">
-            <ag-grid-angular #agGrid style="width: 100%;" domLayout='autoHeight' class="ag-theme-balham"
-              (gridReady)="onGridReady($event)" 
-              [gridOptions]="gridOptions" 
-              [columnDefs]="columnDefs"
-              [defaultColDef]="defaultColDef">
-            </ag-grid-angular>
-          </div>
+    <div class="card">
+      <div class="card-header text-right">
+        <shared-authorized-content [permissions]="['promotions.create']" [type]="'hide'">
+          <a class="btn btn-primary" 
+            [routerLink]="['/admin/promotions/create']">Create Promotion
+          </a>
+        </shared-authorized-content>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <ag-grid-angular #agGrid style="width: 100%;" domLayout='autoHeight' class="ag-theme-balham"
+            (gridReady)="onGridReady($event)" 
+            [gridOptions]="gridOptions" 
+            [columnDefs]="columnDefs"
+            [defaultColDef]="defaultColDef">
+          </ag-grid-angular>
         </div>
       </div>
-    <!-- </shared-authorized-content> -->
+    </div>
   </div>
 </div>
 
@@ -40,8 +36,7 @@
       (click)="navigateTo('/admin/promotions', row.id)">
       <i class="bx bxs-edit"></i>
     </a>
-    <!-- *ngIf="'delete' | ablePure: 'promotions' | async" -->
-    <a 
+    <a *ngIf="'delete' | ablePure: 'promotions' | async"
       class="btn btn-xs btn-icon btn-danger btn-action-icon" 
       (click)="delete(row.id)">
       <i class="bx bxs-trash"></i>

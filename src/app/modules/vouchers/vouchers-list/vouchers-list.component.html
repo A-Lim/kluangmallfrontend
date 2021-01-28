@@ -1,0 +1,39 @@
+<div class="content-wrapper">
+  <div class="content-header row">
+    <div class="content-header-left col-12 mb-2 mt-1">
+      <shared-breadcrumb></shared-breadcrumb>
+    </div>
+  </div>
+
+  <div class="content-body">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link active"
+          id="vouchers-tab" data-toggle="pill" href="#vouchers"
+          aria-expanded="true">
+          Vouchers
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link"
+          id="transactions-tab" data-toggle="pill" href="#transactions" 
+          (click)="onTabClick(VoucherTab.Transactions)"
+          aria-expanded="false">
+          Transactions
+        </a>
+      </li>
+    </ul>
+
+    <div class="card">
+      <div class="tab-content">
+        <div class="tab-pane active" id="vouchers" role="tabpanel" aria-labelledby="vouchers-tab" aria-expanded="true">
+          <vouchers-tab></vouchers-tab>
+        </div>
+        <div class="tab-pane" id="transactions" role="tabpanel" aria-labelledby="transactions-tab" aria-expanded="false">
+          <transactions-tab *ngIf="isTransactionsTabLoaded"></transactions-tab>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

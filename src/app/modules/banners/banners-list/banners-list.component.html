@@ -6,57 +6,63 @@
     </div>
   </div>
 
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link"
+        [class.active]="activeTab === 'user'"
+        id="general-tab" data-toggle="pill" href="#user"
+        aria-expanded="true"
+        (click)="onTabClick(BannerListTab.Users)">User</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link"
+        [class.active]="activeTab === 'merchant'"
+        id="auth-tab" data-toggle="pill" href="#merchant"
+        aria-expanded="true"
+        (click)="onTabClick(BannerListTab.Merchants)">Merchant</a>
+    </li>
+  </ul>
+
   <div class="content-body">
-    <!-- <shared-authorized-content 
-      [permissions]="['banners.view', 'banners.update']" 
-      [condition]="'or'"> -->
-      <div class="card">
-        <div class="card-header">
-          <!-- <shared-authorized-content [permissions]="['banners.create']" [type]="'hide'"> -->
-            <a class="btn btn-primary float-right" 
-              [routerLink]="['/admin/banners/create']">Create Banner
-            </a>
-          <!-- </shared-authorized-content> -->
+    <div class="card">
+      <div class="tab-content">
+        <div class="tab-pane" 
+          [class.active]="activeTab === 'user'"
+          id="user" role="tabpanel" aria-labelledby="user-tab" aria-expanded="false">
+          <div class="card-header text-right">
+            <shared-authorized-content [permissions]="['banners.create']" [type]="'hide'">
+              <a class="btn btn-primary" 
+                [routerLink]="['/admin/banners/create/users']">Create User Banner
+              </a>
+            </shared-authorized-content>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+              <banners-table *ngIf="isUsersTabLoaded" 
+                [app]="'user'"></banners-table>
+            </div>
+          </div>
         </div>
-        <div class="card-content">
-          <div class="card-body">
-            <ag-grid-angular #agGrid style="width: 100%;" domLayout='autoHeight' class="ag-theme-balham"
-              (gridReady)="onGridReady($event)" 
-              [gridOptions]="gridOptions" 
-              [columnDefs]="columnDefs"
-              [defaultColDef]="defaultColDef">
-            </ag-grid-angular>
+  
+        <div class="tab-pane"
+          [class.active]="activeTab === 'merchant'" 
+          id="merchant" role="tabpanel" aria-labelledby="merchant-tab" aria-expanded="false">
+          <div class="card-header text-right">
+            <shared-authorized-content [permissions]="['banners.create']" [type]="'hide'">
+              <a class="btn btn-primary" 
+                [routerLink]="['/admin/banners/create/merchants']">Create Merchant Banner
+              </a>
+            </shared-authorized-content>
+          </div>
+          <div class="card-content">
+            <div class="card-body">
+              <banners-table *ngIf="isMerchantsTabLoaded" 
+                [app]="'merchant'"></banners-table>
+            </div>
           </div>
         </div>
       </div>
-    <!-- </shared-authorized-content> -->
+    </div>
   </div>
 </div>
-
-<ng-template #imageCell let-row>
-  <ng-container *ngIf="row && row.image">
-    <img [src]="row.image.path" style="width:100%" />
-  </ng-container>
-</ng-template>
-
-<ng-template #actionsCell let-row>
-  <ng-container *ngIf="row">
-    <a class="btn btn-xs btn-icon btn-primary btn-action-icon" 
-      (click)="navigateTo('/admin/banners', row.id)">
-      <i class="bx bxs-edit"></i>
-    </a>
-    <!-- *ngIf="'delete' | ablePure: 'banners' | async" -->
-    <a 
-      class="btn btn-xs btn-icon btn-danger btn-action-icon" 
-      (click)="delete(row.id)">
-      <i class="bx bxs-trash"></i>
-    </a>
-  </ng-container>
-</ng-template>
-
-<ng-template #statusCell let-row>
-  <ng-container *ngIf="row" [ngSwitch]="row.status">
-    <span *ngSwitchCase="'inactive'" class="badge badge-xs badge-light-danger">{{ row.status | titlecase }}</span>
-    <span *ngSwitchCase="'active'" class="badge badge-xs badge-light-success">{{ row.status | titlecase }}</span>
-  </ng-container>
-</ng-template>

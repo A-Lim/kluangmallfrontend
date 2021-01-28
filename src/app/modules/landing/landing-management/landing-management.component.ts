@@ -15,6 +15,8 @@ import { LandingVm } from 'app/modules/landing/models/landing.model.vm';
 import { LandingDetail } from 'app/modules/landing/models/landing-detail.model';
 import { Banner } from 'app/modules/banners/models/banner.model';
 import { BannersAddModalComponent } from '../modals/banners-add/modal-banner-add.component';
+import { ActivatedRoute } from '@angular/router';
+import Utils from 'app/shared/helpers/utils';
 
 @Component({
   selector: 'landing-management',
@@ -22,38 +24,47 @@ import { BannersAddModalComponent } from '../modals/banners-add/modal-banner-add
   styleUrls: ['./landing-management.component.css']
 })
 export class LandingManagementComponent extends Base implements OnInit {
-  landing: Landing;
 
-  constructor(public landingSvc: LandingService) { 
+  app: string;
+  landing: Landing;
+  permissions: string[];
+
+  constructor(public landingSvc: LandingService,
+    private route: ActivatedRoute) { 
     super();
   }
 
   ngOnInit() {
     super.ngOnInit();
-    this.setTitle('Landing');
-    this.landingSvc.getLanding()
+    this.app = this.route.snapshot.data.app;
+    this.setTitle(Utils.camelCase(this.app) + ' Landing');
+    this.landingSvc.getLanding(this.app)
       .subscribe(response => this.landing = response.data);
   }
 
   update() {
     const landingVm = new LandingVm();
+    landingVm.app = this.app;
+
     landingVm.banners = this.landing.banners.map((x, i) => <LandingDetail> {
       'type': 'banner',
       'type_id': x.id,
       'seq': i + 1,
     });
 
-    landingVm.events = this.landing.events.map((x, i) => <LandingDetail> {
-      'type': 'event',
-      'type_id': x.id,
-      'seq': i + 1,
-    });
-
-    landingVm.promotions = this.landing.promotions.map((x, i) => <LandingDetail> {
-      'type': 'promotion',
-      'type_id': x.id,
-      'seq': i + 1,
-    });
+    if (this.app === 'user') {
+      landingVm.events = this.landing.events.map((x, i) => <LandingDetail> {
+        'type': 'event',
+        'type_id': x.id,
+        'seq': i + 1,
+      });
+  
+      landingVm.promotions = this.landing.promotions.map((x, i) => <LandingDetail> {
+        'type': 'promotion',
+        'type_id': x.id,
+        'seq': i + 1,
+      });
+    }
 
     this.landingSvc.updateLanding(landingVm)
       .pipe(switchMap(response => this.swalAlert('Success', response.message, 'success')))
@@ -63,7 +74,12 @@ export class LandingManagementComponent extends Base implements OnInit {
   }
 
   addBanners() {
-    this.modalSvc.open<Banner[], Banner[]>(BannersAddModalComponent, cloneDeep(this.landing.banners ?? []), ModalSize.ExtraLarge)
+    const data = {
+      app: this.app,
+      banners: cloneDeep(this.landing.banners ?? [])
+    };
+  
+    this.modalSvc.open<Banner[], { app: string, banners: Banner[] }>(BannersAddModalComponent, data, ModalSize.ExtraLarge)
       .afterClosed$
       .pipe(filter(x => x.type == 'save'))
       .subscribe(closeEvent => this.landing.banners = closeEvent.data);

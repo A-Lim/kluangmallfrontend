@@ -1,0 +1,44 @@
+<div class="card-header text-right">
+  <shared-authorized-content [permissions]="['vouchers.create']" [type]="'hide'">
+    <a class="btn btn-primary" 
+      [routerLink]="['/admin/vouchers/create']">Create Voucher
+    </a>
+  </shared-authorized-content>
+</div>
+<div class="card-content">
+  <div class="card-body">
+    <ag-grid-angular #agGrid style="width: 100%;" domLayout='autoHeight' class="ag-theme-balham"
+      (gridReady)="onGridReady($event)" 
+      [gridOptions]="gridOptions" 
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef">
+    </ag-grid-angular>
+  </div>
+</div>
+        
+
+<ng-template #actionsCell let-row>
+  <ng-container *ngIf="row">
+    <a class="btn btn-xs btn-icon btn-primary btn-action-icon" 
+      title="Edit"
+      (click)="navigateTo('/admin/vouchers', row.id)">
+      <i class="bx bxs-edit"></i>
+    </a>
+    <a *ngIf="'delete' | ablePure: 'usergroups' | async" 
+      class="btn btn-xs btn-icon btn-danger btn-action-icon" 
+      (click)="delete(row.id)">
+      <i class="bx bxs-trash"></i>
+    </a>
+  </ng-container>
+</ng-template>
+
+<ng-template #statusCell let-row>
+  <ng-container *ngIf="row">
+    <span [ngClass]="{
+        'badge-light-success': row.status === 'active',
+        'badge-light-warning': row.status === 'inactive'
+      }"
+      class="badge badge-xs badge-light-success">{{ row.status | titlecase }}</span>
+  </ng-container>
+</ng-template>
+<!-- END: Content-->

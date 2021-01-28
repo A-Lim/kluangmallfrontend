@@ -3,6 +3,7 @@ import { Event } from 'app/modules/events/models/event.model';
 import { Promotion } from 'app/modules/promotions/models/promotion.model';
 
 export interface Landing {
+  app: string;
   banners: Banner[];
   events: Event[];
   promotions: Promotion[];

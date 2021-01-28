@@ -8,16 +8,12 @@
 
   <div class="content-body">
     <div class="card">
-      <div class="card-header">
-        <!-- <shared-authorized-content [permissions]="['merchant.create']" [type]="'hide'"> -->
-          <a class="btn btn-primary float-right" 
+      <div class="card-header text-right">
+        <shared-authorized-content [permissions]="['merchants.create']" [type]="'hide'">
+          <a class="btn btn-primary" 
             [routerLink]="['/admin/merchants/create']">Create Merchant
           </a>
-
-          <!-- <button type="button" class="btn btn-info float-right mr-1"
-            (click)="manageCategories()">Manage Categories
-          </button> -->
-        <!-- </shared-authorized-content> -->
+        </shared-authorized-content>
       </div>
       <div class="card-content">
         <div class="card-body">
@@ -33,24 +29,12 @@
   </div>
 </div>
 
-<!-- <ng-template #imageCell let-row>
-  <ng-container *ngIf="row && row.logo">
-    <img [src]="row.logo.path" style="width:100%" />
-  </ng-container>
-</ng-template> -->
-
 <ng-template #actionsCell let-row>
   <ng-container *ngIf="row">
     <a class="btn btn-xs btn-icon btn-primary btn-action-icon" 
       (click)="navigateTo('/admin/merchants', row.id)">
       <i class="bx bxs-edit"></i>
     </a>
-    <!-- *ngIf="'delete' | ablePure: 'merchants' | async" -->
-    <!-- <a 
-      class="btn btn-xs btn-icon btn-danger btn-action-icon" 
-      (click)="delete(row.id)">
-      <i class="bx bxs-trash"></i>
-    </a> -->
   </ng-container>
 </ng-template>
 

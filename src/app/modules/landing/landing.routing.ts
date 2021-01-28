@@ -7,12 +7,23 @@ import { LandingManagementComponent } from 'app/modules/landing/landing-manageme
 
 const routes: Routes = [
   { 
-    path: '', 
+    path: 'landing-user', 
     component: LandingManagementComponent, 
     canActivate: [AuthGuard, PermissionGuard],
     data: { 
-      breadcrumb: 'landing',
-      permissions: ['user.landing.viewAny', 'user.landing.update']
+      app: 'user',
+      breadcrumb: 'user',
+      permissions: ['userlanding.viewAny', 'userlanding.update']
+    },
+  },
+  { 
+    path: 'landing-merchant', 
+    component: LandingManagementComponent, 
+    canActivate: [AuthGuard, PermissionGuard],
+    data: { 
+      app: 'merchant',
+      breadcrumb: 'merchant',
+      permissions: ['merchantlanding.viewAny', 'merchantlanding.update']
     },
   },
 ];

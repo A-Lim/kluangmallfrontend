@@ -8,15 +8,6 @@
   <div class="modal-body">
     <fieldset [disabled]="isLoading">
       <div class="row">
-        <!-- amount -->
-        <div class="col-6 form-group" [class.error]="(submitted || amount.dirty) && amount.errors">
-          <label class="text-bold-600">Amount (RM)</label>
-          <input type="number" class="form-control"
-            #amount="ngModel"
-            [(ngModel)]="transaction.amount"
-            id="amount" name="amount" disabled />
-        </div>
-
         <!-- credit -->
         <div class="col-6 form-group">
           <label class="text-bold-600">Credit</label>
