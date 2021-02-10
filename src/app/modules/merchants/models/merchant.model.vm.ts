@@ -4,7 +4,7 @@ export class MerchantVm {
   id: number;
   name: string;
   status: string;
-  category: string;
+  merchant_category_id: number;
   floor: string;
   unit: string;
   description: string;

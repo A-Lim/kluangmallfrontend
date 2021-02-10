@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-body">
+    <ag-grid-angular
+      #agGrid style="width: 100%;" domLayout='autoHeight' class="ag-theme-balham"
+      (gridReady)="onGridReady($event)" 
+      [gridOptions]="gridOptions" 
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef">
+    </ag-grid-angular>
+  </div>
+</div>
+
+<ng-template #invoiceCell let-row>
+  <ng-container *ngIf="row">
+    <a [href]="row.image" target="_blank">{{ row.invoice_no }}</a>
+  </ng-container>
+</ng-template>

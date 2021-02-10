@@ -104,6 +104,8 @@ export class VouchersEditComponent extends Base implements OnInit, OnDestroy {
           merchant_id: response.data.merchant_id,
           status: response.data.status,
           description: response.data.description,
+          image: response.data.image != null ? [response.data.image] : [],
+          uploadImage: [],
           qr: response.data.qr != null ? [response.data.qr] : [],
           uploadQr: [],
           points: response.data.points,

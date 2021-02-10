@@ -105,15 +105,33 @@
                   </div>
                 </div>
 
+                <!-- image -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || image.dirty) && image.errors">
+                  <label class="text-bold-600" for="image">Image</label>
+                  <shared-fileinput
+                    #image="ngModel"
+                    [(ngModel)]="voucherVm.uploadImage"
+                    [multiple]="false"
+                    [files]="voucherVm.image"
+                    name="image" id="image"></shared-fileinput>
+
+                    <!-- validation errors -->
+                    <!-- <div class="help-block" *ngIf="submitted || image.dirty">
+                      <ul role="alert">
+                        <li *ngIf="image.errors?.required" class="text-danger" role="alert">Image is required.</li>
+                      </ul>
+                    </div> -->
+                </div>
+
                 <!-- qr -->
                 <div class="col-md-6 form-group" [class.error]="(submitted || qr.dirty) && qr.errors">
-                  <label class="text-bold-600" for="qr">QR</label>
+                  <label class="text-bold-600" for="qr">QR Code</label>
                   <shared-fileinput
                     #qr="ngModel"
                     [(ngModel)]="voucherVm.uploadQr"
                     [multiple]="false"
                     [files]="voucherVm.qr"
-                    name="image" id="image"></shared-fileinput>
+                    name="qr" id="qr"></shared-fileinput>
                 </div>
                 
 

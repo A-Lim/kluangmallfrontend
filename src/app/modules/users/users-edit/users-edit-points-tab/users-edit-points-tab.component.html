@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row flex-row-reverse">
+      <div class="col-3">
+        <label class="text-bold-600">Total Points</label>
+        <input type="text" class="form-control float-right"
+          [value]="user.points" readonly/>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <ag-grid-angular
+      #agGrid style="width: 100%;" domLayout='autoHeight' class="ag-theme-balham"
+      (gridReady)="onGridReady($event)" 
+      [gridOptions]="gridOptions" 
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef">
+    </ag-grid-angular>
+  </div>
+</div>
+
+<ng-template #typeCell let-row>
+  <ng-container *ngIf="row">
+    <span class="badge badge-xs" [ngClass]="{
+        'badge-light-danger': row.type === 'deduct',
+        'badge-light-success': row.type === 'add'
+      }">{{ row.type | titlecase }}</span>
+  </ng-container>
+</ng-template>

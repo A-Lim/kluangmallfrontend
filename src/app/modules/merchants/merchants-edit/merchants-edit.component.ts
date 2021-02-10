@@ -48,7 +48,7 @@ export class MerchantsEditComponent extends Base implements OnInit, OnDestroy {
           id: response.data.id,
           name: response.data.name,
           status: response.data.status,
-          category: response.data.category,
+          merchant_category_id: response.data.merchant_category_id,
           floor: response.data.floor,
           unit: response.data.unit,
           description: response.data.description,

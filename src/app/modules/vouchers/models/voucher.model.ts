@@ -6,6 +6,7 @@ export interface Voucher {
   status: string;
   name: string;
   description: string;
+  image: FileDetail;
   qr: FileDetail;
   points: string;
   fromDate: string;

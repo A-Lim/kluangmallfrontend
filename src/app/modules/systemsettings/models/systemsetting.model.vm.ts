@@ -25,4 +25,6 @@ export class SystemSettingVm {
   merchant_android_link: string;
 
   credit_announcement: number;
+
+  points_rate: number;
 }

@@ -11,7 +11,7 @@ import { ForgotPasswordComponent } from 'app/modules/auth/forgot-password/forgot
 const routes: Routes = [
   { path: '', component: LoginComponent, canActivate: [GuestGuard] },
   { path: 'login', component: LoginComponent, canActivate: [GuestGuard] },
-  { path: 'register', component: RegisterComponent, canActivate: [GuestGuard] },
+  // { path: 'register', component: RegisterComponent, canActivate: [GuestGuard] },
   { path: 'verify-email', component: VerifyEmailComponent, canActivate: [GuestGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [GuestGuard] },
   { path: 'reset-password', component: ResetPasswordComponent, canActivate: [GuestGuard] },

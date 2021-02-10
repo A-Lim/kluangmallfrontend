@@ -5,6 +5,8 @@ export class VoucherVm {
   status: string = 'active';
   name: string;
   description: string = '';
+  image: FileDetail[] = [];
+  uploadImage: FileDetail[] = [];
   qr: FileDetail[] = [];
   uploadQr: File[] = [];
   points: string;

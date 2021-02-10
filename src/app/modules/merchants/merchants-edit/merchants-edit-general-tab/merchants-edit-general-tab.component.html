@@ -59,13 +59,13 @@
         <label class="text-bold-600" for="category">Category</label>
         <ng-select 
           #category="ngModel"
-          [(ngModel)]="merchantVm.category" 
+          [(ngModel)]="merchantVm.merchant_category_id" 
           [items]="merchantCategories$ | async"
           [multiple]="false"
           [trackByFn]="trackByFn"
           [loading]="merchantCategoriesReqLoading"
           [typeahead]="merchantCategoriesInput$"
-          bindLabel="name" bindValue="name"
+          bindLabel="name" bindValue="id"
           id="category" name="category"></ng-select>
         <div *ngIf="submitted || category.dirty" class="help-block" >
           <ul role="alert">

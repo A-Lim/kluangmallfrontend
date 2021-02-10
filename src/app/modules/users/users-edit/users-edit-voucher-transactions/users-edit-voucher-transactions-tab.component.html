@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-body">
+    <ag-grid-angular
+      #agGrid style="width: 100%;" domLayout='autoHeight' class="ag-theme-balham"
+      (gridReady)="onGridReady($event)" 
+      [gridOptions]="gridOptions" 
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef">
+    </ag-grid-angular>
+  </div>
+</div>
+
+<ng-template #typeCell let-row>
+  <ng-container *ngIf="row">
+    <span class="badge badge-xs" [ngClass]="{
+        'badge-light-primary': row.type === 'redeem',
+        'badge-light-danger': row.type === 'use'
+      }">{{ row.type | titlecase }}</span>
+  </ng-container>
+</ng-template>

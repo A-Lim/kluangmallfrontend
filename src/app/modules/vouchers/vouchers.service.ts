@@ -5,6 +5,7 @@ import { environment } from 'environments/environment';
 import { PaginationResponse } from 'app/shared/models/responses/pagination.response';
 import { ResponseResult } from 'app/shared/models/responses/responseresult.model';
 import { Voucher } from 'app/modules/vouchers/models/voucher.model';
+import { MyVoucher } from 'app/modules/vouchers/models/myvoucher.model';
 import { VoucherVm } from 'app/modules/vouchers/models/voucher.model.vm';
 import Utils from 'app/shared/helpers/utils';
 
@@ -21,6 +22,10 @@ export class VoucherService {
 
   getVouchers(qParams: any) {
     return this.http.get<ResponseResult<PaginationResponse<Voucher>>>(`${this.voucherUrl}`, { params: qParams });
+  }
+
+  getMyVouchers(qParams: any) {
+    return this.http.get<ResponseResult<PaginationResponse<MyVoucher>>>(`${this.voucherUrl}/my/all`, { params: qParams });
   }
 
   getVoucherTransactions(qParams: any) {

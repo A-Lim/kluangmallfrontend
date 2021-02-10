@@ -1,0 +1,21 @@
+<form autocomplete="off" #form="ngForm">
+  <fieldset [disabled]="isLoading || !('update' | ablePure: 'systemsettings' | async)">
+    <div class="row">
+      <div class="col-md-6 form-group" [class.error]="(submitted || points_rate.dirty) && points_rate.errors">
+        <label class="text-bold-600" for="points_rate">Points Rate</label>
+        <input type="number" class="form-control"
+          #points_rate="ngModel"
+          [(ngModel)]="systemSettingVm.points_rate"
+          id="points_rate" name="points_rate" required />
+        <small class="text-muted">Points awarded for every RM1</small>
+
+        <!-- validation errors -->
+        <div class="help-block" *ngIf="submitted || points_rate.dirty">
+          <ul role="alert">
+            <li *ngIf="points_rate.errors?.required" class="text-danger" role="alert">Points rate is required.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</form>

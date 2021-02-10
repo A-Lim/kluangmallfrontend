@@ -168,7 +168,7 @@
                     [typeahead]="userGroupInput$"
                     bindLabel="name" bindValue="id"
                     id="usergroups" name="usergroups"
-                    [disabled]="isLoading || !('update' | ablePure: 'usergroups' | async)"></ng-select>
+                    [disabled]="isLoading || userGroupNotEditable || !('update' | ablePure: 'usergroups' | async)"></ng-select>
 
                   <div *ngIf="submitted || usergroups.dirty" class="help-block" >
                     <ul role="alert">

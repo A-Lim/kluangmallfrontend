@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, OnDestroy, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
@@ -7,11 +7,11 @@ import { FORMSTATUS } from 'app/shared/constants/formstatus.constants';
 import { SystemSettingVm } from 'app/modules/systemsettings/models/systemsetting.model.vm';
 
 @Component({
-  selector: 'systemsettings-credit-tab',
-  templateUrl: './systemsettings-credit-tab.component.html',
-  styleUrls: ['./systemsettings-credit-tab.component.css']
+  selector: 'systemsettings-redemption-tab',
+  templateUrl: './systemsettings-redemption-tab.component.html',
+  styleUrls: ['./systemsettings-redemption-tab.component.css']
 })
-export class SystemSettingsCreditTabComponent extends Base implements OnInit, AfterViewInit {
+export class SystemSettingsRedemptionTabComponent extends Base implements OnInit, AfterViewInit {
   @ViewChild('form')
   form: NgForm;
   

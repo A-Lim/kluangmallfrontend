@@ -1,3 +1,15 @@
+.km-logo {
+  background-image: url(/assets/images/logo/km-logo.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 27px;
+  width: 35px;
+  float: left;
+  margin-top: .2rem;
+  margin-left: 3px;
+}
+
 .navigation > li.nav-item.open > a > i {
   color: inherit !important;
 }

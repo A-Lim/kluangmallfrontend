@@ -44,7 +44,7 @@ export class MerchantsEditGeneralTabComponent extends Base implements OnInit, On
 
   loadMerchantCategory() {
     this.merchantCategories$ = concat(
-      this.getMerchantCategoriesFn$(null, [this.merchantVm.category]), 
+      this.getMerchantCategoriesFn$(), 
       this.merchantCategoriesInput$.pipe(
         debounceTime(500),
         distinctUntilChanged(),

@@ -23,6 +23,7 @@ export class SystemSettingsComponent extends Base implements OnInit, OnDestroy {
   socialTabValid: boolean;
   mobileTabValid: boolean;
   creditTabValid: boolean;
+  redemptionTabValid: boolean;
 
   constructor(private systemsettingSvc: SystemSettingService) {
     super();
@@ -36,6 +37,7 @@ export class SystemSettingsComponent extends Base implements OnInit, OnDestroy {
     this.authTabValid = true;
     this.mobileTabValid = true;
     this.creditTabValid = true;
+    this.redemptionTabValid = true;
 
     this.systemsettingSvc.getSystemSettings()
       .subscribe(result => {
@@ -69,13 +71,18 @@ export class SystemSettingsComponent extends Base implements OnInit, OnDestroy {
       case SystemSettingTab.Credit:
         this.creditTabValid = isValid;
         break;
+
+      case SystemSettingTab.Redemption:
+        this.redemptionTabValid = isValid;
+        break;
     }
     
     this.allTabsValid = this.generalTabValid &&
                         this.authTabValid && 
                         this.socialTabValid &&
                         this.mobileTabValid &&
-                        this.creditTabValid;
+                        this.creditTabValid &&
+                        this.redemptionTabValid;
   }
 
   onSubmit() {
@@ -115,5 +122,6 @@ enum SystemSettingTab {
   Auth,
   Social,
   Mobile,
-  Credit
+  Credit,
+  Redemption
 }

@@ -20,9 +20,11 @@ export class UsersEditGeneralTabComponent extends Base implements OnInit {
   @Input()
   user: User;
 
-  @Input()
-  userVm: UserVm;
+  // @Input()
+  // userVm: UserVm;
   
+  userVm: UserVm;
+  userGroupNotEditable: boolean; 
   userGroupInput$ = new Subject<string>();
   userGroups$: Observable<UserGroup[]>;
   userGroupsReqLoading: boolean;
@@ -36,7 +38,18 @@ export class UsersEditGeneralTabComponent extends Base implements OnInit {
 
   ngOnInit() {
     super.ngOnInit();
+    
+    this.userVm = <UserVm> {
+      name: this.user.name,
+      gender: this.user.gender,
+      date_of_birth: this.user.date_of_birth,
+      phone: this.user.phone,
+      status: this.user.status,
+      usergroups: this.user.usergroups.map(x => x.id)
+    };
+
     this.loadUserGroup();
+    this.userGroupNotEditable = this.user.usergroups.some(x => x.code === 'merchant');
   }
 
   loadUserGroup() {
@@ -48,7 +61,7 @@ export class UsersEditGeneralTabComponent extends Base implements OnInit {
         debounceTime(500),
         distinctUntilChanged(),
         tap(_ => this.userGroupsReqLoading = true),
-        switchMap(searchStr => this.getUserGroupsFn$(searchStr))
+        switchMap(searchStr => this.getUserGroupsFn$(searchStr)),
       )
     );
   }
@@ -104,7 +117,11 @@ export class UsersEditGeneralTabComponent extends Base implements OnInit {
 
     return this.userGroupSvc.getUserGroups(params).pipe(
       tap(_ => this.userGroupsReqLoading = false),
-      map(response => response.data.data),
+      map(response => response.data.data.map(x => {
+        const y: any = x;
+        y.disabled = x.code === 'merchant';
+        return y;
+      })),
       catchError(() => of([])), // empty list on error
     )
   }

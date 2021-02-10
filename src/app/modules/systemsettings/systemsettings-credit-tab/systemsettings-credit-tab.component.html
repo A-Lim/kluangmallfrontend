@@ -5,12 +5,19 @@
     <div class="row">
       <!-- announcement -->
       <div class="col-md-6 form-group" [class.error]="(submitted || credit_announcement.dirty) && credit_announcement.errors">
-        <label class="text-bold-600" for="credit_announcement">Announcement</label>
+        <label class="text-bold-600" for="credit_announcement">Credit Announcement</label>
         <input type="number" class="form-control"
           #credit_announcement="ngModel"
           [(ngModel)]="systemSettingVm.credit_announcement"
-          id="credit_announcement" name="credit_announcement" />
+          id="credit_announcement" name="credit_announcement" required/>
         <small class="text-muted">Credit required to make announcement</small>
+
+        <!-- validation errors -->
+        <div class="help-block" *ngIf="submitted || credit_announcement.dirty">
+          <ul role="alert">
+            <li *ngIf="credit_announcement.errors?.required" class="text-danger" role="alert">Credit announcement is required.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </fieldset>

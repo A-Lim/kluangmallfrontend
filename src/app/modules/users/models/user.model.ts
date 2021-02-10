@@ -7,6 +7,7 @@ export interface User {
     phone: string;
     email: string;
     gender: string;
+    points: number;
     date_of_birth: string;
     avatar: string;
     email_verified_at: string;

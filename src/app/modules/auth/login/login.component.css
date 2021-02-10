@@ -1,6 +1,12 @@
 /* Authentication page css */
 /*-------------------------*/
 
+.logo {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 5px;
+}
+
 .bg-authentication {
   background-color: #F2F4F4;
 }

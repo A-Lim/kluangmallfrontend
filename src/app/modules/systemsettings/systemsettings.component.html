@@ -41,8 +41,14 @@
 
                 <li class="nav-item">
                   <a class="nav-link" [class.bg-danger]="submitted && !creditTabValid"
-                    id="mobile-tab" data-toggle="pill" href="#credit"
+                    id="credit-tab" data-toggle="pill" href="#credit"
                     aria-expanded="true">Credit</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" [class.bg-danger]="submitted && !redemptionTabValid"
+                    id="redemption-tab" data-toggle="pill" href="#redemption"
+                    aria-expanded="true">Redemption</a>
                 </li>
               </ul>
   
@@ -85,6 +91,14 @@
                     [submitted]="submitted"
                     [isLoading]="isLoading"
                     (formValid)="onFormStatusChange(SystemSettingTab.Credit, $event)"></systemsettings-credit-tab>
+                </div>
+
+                <div class="tab-pane" id="redemption" role="tabpanel" aria-labelledby="redemption-tab" aria-expanded="false">
+                  <systemsettings-redemption-tab 
+                    [systemSettingVm]="systemSettingVm"
+                    [submitted]="submitted"
+                    [isLoading]="isLoading"
+                    (formValid)="onFormStatusChange(SystemSettingTab.Redemption, $event)"></systemsettings-redemption-tab>
                 </div>
               </div>
   

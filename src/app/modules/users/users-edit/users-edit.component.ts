@@ -12,7 +12,13 @@ import { UserVm } from 'app/modules/users/models/user.model.vm';
 })
 export class UsersEditComponent extends Base implements OnInit {
   user: User;
-  userVm: UserVm;
+  // userVm: UserVm;
+
+  isGeneralTabLoaded: boolean = true;
+  isVouchersTabLoaded: boolean = false;
+  isVoucherTransactionsTabLoaded: boolean = false;
+  isPointsTabLoaded: boolean = false;
+  isReceiptsTabLoaded: boolean = false;
 
   constructor(private route: ActivatedRoute, private userSvc: UserService) { 
     super();
@@ -31,17 +37,46 @@ export class UsersEditComponent extends Base implements OnInit {
     this.userSvc.getUser(id)
       .subscribe(result => {
         this.user = result.data;
-        this.userVm = {
-          name: result.data.name,
-          gender: result.data.gender,
-          date_of_birth: result.data.date_of_birth,
-          phone: result.data.phone,
-          status: result.data.status,
-          usergroups: result.data.usergroups.map(x => x.id)
-        };
-
         this.isLoading = false;
       }, _ => { this.isLoading = false; });
   }
 
+  onTabClick(tab: UserEditTab) {
+    switch (tab) {
+      case UserEditTab.General:
+        this.isGeneralTabLoaded = true;
+        break;
+      
+      case UserEditTab.Vouchers:
+        this.isVouchersTabLoaded = true;
+        break;
+      
+      case UserEditTab.VoucherTransactions:
+        this.isVoucherTransactionsTabLoaded = true;
+        break;
+      
+      case UserEditTab.Points:
+        this.isPointsTabLoaded = true;
+        break;
+
+      case UserEditTab.Receipts:
+        this.isReceiptsTabLoaded = true;
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  get UserEditTab() {
+    return UserEditTab;
+  }
+}
+
+enum UserEditTab {
+  General, 
+  Vouchers,
+  VoucherTransactions,
+  Points,
+  Receipts
 }

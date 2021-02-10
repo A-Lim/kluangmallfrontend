@@ -16,7 +16,14 @@ export class WidgetNewUsersComponent implements OnInit {
 
   barChartOptions: ChartOptions = {
     responsive: true,
-    scales: { xAxes: [{}], yAxes: [{}] },
+    scales: { 
+      xAxes: [{}], 
+      yAxes: [{
+        ticks: {
+          stepSize: 1
+        }
+      }] 
+    },
     plugins: {
       datalabels: {
         anchor: 'end',
