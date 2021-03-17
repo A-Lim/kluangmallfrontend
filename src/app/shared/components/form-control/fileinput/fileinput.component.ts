@@ -104,21 +104,21 @@ export class FileInputComponent implements OnInit, OnDestroy, ControlValueAccess
   
   saveFiles(newFiles: File[]) {
     const newFileNames = newFiles.map(x => x.name);
+
     // remove duplicates for uploadFiles
-    for (let i = 0; i < this.uploadFiles.length; i++) {
+    for (let i = 0; i < this.uploadFilesCount(); i++) {
       if (newFileNames.includes(this.uploadFiles[i].name)) {
         this.uploadFiles.splice(i, 1);
       }
     }
 
     // remove duplicates for files
-    for (let i = 0; i < this.files.length; i++) {
+    for (let i = 0; i < this.filesCount(); i++) {
       if (newFileNames.includes(this.files[i].name)) {
         this.files.splice(i, 1);
       }
     }
 
-    
     // insert new files
     if (this.multiple) {
       this.uploadFiles = this.uploadFiles.concat(newFiles);
@@ -129,12 +129,12 @@ export class FileInputComponent implements OnInit, OnDestroy, ControlValueAccess
   }
 
   updateFileName() {
-    const total = this.uploadFiles.length + this.files.length;
+    const total = this.uploadFilesCount() + this.filesCount();
     let fileName = '';
 
-    if (this.uploadFiles.length !== 0) {
+    if (this.uploadFilesCount() !== 0) {
       fileName = this.uploadFiles[0].name;
-    } else if (this.files.length !== 0) {
+    } else if (this.filesCount() !== 0) {
       fileName = this.files[0].name;
     }
 
@@ -158,5 +158,13 @@ export class FileInputComponent implements OnInit, OnDestroy, ControlValueAccess
       this.onChanged(this.uploadFiles[0]);
     else
       this.onChanged(null);
+  }
+
+  private filesCount() {
+    return this.files ? this.files.length : 0;
+  }
+
+  private uploadFilesCount() {
+    return this.uploadFiles ? this.uploadFiles.length : 0;
   }
 }

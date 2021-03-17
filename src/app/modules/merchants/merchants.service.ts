@@ -5,17 +5,23 @@ import { environment } from 'environments/environment';
 import { PaginationResponse } from 'app/shared/models/responses/pagination.response';
 import { ResponseResult } from 'app/shared/models/responses/responseresult.model';
 import { User } from 'app/modules/users/models/user.model';
+import { Shop } from 'app/modules/merchants/models/shop.model';
 import { Merchant } from 'app/modules/merchants/models/merchant.model';
 import { MerchantVm } from 'app/modules/merchants/models/merchant.model.vm';
 import { MerchantUserVm } from 'app/modules/merchants/models/merchant-user.model.vm';
-import { MerchantTransactionVm } from './models/merchant-transaction.model.vm';
-import { MerchantTransactionResponse } from './models/merchant-transaction-response.model';
+import { MerchantTransactionVm } from 'app/modules/merchants/models/merchant-transaction.model.vm';
+import { MerchantTransactionResponse } from 'app/modules/merchants/models/merchant-transaction-response.model';
 
 @Injectable({ providedIn: 'root' })
 export class MerchantService {
+  private shopUrl = `${environment.apiUrl}/api/${environment.apiVersion}/page/shops`
   private merchantUrl = `${environment.apiUrl}/api/${environment.apiVersion}/merchants`;
 
   constructor(private http: HttpClient) {
+  }
+
+  getShops(qParams: any) {
+    return this.http.get<ResponseResult<Shop[]>>(this.shopUrl, { params: qParams });
   }
 
   getMerchants(qParams: any) {

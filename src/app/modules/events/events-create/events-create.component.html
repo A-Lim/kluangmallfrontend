@@ -83,7 +83,7 @@
                   <input type="text" class="form-control"
                     #externalLink="ngModel"
                     [(ngModel)]="eventVm.externalLink"
-                    name="externalLink" id="externalLink" required/>
+                    name="externalLink" id="externalLink"/>
   
                   <!-- validation errors -->
                   <div class="help-block" *ngIf="submitted || externalLink.dirty">
@@ -99,14 +99,14 @@
                   <shared-fileinput
                     #thumbnail="ngModel"
                     [(ngModel)]="eventVm.uploadThumbnail"
-                    name="thumbnail" id="thumbnail"></shared-fileinput>
+                    name="thumbnail" id="thumbnail" fileRequired></shared-fileinput>
   
                   <!-- validation errors -->
-                  <!-- <div class="help-block" *ngIf="submitted && toDate.errors">
+                  <div class="help-block" *ngIf="submitted && thumbnail.errors">
                     <ul role="alert">
-                      <li *ngIf="toDate.errors.required" class="text-danger" role="alert">To Date is required.</li>
+                      <li *ngIf="thumbnail.errors.fileRequired" class="text-danger" role="alert">Thumbnail is required.</li>
                     </ul>
-                  </div> -->
+                  </div>
                 </div>
   
                 <!-- images -->
@@ -119,11 +119,11 @@
                     name="images" id="images"></shared-fileinput>
   
                   <!-- validation errors -->
-                  <!-- <div class="help-block" *ngIf="submitted && toDate.errors">
+                  <div class="help-block" *ngIf="submitted && images.errors">
                     <ul role="alert">
-                      <li *ngIf="toDate.errors.required" class="text-danger" role="alert">To Date is required.</li>
+                      <li *ngIf="images.errors.fileRequired" class="text-danger" role="alert">Images is required.</li>
                     </ul>
-                  </div> -->
+                  </div>
                 </div>
   
                 <!-- caption -->

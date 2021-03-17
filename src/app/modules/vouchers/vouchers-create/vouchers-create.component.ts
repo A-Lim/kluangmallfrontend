@@ -9,8 +9,7 @@ import { VoucherService } from 'app/modules/vouchers/vouchers.service';
 import { VoucherLimitVm, VoucherVm } from 'app/modules/vouchers/models/voucher.model.vm';
 import { Merchant } from 'app/modules/merchants/models/merchant.model';
 import { MerchantService } from 'app/modules/merchants/merchants.service';
-
-
+import { Shop } from 'app/modules/merchants/models/shop.model';
 
 @Component({
   selector: 'vouchers-create',
@@ -24,7 +23,7 @@ export class VouchersCreateComponent extends Base implements OnInit, OnDestroy {
   voucherVm: VoucherVm;
   Editor = ClassicEditor;
 
-  merchants$: Observable<Merchant[]>;
+  merchants$: Observable<Shop[]>;
   merchantsInput$ = new Subject<string>();
   merchantsReqLoading: boolean;
 
@@ -101,11 +100,11 @@ export class VouchersCreateComponent extends Base implements OnInit, OnDestroy {
     let params: any = { limit: 10, page: 1 };
 
     if (searchStr != null && searchStr != '')
-      params.title = `contains:${searchStr}`;
+      params.name = `contains:${searchStr}`;
 
-    return this.merchantSvc.getMerchants(params).pipe(
+    return this.merchantSvc.getShops(params).pipe(
       tap(_ => this.merchantsReqLoading = false),
-      map(response => response.data.data),
+      map(response => response.data),
       catchError(() => of([])), // empty list on error
     )
   }

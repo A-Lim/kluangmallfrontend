@@ -35,6 +35,7 @@ import { IsIntegerValidator } from 'app/shared//validators/isinteger.validator';
 import { MatchValueValidator } from 'app/shared//validators/matchvalue.validator';
 import { RequiredIfEitherNotEmptyValidator } from 'app/shared/validators/requiredifnotempty.validator';
 import { FileTypesValidator } from 'app/shared/components/form-control/fileinput/validators/filetype.validator';
+import { RequiredFileInputValidator } from 'app/shared/components/form-control/fileinput/validators/required.validator';
 import { DateRequiredValidator } from 'app/shared/components/form-control/datepicker/validators/daterequired.validator';
 
 // pages
@@ -72,6 +73,7 @@ import { AuthorizedContentComponent } from 'app/shared/components/authorized-con
 
     // Validator
     FileTypesValidator,
+    RequiredFileInputValidator,
     IsIntegerValidator,
     MatchValueValidator,
     RequiredIfEitherNotEmptyValidator,
@@ -128,6 +130,7 @@ import { AuthorizedContentComponent } from 'app/shared/components/authorized-con
 
     // Validator
     FileTypesValidator,
+    RequiredFileInputValidator,
     IsIntegerValidator,
     MatchValueValidator,
     RequiredIfEitherNotEmptyValidator,

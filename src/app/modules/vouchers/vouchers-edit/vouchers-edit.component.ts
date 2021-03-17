@@ -1,16 +1,17 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { concat, Observable, of, Subject } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { Base } from 'app/shared/components/base.component';
 import { VoucherService } from 'app/modules/vouchers/vouchers.service';
-import { Voucher, VoucherLimit } from 'app/modules/vouchers/models/voucher.model';
+import { Shop } from 'app/modules/merchants/models/shop.model';
+import { VoucherLimit } from 'app/modules/vouchers/models/voucher.model';
 import { Merchant } from 'app/modules/merchants/models/merchant.model';
 import { VoucherLimitVm, VoucherVm } from 'app/modules/vouchers/models/voucher.model.vm';
 import { MerchantService } from 'app/modules/merchants/merchants.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'vouchers-edit',
@@ -25,7 +26,7 @@ export class VouchersEditComponent extends Base implements OnInit, OnDestroy {
   voucherVm: VoucherVm;
   Editor = ClassicEditor;
 
-  merchants$: Observable<Merchant[]>;
+  merchants$: Observable<Shop[]>;
   merchantsInput$ = new Subject<string>();
   merchantsReqLoading: boolean;
 
@@ -136,11 +137,11 @@ export class VouchersEditComponent extends Base implements OnInit, OnDestroy {
     let params: any = { limit: 10, page: 1 };
 
     if (searchStr != null && searchStr != '')
-      params.title = `contains:${searchStr}`;
+      params.name = `contains:${searchStr}`;
 
-    return this.merchantSvc.getMerchants(params).pipe(
+    return this.merchantSvc.getShops(params).pipe(
       tap(_ => this.merchantsReqLoading = false),
-      map(response => response.data.data),
+      map(response => response.data),
       catchError(() => of([])), // empty list on error
     )
   }

@@ -49,14 +49,14 @@
                     [(ngModel)]="bannerVm.uploadImage"
                     [multiple]="false"
                     [files]="bannerVm.image"
-                    name="image" id="image"></shared-fileinput>
+                    name="image" id="image" fileRequired></shared-fileinput>
   
                   <!-- validation errors -->
-                  <!-- <div class="help-block" *ngIf="submitted && toDate.errors">
+                  <div class="help-block" *ngIf="submitted && image.errors">
                     <ul role="alert">
-                      <li *ngIf="toDate.errors.required" class="text-danger" role="alert">To Date is required.</li>
+                      <li *ngIf="image.errors.fileRequired" class="text-danger" role="alert">Image is required.</li>
                     </ul>
-                  </div> -->
+                  </div>
                 </div>
   
                 <!-- is clickable -->
