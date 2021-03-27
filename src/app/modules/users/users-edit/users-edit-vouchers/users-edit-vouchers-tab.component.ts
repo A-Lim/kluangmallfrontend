@@ -10,6 +10,7 @@ import { VoucherService } from 'app/modules/vouchers/vouchers.service';
   styleUrls: ['./users-edit-vouchers-tab.component.css']
 })
 export class UsersEditVouchersTabComponent extends BaseAgGrid implements OnInit {
+  @ViewChild('merchantsCell', { static: true }) merchantsCell: TemplateRef<any>;
   @ViewChild('statusCell', { static: true }) statusCell: TemplateRef<any>;
 
   @Input()
@@ -24,8 +25,8 @@ export class UsersEditVouchersTabComponent extends BaseAgGrid implements OnInit 
 
     this.columnDefs = [
       this.getIndexColDef(),
-      this.getColDef('Name', 'name', true, true),
-      this.getColDef('Merchant', 'merchant', true, true),
+      this.getColDef('Name', 'name', true, false),
+      this.getTemplateColDef('Merchant', 'merchant_name', null, false, true, false, this.merchantsCell),
       this.getDateColDef('Expiry Date', 'expiry_date'),
       this.getStatusColDef('Status', 'status', 100, false, this.statusCell),
     ];

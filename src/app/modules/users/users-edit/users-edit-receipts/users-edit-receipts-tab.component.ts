@@ -24,7 +24,7 @@ export class UsersEditReceiptsTabComponent extends BaseAgGrid implements OnInit 
 
     this.columnDefs = [
       this.getIndexColDef(),
-      this.getTemplateColDef('Invoice No', 'invoice_no', 150, false, this.invoiceCell),
+      this.getTemplateColDef('Invoice No', 'invoice_no', 150, false, false, false, this.invoiceCell),
       this.getColDef('Merchant', 'merchant', true, true),
       this.getNumberColDef('Amount', 'amount', false, false),
       this.getNumberColDef('Points', 'points', false, false),

@@ -10,6 +10,7 @@ import { filter, switchMap } from 'rxjs/operators';
   styleUrls: ['./vouchers-tab.component.css']
 })
 export class VouchersTabComponent extends BaseAgGrid implements OnInit, OnDestroy {
+  @ViewChild('merchantsCell', { static: true }) merchantsCell: TemplateRef<any>;
   @ViewChild('actionsCell', { static: true }) actionsCell: TemplateRef<any>;
   @ViewChild('statusCell', { static: true }) statusCell: TemplateRef<any>;
 
@@ -23,7 +24,7 @@ export class VouchersTabComponent extends BaseAgGrid implements OnInit, OnDestro
     this.columnDefs = [
       this.getIndexColDef(),
       this.getColDef('Name', 'name', true, true),
-      this.getColDef('Merchant', 'merchant_name', true, true),
+      this.getTemplateColDef('Merchant', 'merchant_name', null, false, true, false, this.merchantsCell),
       this.getDateColDef('From Date', 'fromDate'),
       this.getDateColDef('To Date', 'toDate'),
       this.getStatusColDef('Status', 'status', 100, false, this.statusCell),

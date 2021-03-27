@@ -30,7 +30,7 @@ export class EventsAddModalComponent extends BaseAgGrid implements OnInit {
       this.getColDef('Category', 'category', true, true),
       this.getDateColDef('From Date', 'fromDate'),
       this.getDateColDef('To Date', 'toDate'),
-      this.getTemplateColDef('Status', 'status', 100, false, this.statusCell),
+      this.getStatusColDef('Status', 'status', 100, false, this.statusCell),
       this.getActionColDef('Action', '', 110, this.actionsCell),
     ];
 

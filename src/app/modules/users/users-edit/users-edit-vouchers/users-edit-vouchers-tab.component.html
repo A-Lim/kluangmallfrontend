@@ -10,6 +10,18 @@
   </div>
 </div>
 
+<ng-template #merchantsCell let-row>
+  <ng-container *ngIf="row">
+    <ng-container *ngIf="row.merchants.length > 1">
+      Kluang Mall ({{ row.merchants.length }} merchants)
+    </ng-container>
+
+    <ng-container *ngIf="row.merchants.length === 1">
+      {{ row.merchants[0].name }}
+    </ng-container>
+  </ng-container>
+</ng-template>
+
 <ng-template #statusCell let-row>
   <ng-container *ngIf="row">
     <span class="badge badge-xs" [ngClass]="{

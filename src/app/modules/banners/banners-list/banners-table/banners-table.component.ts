@@ -27,7 +27,7 @@ export class BannersTableComponent extends BaseAgGrid implements OnInit {
     this.gridOptions.rowHeight = 70;
     this.columnDefs = [
       this.getIndexColDef(),
-      this.getTemplateColDef('Image', 'image', 120, false, this.imageCell),
+      this.getTemplateColDef('Image', 'image', 120, false, false, false, this.imageCell),
       this.getColDef('Title', 'title', true, true),
       this.getStatusColDef('Status', 'status', 100, false, this.statusCell),
       this.getActionColDef('Action', '', 110, this.actionsCell),

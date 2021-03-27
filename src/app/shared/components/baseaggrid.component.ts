@@ -143,13 +143,15 @@ export abstract class BaseAgGrid extends Base implements OnInit, OnDestroy {
     headerName: string, 
     field: string,
     width: number = 100,
-    pinned: string | boolean = false,
+    sortable: boolean,
+    filter: boolean,
+    pinned: boolean,
     template: TemplateRef<any>): ColDef {
     return <ColDef> {
       headerName: headerName,
       field: field,
-      sortable: false,
-      filter: false,
+      sortable: sortable,
+      filter: filter,
       suppressMenu: true,
       floatingFilterComponentParams: { suppressFilterButton: true },
       width: width,

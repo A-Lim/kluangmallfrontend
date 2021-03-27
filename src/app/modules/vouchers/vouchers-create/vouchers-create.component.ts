@@ -36,7 +36,6 @@ export class VouchersCreateComponent extends Base implements OnInit, OnDestroy {
     super.ngOnInit();
     this.setTitle('Create Voucher');
     this.voucherVm = new VoucherVm();
-    this.loadMerchants();
   }
 
   ngOnDestroy() {
@@ -71,45 +70,19 @@ export class VouchersCreateComponent extends Base implements OnInit, OnDestroy {
       return;
 
     this.isLoading = true;
+    
+    let newVoucherId = 0;
     this.voucherSvc.createVoucher(this.voucherVm)
       .pipe(
+        tap(response => newVoucherId = response.data.id),
         switchMap(response => this.swalAlert('Success', response.message, 'success'))
       )
       .subscribe(_ => { 
         this.isLoading = false;
-        this.router.navigate(['admin/vouchers']);
+        this.router.navigate(['admin/vouchers', newVoucherId], { queryParams: { tab: 'merchants' } });
       }, errorResponse => {
         this.swalAlert('Error', errorResponse.error.message, 'error');
         this.isLoading = false;
       });
-  }
-
-  loadMerchants() {
-    this.merchants$ = concat(
-      this.getMerchantsFn$(), // default items
-      this.merchantsInput$.pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        tap(_ => this.merchantsReqLoading = true),
-        switchMap(searchStr => this.getMerchantsFn$(searchStr))
-      )
-    );
-  }
-
-  getMerchantsFn$(searchStr: string = '') {
-    let params: any = { limit: 10, page: 1 };
-
-    if (searchStr != null && searchStr != '')
-      params.name = `contains:${searchStr}`;
-
-    return this.merchantSvc.getShops(params).pipe(
-      tap(_ => this.merchantsReqLoading = false),
-      map(response => response.data),
-      catchError(() => of([])), // empty list on error
-    )
-  }
-
-  trackByMerchantFn(merchant: Merchant) {
-    return merchant.id;
   }
 }

@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="ml-auto col-4">
+    <input type="text" 
+      class="form-control"
+      (input)="searchMerchant($event.target.value)"
+      placeholder="Search Merchant"
+      id="search" name="search" />
+    <div class="checkbox select-all">
+      <input type="checkbox" class="checkbox-input"
+        [(ngModel)]="isAllSelected"
+        (change)="isAllSelectedChange($event.target.checked)"
+        id="isAllSelected" name="isAllSelected">
+      <label for="isAllSelected">
+        <small>
+          <ng-container *ngIf="isAllSelected">Deselect All</ng-container>
+          <ng-container *ngIf="!isAllSelected">Select All</ng-container>
+        </small>
+      </label>
+    </div>
+  </div>
+</div>
+
+<form autocomplete="off" #form="ngForm" (submit)="onSubmit()">
+  <fieldset [disabled]="isLoading || !('update' | ablePure: 'vouchers' | async)">
+    <label class="text-bold-600">Merchants</label>
+    <div class="row">
+      <!-- loading -->
+      <ng-container *ngIf="!checkboxes">
+        <div class="col-12"><span class="spinner-border spinner-border-sm"></span> Loading...</div>
+      </ng-container>
+      <!-- loaded -->
+      <ng-container *ngIf="checkboxes">
+        <div *ngFor="let checkbox of checkboxes" class="col-3">
+          <div class="checkbox">
+            <input type="checkbox" class="checkbox-input"
+              [(ngModel)]="checkbox.isChecked"
+              id="merchant_{{ checkbox.value }}" name="merchant_{{ checkbox.value }}">
+            <label for="merchant_{{ checkbox.value }}"><small>{{ checkbox.name }}</small></label>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="form-actions d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary pull-right" (click)="onSubmit()"
+        [disabled]="isLoading || !checkboxes">
+        <span *ngIf="isLoading || !checkboxes" class="spinner-border spinner-border-sm"></span> Update
+      </button>
+    </div>
+  </fieldset>
+</form>
+
+
+

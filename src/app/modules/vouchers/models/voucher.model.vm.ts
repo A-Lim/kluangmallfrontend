@@ -1,7 +1,6 @@
 import { FileDetail } from 'app/shared/models/filedetail.model';
 
 export class VoucherVm {
-  merchant_id: number;
   status: string = 'active';
   name: string;
   description: string = '';

@@ -45,14 +45,30 @@
                   </div>
                 </div>
 
+                <!-- points -->
+                <div class="col-md-6 form-group" [class.error]="(submitted || points.dirty) && points.errors">
+                  <label class="text-bold-600" for="points">Points</label>
+                  <input type="number" class="form-control" 
+                    #points="ngModel" 
+                    [(ngModel)]="voucherVm.points"
+                    id="points" name="points" placeholder="Points"
+                    required>
+                  <div *ngIf="submitted || points.dirty" class="help-block">
+                    <ul role="alert">
+                      <li *ngIf="points.errors?.required" class="text-danger" role="alert">Points is required.</li>
+                    </ul>
+                  </div>
+                  <small class="help-text">Points required to redeeem voucher.</small>
+                </div>
+
                 <!-- merchants -->
-                <div class="col-md-6 form-group" [class.error]="(submitted || merchantId.dirty) && merchantId.errors">
+                <!-- <div class="col-md-6 form-group" [class.error]="(submitted || merchantId.dirty) && merchantId.errors">
                   <label class="text-bold-600" for="merchantId">Merchant</label>
                   <ng-select 
                     #merchantId="ngModel"
-                    [(ngModel)]="voucherVm.merchant_id" 
+                    [(ngModel)]="voucherVm.merchant_ids" 
                     [items]="merchants$ | async"
-                    [multiple]="false"
+                    [multiple]="true"
                     [trackByFn]="trackByMerchantFn"
                     [loading]="merchantsReqLoading"
                     [typeahead]="merchantsInput$"
@@ -64,7 +80,7 @@
                       <li *ngIf="merchantId.errors?.required" class="text-danger" role="alert">Merchant is required.</li>
                     </ul>
                   </div>
-                </div>
+                </div> -->
 
                 <!-- period -->
                 <div class="col-md-6">
@@ -129,22 +145,6 @@
                     [(ngModel)]="voucherVm.uploadQr"
                     [multiple]="false"
                     name="qr" id="qr"></shared-fileinput>
-                </div>
-
-                <!-- points -->
-                <div class="col-md-6 form-group" [class.error]="(submitted || points.dirty) && points.errors">
-                  <label class="text-bold-600" for="points">Points</label>
-                  <input type="number" class="form-control" 
-                    #points="ngModel" 
-                    [(ngModel)]="voucherVm.points"
-                    id="points" name="points" placeholder="Points"
-                    required>
-                  <div *ngIf="submitted || points.dirty" class="help-block">
-                    <ul role="alert">
-                      <li *ngIf="points.errors?.required" class="text-danger" role="alert">Points is required.</li>
-                    </ul>
-                  </div>
-                  <small class="help-text">Points required to redeeem voucher.</small>
                 </div>
 
                 <!-- redemption limits -->

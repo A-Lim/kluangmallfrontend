@@ -25,7 +25,7 @@ export class VoucherService {
   }
 
   getMyVouchers(qParams: any) {
-    return this.http.get<ResponseResult<PaginationResponse<MyVoucher>>>(`${this.voucherUrl}/my/all`, { params: qParams });
+    return this.http.get<ResponseResult<PaginationResponse<MyVoucher>>>(`${this.voucherUrl}/my`, { params: qParams });
   }
 
   getVoucherTransactions(qParams: any) {
@@ -35,14 +35,19 @@ export class VoucherService {
   createVoucher(voucherVm: VoucherVm) {
     const formData = new FormData();
     Utils.appendFormData(formData, voucherVm, '');
-    return this.http.post<ResponseResult<boolean>>(`${this.voucherUrl}`, formData); 
+    return this.http.post<ResponseResult<Voucher>>(`${this.voucherUrl}`, formData); 
   }
 
   updateVoucher(id: number, voucherVm: VoucherVm) {
     const formData = new FormData();
     formData.append('_method', 'PATCH');
     Utils.appendFormData(formData, voucherVm, '');
-    return this.http.post<ResponseResult<boolean>>(`${this.voucherUrl}/${id}`, formData); 
+    return this.http.post<ResponseResult<Voucher>>(`${this.voucherUrl}/${id}`, formData); 
+  }
+
+  updateMerchants(id: number, merchant_ids: number[]) {
+    const data = { merchant_ids: merchant_ids };
+    return this.http.patch<ResponseResult<null>>(`${this.voucherUrl}/${id}/merchants`, data); 
   }
 
   deleteVoucher(id: number) {
