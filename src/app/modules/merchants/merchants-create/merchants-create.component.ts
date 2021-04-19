@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { concat, Observable, of, Subject } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { Base } from 'app/shared/components/base.component';
 import { MerchantService } from 'app/modules/merchants/merchants.service';
@@ -19,9 +18,6 @@ export class MerchantsCreateComponent extends Base implements OnInit, OnDestroy 
   form: NgForm;
 
   merchantVm: MerchantVm;
-
-  Editor = ClassicEditor;
-  
   merchantCategories$: Observable<MerchantCategory[]>;
   merchantCategoriesInput$ = new Subject<string>();
   merchantCategoriesReqLoading: boolean;

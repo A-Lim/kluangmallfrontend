@@ -10,6 +10,7 @@ import { UsersEditPointsTabComponent } from './users-edit/users-edit-points-tab/
 import { UsersEditVouchersTabComponent } from './users-edit/users-edit-vouchers/users-edit-vouchers-tab.component';
 import { UsersEditReceiptsTabComponent } from './users-edit/users-edit-receipts/users-edit-receipts-tab.component';
 import { UsersEditVoucherTransactionsTabComponent } from './users-edit/users-edit-voucher-transactions/users-edit-voucher-transactions-tab.component';
+import { UserUpdatePointsModalComponent } from './modals/update-points/modal-user-update-points.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { UsersEditVoucherTransactionsTabComponent } from './users-edit/users-edi
     UsersEditPointsTabComponent,
     UsersEditVouchersTabComponent,
     UsersEditReceiptsTabComponent,
-    UsersEditVoucherTransactionsTabComponent
+    UsersEditVoucherTransactionsTabComponent,
+    UserUpdatePointsModalComponent
   ],
   imports: [
     UsersRoutingModule,

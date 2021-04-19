@@ -6,7 +6,7 @@ export interface Announcement {
   description: string;
   status: string;
   audience: string;
-
+  publish_at: string;
   has_content: boolean;
   content: string;
   merchant_name: string;

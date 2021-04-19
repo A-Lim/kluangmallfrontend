@@ -2,10 +2,8 @@ import { AfterViewInit, Component, EventEmitter, Input, OnInit, OnDestroy, Outpu
 import { NgForm } from '@angular/forms';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Base } from 'app/shared/components/base.component';
 import { FORMSTATUS } from 'app/shared/constants/formstatus.constants';
-import { UserGroupService } from 'app/modules/usergroups/usergroups.service';
 import { SystemSettingVm } from 'app/modules/systemsettings/models/systemsetting.model.vm';
 
 @Component({
@@ -28,8 +26,6 @@ export class SystemSettingsGeneralTabComponent extends Base implements OnInit, O
 
   @Output()
   formValid = new EventEmitter<boolean>();
-
-  Editor = ClassicEditor;
   
   constructor() { 
     super();

@@ -22,6 +22,7 @@ import { AccordionComponent } from './components/accordion/accordion.component';
 // formcontrols
 import { DatepickerComponent } from 'app/shared/components/form-control/datepicker/datepicker.component';
 import { FileInputComponent } from 'app/shared/components/form-control/fileinput/fileinput.component';
+import { RichTextEditorComponent } from 'app/shared/components/form-control/richtexteditor/richtexteditor.component';
 
 import { TemplateRendererComponent } from 'app/shared/components/template-renderer.component';
 import { AdminLayoutComponent } from 'app/shared/components/layouts/admin/admin.layout.component';
@@ -59,9 +60,7 @@ import { AuthorizedContentComponent } from 'app/shared/components/authorized-con
     AuthorizedContentComponent,
 
     TemplateRendererComponent,
-    // Form Input
-    FileInputComponent,
-
+  
     AdminLayoutComponent,
     DefaultLayoutComponent,
     DefaultModalComponent,
@@ -79,9 +78,10 @@ import { AuthorizedContentComponent } from 'app/shared/components/authorized-con
     RequiredIfEitherNotEmptyValidator,
     DateRequiredValidator,
 
-    AuthorizedContentComponent,
+    // Form Input
+    FileInputComponent,
     DatepickerComponent,
-
+    RichTextEditorComponent,
     // Directives
   ],
   imports: [
@@ -116,13 +116,14 @@ import { AuthorizedContentComponent } from 'app/shared/components/authorized-con
     // 3rd party
     AgGridModule,
     TemplateRendererComponent,
-    CKEditorModule,
     NgSelectModule,
     AbilityModule,
 
     // form controls
     FileInputComponent,
     DatepickerComponent,
+    RichTextEditorComponent,
+    
     // Directives
 
     // Pipes

@@ -1,13 +1,12 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { concat, Observable, of, Subject } from 'rxjs';
-import { catchError, debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Observable, Subject } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
+
 
 import { Base } from 'app/shared/components/base.component';
 import { VoucherService } from 'app/modules/vouchers/vouchers.service';
 import { VoucherLimitVm, VoucherVm } from 'app/modules/vouchers/models/voucher.model.vm';
-import { Merchant } from 'app/modules/merchants/models/merchant.model';
 import { MerchantService } from 'app/modules/merchants/merchants.service';
 import { Shop } from 'app/modules/merchants/models/shop.model';
 
@@ -21,7 +20,6 @@ export class VouchersCreateComponent extends Base implements OnInit, OnDestroy {
   form: NgForm;
 
   voucherVm: VoucherVm;
-  Editor = ClassicEditor;
 
   merchants$: Observable<Shop[]>;
   merchantsInput$ = new Subject<string>();

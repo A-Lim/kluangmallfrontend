@@ -6,9 +6,17 @@
   flex: 1;
 }
 
+.input-group-append.disabled {
+  margin-left: 0;
+}
+
 .input-group > .has-icon-right > input {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.date-control[disabled] {
+  background-color: #F2F4F4;
 }
 
 .date-control[readonly] {

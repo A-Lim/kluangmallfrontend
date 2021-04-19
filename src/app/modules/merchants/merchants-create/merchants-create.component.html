@@ -213,12 +213,10 @@
                 <!-- description -->
                 <div class="col-md-12 form-group" [class.error]="(submitted || description.dirty) && description.errors">
                   <label class="text-bold-600">Desription</label>
-                  <ckeditor 
+                  <shared-rich-text-editor 
                     #description="ngModel"
-                    [editor]="Editor" 
                     [(ngModel)]="merchantVm.description"
-                    name="description" name="description"
-                    required></ckeditor>
+                    name="description" name="description" required></shared-rich-text-editor>
           
                   <div class="help-block" *ngIf="submitted || description.dirty">
                     <ul role="alert">
@@ -228,17 +226,16 @@
                 </div>
 
                 <!-- terms and conditions -->
-                <div class="col-md-12 form-group" [class.error]="(submitted || terms.dirty) && terms.errors">
+                <div class="col-md-12 form-group" [class.error]="(submitted || tnc.dirty) && tnc.errors">
                   <label class="text-bold-600">Terms and Conditions</label>
-                  <ckeditor 
-                    #terms="ngModel"
-                    [editor]="Editor" 
+                  <shared-rich-text-editor 
+                    #tnc="ngModel"
                     [(ngModel)]="merchantVm.terms_and_conditions"
-                    name="terms" name="terms"></ckeditor>
+                    name="tnc" name="tnc"></shared-rich-text-editor>
           
-                  <div class="help-block" *ngIf="submitted || terms.dirty">
+                  <div class="help-block" *ngIf="submitted || tnc.dirty">
                     <ul role="alert">
-                      <li *ngIf="terms.errors?.required" class="text-danger" role="alert">Terms and Conditions is required.</li>
+                      <li *ngIf="tnc.errors?.required" class="text-danger" role="alert">Terms and Conditions is required.</li>
                     </ul>
                   </div>
                 </div>
@@ -246,11 +243,10 @@
                 <!-- privacy policy -->
                 <div class="col-md-12 form-group" [class.error]="(submitted || privacyPolicy.dirty) && privacyPolicy.errors">
                   <label class="text-bold-600">Privacy Policy</label>
-                  <ckeditor 
+                  <shared-rich-text-editor 
                     #privacyPolicy="ngModel"
-                    [editor]="Editor" 
                     [(ngModel)]="merchantVm.privacy_policy"
-                    name="privacyPolicy" name="privacyPolicy"></ckeditor>
+                    name="privacyPolicy" name="privacyPolicy"></shared-rich-text-editor>
           
                   <div class="help-block" *ngIf="submitted || privacyPolicy.dirty">
                     <ul role="alert">

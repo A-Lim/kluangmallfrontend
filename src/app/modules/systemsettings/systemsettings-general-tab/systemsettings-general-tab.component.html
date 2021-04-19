@@ -37,11 +37,10 @@
   <div class="row">
     <div class="col-md-12 form-group" [class.error]="(submitted || aboutUs.dirty) && aboutUs.errors">
       <label class="text-bold-600" for="aboutUs">About Us</label>
-      <ckeditor 
+      <shared-rich-text-editor 
         #aboutUs="ngModel"
-        [editor]="Editor" 
         [(ngModel)]="systemSettingVm.about_us"
-        name="aboutUs" name="aboutUs"></ckeditor>
+        name="aboutUs" name="aboutUs"></shared-rich-text-editor>
     </div>
   </div>
 
@@ -49,23 +48,21 @@
   <div class="row">
     <div class="col-md-12 form-group" [class.error]="(submitted || privacyPolicy.dirty) && privacyPolicy.errors">
       <label class="text-bold-600" for="privacyPolicy">Privacy Policy</label>
-      <ckeditor 
+      <shared-rich-text-editor 
         #privacyPolicy="ngModel"
-        [editor]="Editor" 
         [(ngModel)]="systemSettingVm.privacy_policy"
-        name="privacyPolicy" name="privacyPolicy"></ckeditor>
+        name="privacyPolicy" name="privacyPolicy"></shared-rich-text-editor>
     </div>
   </div>
 
   <!-- terms and conditions -->
   <div class="row">
-    <div class="col-md-12 form-group" [class.error]="(submitted || termsAndConditions.dirty) && termsAndConditions.errors">
-      <label class="text-bold-600" for="termsAndConditions">Terms and Conditions</label>
-      <ckeditor 
-        #termsAndConditions="ngModel"
-        [editor]="Editor" 
+    <div class="col-md-12 form-group" [class.error]="(submitted || tnc.dirty) && tnc.errors">
+      <label class="text-bold-600" for="tnc">Terms and Conditions</label>
+      <shared-rich-text-editor 
+        #tnc="ngModel"
         [(ngModel)]="systemSettingVm.terms_and_conditions"
-        name="termsAndConditions" name="termsAndConditions"></ckeditor>
+        name="tnc" name="tnc"></shared-rich-text-editor>
     </div>
   </div>
 

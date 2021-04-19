@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, OnDestroy, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { concat, Observable, of, Subject } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs/operators';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { Base } from 'app/shared/components/base.component';
 import { MerchantService } from 'app/modules/merchants/merchants.service';
@@ -24,7 +23,6 @@ export class MerchantsEditGeneralTabComponent extends Base implements OnInit, On
   @ViewChild('form')
   form: NgForm;
 
-  Editor = ClassicEditor;  
   merchantCategories$: Observable<MerchantCategory[]>;
   merchantCategoriesInput$ = new Subject<string>();
   merchantCategoriesReqLoading: boolean;

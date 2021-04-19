@@ -5,20 +5,22 @@
       #dp="angular-mydatepicker" 
       [(ngModel)]="model" 
       [options]="myDpOptions" 
-      [disabled]="disabled"
+      [attr.disabled]="disabled ? '' : null"
+      [readonly]="!disabled"
       (dateChanged)="onDateChanged($event)"
-      placeholder="Select a date"
-      readonly />
+      placeholder="Select a date" />
 
-    <div *ngIf="model?.singleDate?.jsDate" class="form-control-position">
+    <div *ngIf="model?.singleDate?.jsDate && !disabled" class="form-control-position">
       <i class="bx bx-x text-danger" (click)="dp.clearDate()"></i>
     </div>
   </div>
   
-  <div class="input-group-append">
-    <span class="input-group-text btn-calendar-alt" 
+  <div class="input-group-append"
+    [class.disabled]="disabled">
+    <button class="input-group-text btn-calendar-alt" 
+      [disabled]="disabled"
       (click)="dp.toggleCalendar()">
       <i class="bx bx-calendar-alt"></i>
-    </span>
+    </button>
   </div>
 </div>

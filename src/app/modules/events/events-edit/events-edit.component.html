@@ -146,12 +146,10 @@
                 <!-- content -->
                 <div class="col-md-12 form-group" [class.error]="(submitted || content.dirty) && content.errors">
                   <label class="text-bold-600">Content</label>
-                  <ckeditor 
+                  <shared-rich-text-editor 
                     #content="ngModel"
-                    [editor]="Editor" 
                     [(ngModel)]="eventVm.content"
-                    name="content" name="content"
-                    required></ckeditor>
+                    name="content" name="content" required></shared-rich-text-editor>
   
                   <div class="help-block" *ngIf="submitted || content.dirty">
                     <ul role="alert">

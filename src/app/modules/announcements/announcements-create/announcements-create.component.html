@@ -30,7 +30,7 @@
                 </div>
 
                 <!-- status -->
-                <div class="col-md-6 form-group" [class.error]="(submitted || status.dirty) && status.errors">
+                <!-- <div class="col-md-6 form-group" [class.error]="(submitted || status.dirty) && status.errors">
                   <label class="text-bold-600" for="status">Status</label>
                   <select class="form-control"
                     #status="ngModel"
@@ -40,7 +40,7 @@
                     <option value="approved">Approved</option>
                     <option value="rejected">Rejected</option>
                   </select>
-                </div>
+                </div> -->
 
                 <!-- audience -->
                 <div class="col-md-6 form-group" [class.error]="(submitted || audience.dirty) && audience.errors">
@@ -135,11 +135,11 @@
                   <!-- content -->
                   <div class="col-md-12 form-group" [class.error]="(submitted || content.dirty) && content.errors">
                     <label class="text-bold-600" for="content">Content</label>
-                    <ckeditor 
+                    <shared-rich-text-editor 
                       #content="ngModel"
-                      [editor]="Editor" 
                       [(ngModel)]="announcementVm.content"
-                      id="content" name="content"></ckeditor>
+                      name="content" name="content">
+                    </shared-rich-text-editor>
     
                     <!-- validation errors -->
                     <div class="help-block" *ngIf="submitted || content.dirty">

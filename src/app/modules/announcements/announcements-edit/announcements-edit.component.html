@@ -56,6 +56,18 @@
                   </select>
                 </div>
 
+                <!-- publish now -->
+                <div class="col-md-6 form-group">
+                  <label class="text-bold-600" for="audience">Publish Date</label>
+                  <shared-datepicker
+                    #publishDate="ngModel"
+                    [(ngModel)]="announcementVm.publish_at"
+                    [disabled]="isLoading || disabled || !('update' | ablePure: 'announcements' | async)"
+                    name="publishDate" id="publishDate"
+                    required></shared-datepicker>
+                </div>
+                  
+
                 <!-- description -->
                 <div class="col-md-12 form-group" [class.error]="(submitted || description.dirty) && description.errors">
                   <label class="text-bold-600" for="description">Description</label>
@@ -106,12 +118,11 @@
                   <!-- content -->
                   <div class="col-md-12 form-group" [class.error]="(submitted || content.dirty) && content.errors">
                     <label class="text-bold-600" for="content">Content</label>
-                    <ckeditor 
+                    <shared-rich-text-editor 
                       #content="ngModel"
-                      [editor]="Editor" 
                       [(ngModel)]="announcementVm.content"
-                      [disabled]="disabled"
-                      id="content" name="content"></ckeditor>
+                      name="content" name="content">
+                    </shared-rich-text-editor>
     
                     <!-- validation errors -->
                     <div class="help-block" *ngIf="submitted || content.dirty">

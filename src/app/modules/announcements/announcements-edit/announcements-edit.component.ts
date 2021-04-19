@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { Base } from 'app/shared/components/base.component';
 import { AnnouncementVm } from 'app/modules/announcements/models/announcement.model.vm';
@@ -18,7 +17,6 @@ export class AnnouncementsEditComponent extends Base implements OnInit, OnDestro
   @ViewChild('form')
   form: NgForm;
 
-  Editor = ClassicEditor;
   id: number;
   disabled: boolean = false;
   announcementVm: AnnouncementVm;
@@ -52,6 +50,7 @@ export class AnnouncementsEditComponent extends Base implements OnInit, OnDestro
           title: response.data.title,
           description: response.data.description,
           status: response.data.status,
+          publish_at: response.data.publish_at,
           audience: response.data.audience,
           has_content: response.data.has_content,
           content: response.data.content,

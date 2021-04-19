@@ -73,10 +73,10 @@
     <!-- content -->
     <div *ngIf="announcement.has_content" class="col-12 form-group">
       <label class="text-bold-600">Content</label>
-      <ckeditor 
-        [editor]="Editor" 
-        [ngModel]="announcement.content"
-        id="content" name="content" disabled></ckeditor>
+      <shared-rich-text-editor 
+        #content="ngModel"
+        [(ngModel)]="announcement.content"
+        name="content" name="content" disabled></shared-rich-text-editor>
     </div>
 
     <!-- remark -->

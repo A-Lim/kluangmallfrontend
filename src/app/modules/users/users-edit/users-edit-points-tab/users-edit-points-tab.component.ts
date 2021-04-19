@@ -3,6 +3,9 @@ import { Component, OnInit, ViewChild, Input, TemplateRef } from '@angular/core'
 import { User } from 'app/modules/users/models/user.model';
 import { BaseAgGrid } from 'app/shared/components/baseaggrid.component';
 import { PointService } from 'app/modules/users/points.service';
+import { UserUpdatePointsModalComponent } from '../../modals/update-points/modal-user-update-points.component';
+import { ModalSize } from 'app/shared/models/modalsize.enum';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'users-edit-points-tab',
@@ -36,5 +39,19 @@ export class UsersEditPointsTabComponent extends BaseAgGrid implements OnInit {
     }
 
     this.setDataSource();
+  }
+
+  addDeductPoints(type: 'add' | 'deduct') {
+    const data = { type, user_id: this.user.id };
+    this.modalSvc.open(UserUpdatePointsModalComponent, data, ModalSize.Medium)
+      .afterClosed$
+      .pipe(
+        filter(x => x.type == 'save'),
+        map(x => x.data)
+      )
+      .subscribe(points => {
+        this.user.points = points;
+        this.refreshTable();
+      });
   }
 }

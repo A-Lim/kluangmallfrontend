@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { switchMap } from 'rxjs/operators';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { of } from 'rxjs';
+import { filter, switchMap, tap } from 'rxjs/operators';
 
 import { Base } from 'app/shared/components/base.component';
 import { AnnouncementVm } from 'app/modules/announcements/models/announcement.model.vm';
 import { AnnouncementService } from 'app/modules/announcements/announcements.service';
+
 
 @Component({
   selector: 'announcements-create',
@@ -17,7 +18,6 @@ export class AnnouncementsCreateComponent extends Base implements OnInit, OnDest
   @ViewChild('form')
   form: NgForm;
 
-  Editor = ClassicEditor;
   announcementVm: AnnouncementVm;
 
   constructor(private announcementSvc: AnnouncementService) {
@@ -54,12 +54,20 @@ export class AnnouncementsCreateComponent extends Base implements OnInit, OnDest
       return;
 
     this.isLoading = true;
+
+    const obs = this.announcementVm.publish_now ?
+      this.swalConfirm('Confirm', 'Announcement cannot be recalled once it\'s published. Proceed?', 'warning', 'Ok') : 
+      of(true);
     
-    this.announcementSvc.createAnnouncement(this.announcementVm)
-      .pipe(switchMap(response => this.swalAlert('Success', response.message, 'success')))
-      .subscribe(_ => {
-        this.isLoading = false;
-        this.router.navigate(['admin/announcements']);
-      }, _ => { this.isLoading = false; });
+    obs.pipe(
+      tap(isConfirmed => { if (!isConfirmed) this.isLoading = false }),
+      filter(isConfirmed => isConfirmed),
+      switchMap(_ => this.announcementSvc.createAnnouncement(this.announcementVm)),
+      switchMap(response => this.swalAlert('Success', response.message, 'success'))
+    )
+    .subscribe(_ => {
+      this.isLoading = false;
+      this.router.navigate(['admin/announcements']);
+    }, _ => { this.isLoading = false; });
   }
 }

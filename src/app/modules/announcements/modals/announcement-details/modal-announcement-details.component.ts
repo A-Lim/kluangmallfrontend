@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { Base } from 'app/shared/components/base.component';
 import { CustomOverlayRef } from 'app/shared/helpers/customoverlayref';
@@ -14,7 +13,6 @@ import { switchMap } from 'rxjs/operators';
 })
 export class AnnouncementDetailsModalComponent extends Base implements OnInit {
 
-  Editor = ClassicEditor;
   announcement: Announcement;
   isApproveReqLoading: boolean = false;
   isRejectReqLoading: boolean = false;

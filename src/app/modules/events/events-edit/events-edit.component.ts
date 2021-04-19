@@ -1,13 +1,11 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { Base } from 'app/shared/components/base.component';
 import { NgForm } from '@angular/forms';
 import { EventVm } from 'app/modules/events/models/event.model.vm';
 import { EventService } from 'app/modules/events/events.service';
-import { FileDetail } from 'app/shared/models/filedetail.model';
 
 @Component({
   selector: 'events-edit',
@@ -19,7 +17,6 @@ export class EventsEditComponent extends Base implements OnInit, OnDestroy {
   @ViewChild('form')
   form: NgForm;
 
-  Editor = ClassicEditor;
   eventVm: EventVm;
   id: number;
 

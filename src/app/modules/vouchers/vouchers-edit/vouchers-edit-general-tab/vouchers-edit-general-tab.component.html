@@ -210,11 +210,12 @@
       <!-- description -->
       <div class="col-md-12 form-group" [class.error]="(submitted || description.dirty) && description.errors">
         <label class="text-bold-600" for="description">Description</label>
-        <ckeditor #description="ngModel"
-          [editor]="Editor" 
+        <shared-rich-text-editor 
+          #description="ngModel"
           [(ngModel)]="voucherVm.description"
-          name="description" name="description"
-          required></ckeditor>
+          name="description" name="description" required>
+        </shared-rich-text-editor>
+
         <div *ngIf="submitted || description.dirty" class="help-block">
           <ul role="alert">
             <li *ngIf="description.errors?.required" class="text-danger" role="alert">Description is required.</li>
@@ -225,11 +226,11 @@
       <!-- terms and conditions -->
       <div class="col-md-12 form-group" [class.error]="(submitted || tnc.dirty) && tnc.errors">
         <label class="text-bold-600" for="tnc">Terms and Conditions</label>
-        <ckeditor #tnc="ngModel"
-          [editor]="Editor" 
+        <shared-rich-text-editor 
+          #tnc="ngModel"
           [(ngModel)]="voucherVm.terms_and_conditions"
-          name="tnc" name="tnc"
-          required></ckeditor>
+          name="tnc" name="tnc" required>
+        </shared-rich-text-editor>
         <div *ngIf="submitted || tnc.dirty" class="help-block">
           <ul role="alert">
             <li *ngIf="tnc.errors?.required" class="text-danger" role="alert">Terms and Condition is required.</li>

@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { Base } from 'app/shared/components/base.component';
 import { NgForm } from '@angular/forms';
@@ -18,7 +17,6 @@ export class PromotionsCreateComponent extends Base implements OnInit, OnDestroy
   @ViewChild('form')
   form: NgForm;
 
-  Editor = ClassicEditor;
   promotionVm: PromotionVm;
 
   constructor(private promotionSvc: PromotionService) {

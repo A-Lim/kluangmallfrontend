@@ -1,7 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { Base } from 'app/shared/components/base.component';
 import { VoucherService } from 'app/modules/vouchers/vouchers.service';
@@ -23,7 +22,6 @@ export class VouchersEditGeneralTabComponent extends Base implements OnInit {
 
   voucherVm: VoucherVm;
   qrData: string;
-  Editor = ClassicEditor;
   isDownloading: boolean = false;
 
   constructor(private voucherSvc: VoucherService) { 
