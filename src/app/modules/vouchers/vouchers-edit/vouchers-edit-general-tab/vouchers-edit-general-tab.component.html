@@ -51,20 +51,21 @@
         </div>
       </div>
 
-      <!-- points -->
-      <div class="col-md-6 form-group" [class.error]="(submitted || points.dirty) && points.errors">
-        <label class="text-bold-600" for="points">Points</label>
-        <input type="number" class="form-control" 
-          #points="ngModel" 
-          [(ngModel)]="voucherVm.points"
-          id="points" name="points" placeholder="Points"
-          required>
-        <div *ngIf="submitted || points.dirty" class="help-block">
+      <!-- Type -->
+      <div class="col-md-6 form-group" [class.error]="(submitted || type.dirty) && type.errors">
+        <label class="text-bold-600" for="type">Type</label>
+        <select class="form-control"
+          #type="ngModel"
+          [(ngModel)]="voucherVm.type"
+          id="type" name="type" required>
+          <option value="deduct cash">Deduct Cash</option>
+          <option value="add point">Add Point</option>
+        </select>
+        <div *ngIf="submitted || type.dirty" class="help-block">
           <ul role="alert">
-            <li *ngIf="points.errors?.required" class="text-danger" role="alert">Points is required.</li>
+            <li *ngIf="type.errors?.required" class="text-danger" role="alert">Type is required.</li>
           </ul>
         </div>
-        <small class="help-text">Points required to redeeem voucher.</small>
       </div>
 
       <!-- period -->
@@ -105,7 +106,43 @@
           </div>
         </div>
       </div>
+    </div>
 
+    <div class="row">
+      <!-- points -->
+      <div class="col-md-6 form-group" [class.error]="(submitted || points.dirty) && points.errors">
+        <label class="text-bold-600" for="points">Points</label>
+        <input type="number" class="form-control" 
+          #points="ngModel" 
+          [(ngModel)]="voucherVm.points"
+          id="points" name="points" placeholder="Points"
+          required>
+        <div *ngIf="submitted || points.dirty" class="help-block">
+          <ul role="alert">
+            <li *ngIf="points.errors?.required" class="text-danger" role="alert">Points is required.</li>
+          </ul>
+        </div>
+        <small class="help-text">Points required to redeeem voucher.</small>
+      </div>
+
+      <!-- free points -->
+      <div class="col-md-6 form-group" [class.error]="(submitted || freePoints.dirty) && freePoints.errors">
+        <label class="text-bold-600" for="freePoints">Free Points</label>
+        <input type="number" class="form-control" 
+          #freePoints="ngModel" 
+          [(ngModel)]="voucherVm.free_points"
+          id="freePoints" name="freePoints" placeholder="Free Points"
+          required>
+        <div *ngIf="submitted || freePoints.dirty" class="help-block">
+          <ul role="alert">
+            <li *ngIf="freePoints.errors?.required" class="text-danger" role="alert">Free points is required.</li>
+          </ul>
+        </div>
+        <small class="help-text">Free points credited to user.</small>
+      </div>
+    </div>
+
+    <div class="row">
       <!-- image -->
       <div class="col-md-6 form-group" [class.error]="(submitted || image.dirty) && image.errors">
         <label class="text-bold-600" for="image">Image</label>

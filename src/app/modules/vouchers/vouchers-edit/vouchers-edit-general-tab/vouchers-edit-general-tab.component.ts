@@ -39,6 +39,7 @@ export class VouchersEditGeneralTabComponent extends Base implements OnInit {
 
     this.voucherVm = <VoucherVm> {
       name: this.voucher.name,
+      type: this.voucher.type,
       status: this.voucher.status,
       description: this.voucher.description,
       image: this.voucher.image != null ? [this.voucher.image] : [],
@@ -46,6 +47,7 @@ export class VouchersEditGeneralTabComponent extends Base implements OnInit {
       qr: this.voucher.qr != null ? [this.voucher.qr] : [],
       uploadQr: [],
       points: this.voucher.points,
+      free_points: this.voucher.free_points,
       fromDate: this.voucher.fromDate,
       toDate: this.voucher.toDate,
       terms_and_conditions: this.voucher.terms_and_conditions,

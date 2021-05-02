@@ -56,6 +56,12 @@ export class VouchersCreateComponent extends Base implements OnInit, OnDestroy {
       this.voucherVm.limits = [];
   }
 
+  typeOnChange(type: string) {
+    if (type === 'deduct cash') {
+      this.voucherVm.free_points = null;
+    }
+  }
+
   trackByFn(index: number, limit: VoucherLimitVm) {
     return index;
   }

@@ -1,6 +1,7 @@
 import { FileDetail } from 'app/shared/models/filedetail.model';
 
 export class VoucherVm {
+  type: string = 'deduct cash';
   status: string = 'active';
   name: string;
   description: string = '';
@@ -9,10 +10,12 @@ export class VoucherVm {
   qr: FileDetail[] = [];
   uploadQr: File[] = [];
   points: string;
+  free_points: string;
   fromDate: string;
   toDate: string;
   terms_and_conditions: string = '';
   has_redemption_limit: boolean = false;
+  assign_to_user_now: boolean = false;
   limits: VoucherLimitVm[] = [];
 }
 
