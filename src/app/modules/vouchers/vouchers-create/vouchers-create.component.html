@@ -198,6 +198,17 @@
                   </div>
                 </div>
 
+                <!-- display to all user -->
+                <div class="col-md-12 form-group" *ngIf="voucherVm.type === 'add point'">
+                  <div class="checkbox">
+                    <input type="checkbox" class="checkbox-input"
+                      #displayToAll="ngModel"
+                      [(ngModel)]="voucherVm.display_to_all"
+                      id="displayToAll" name="displayToAll">
+                      <label for="displayToAll"><small class="text-bold-600">DISPLAY TO ALL USERS</small></label>
+                  </div>
+                </div>
+
                 <!-- redemption limits -->
                 <div class="col-md-12 form-group">
                   <div class="checkbox">

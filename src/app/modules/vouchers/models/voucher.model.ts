@@ -3,6 +3,7 @@ import { FileDetail } from 'app/shared/models/filedetail.model';
 export interface Voucher {
   id: number;
   type: string;
+  display_to_all: boolean;
   status: string;
   name: string;
   description: string;

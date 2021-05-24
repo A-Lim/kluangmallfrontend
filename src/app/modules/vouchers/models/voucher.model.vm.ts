@@ -2,6 +2,7 @@ import { FileDetail } from 'app/shared/models/filedetail.model';
 
 export class VoucherVm {
   type: string = 'deduct cash';
+  display_to_all: boolean = false;
   status: string = 'active';
   name: string;
   description: string = '';

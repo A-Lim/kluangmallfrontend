@@ -40,6 +40,7 @@ export class VouchersEditGeneralTabComponent extends Base implements OnInit {
     this.voucherVm = <VoucherVm> {
       name: this.voucher.name,
       type: this.voucher.type,
+      display_to_all: this.voucher.display_to_all,
       status: this.voucher.status,
       description: this.voucher.description,
       image: this.voucher.image != null ? [this.voucher.image] : [],
